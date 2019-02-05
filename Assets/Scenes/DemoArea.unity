@@ -285,6 +285,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x_size: 20
   y_size: 20
+  wall: {fileID: 4912253128181058, guid: e42e9478218929a499d67185b8ede7b4, type: 2}
+  pit: {fileID: 4820490543244234, guid: 5d870dbf3dccdfa49855aaadd85b56b5, type: 2}
+  crushing_wall: {fileID: 4135774818508772, guid: 09efd3a3c4e6cee46a7d7395525c8e37,
+    type: 2}
+  spikes: {fileID: 4990609998107340, guid: 7ef64cdb0bc303a43b5c59836dc36dfa, type: 2}
+  boulder: {fileID: 4291821300821666, guid: 158368ef6c070b843872f28cd4832277, type: 2}
+  arrow_wall: {fileID: 4402661683941512, guid: 9b5d581e940cae64aa8315ff7d320b6a, type: 2}
+  generic_enemy: {fileID: 4934108064056274, guid: 214ecc60b6c01274fa6965a11a9198c9,
+    type: 2}
 --- !u!4 &690358683
 Transform:
   m_ObjectHideFlags: 0

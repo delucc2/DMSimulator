@@ -10,6 +10,12 @@ public class Grid : MonoBehaviour {
     public int y_size = 5;
 
     public Transform wall;
+    public Transform pit;
+    public Transform crushing_wall;
+    public Transform spikes;
+    public Transform boulder;
+    public Transform arrow_wall;
+    public Transform generic_enemy;
 
     /* Selection Key
      * --------------
@@ -20,6 +26,7 @@ public class Grid : MonoBehaviour {
      * 4 - Spikes
      * 5 - Boulder
      * 6 - Arrow Wall
+     * e - Generic enemy
      * 9 - Delete
      */
     private char selection = '0';
@@ -49,6 +56,8 @@ public class Grid : MonoBehaviour {
             selection = '6';
         } else if (Input.GetKeyDown(KeyCode.Alpha9)) {
             selection = '9';
+        } else if (Input.GetKeyDown(KeyCode.E)) {
+            selection = 'e';
         }
     }
 
