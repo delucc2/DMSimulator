@@ -5,9 +5,9 @@ using UnityEngine;
 public class Grid : MonoBehaviour {
 
     [SerializeField]
-    public int x_size = 5;
+    static public int x_size = 20;
     [SerializeField]
-    public int y_size = 5;
+    static public int y_size = 20;
 
     public Transform wall;
     public Transform pit;
@@ -16,6 +16,9 @@ public class Grid : MonoBehaviour {
     public Transform boulder;
     public Transform arrow_wall;
     public Transform generic_enemy;
+    public Transform party;
+
+    public GameObject[,] squares = new GameObject[x_size, y_size];
 
     /* Selection Key
      * --------------
@@ -26,6 +29,7 @@ public class Grid : MonoBehaviour {
      * 4 - Spikes
      * 5 - Boulder
      * 6 - Arrow Wall
+     * 7 - Party
      * e - Generic enemy
      * 9 - Delete
      */
@@ -54,10 +58,14 @@ public class Grid : MonoBehaviour {
             selection = '5';
         } else if (Input.GetKeyDown(KeyCode.Alpha6)) {
             selection = '6';
-        } else if (Input.GetKeyDown(KeyCode.Alpha9)) {
+        } else if (Input.GetKeyDown(KeyCode.Alpha9)) { 
             selection = '9';
+        } else if (Input.GetKeyDown(KeyCode.Alpha7)) {
+            selection = '7';
         } else if (Input.GetKeyDown(KeyCode.E)) {
             selection = 'e';
+        } else if (Input.GetKeyDown(KeyCode.R)) {
+            selection = 'r';
         }
     }
 
@@ -71,6 +79,7 @@ public class Grid : MonoBehaviour {
                 square.transform.localScale = new Vector3(0.075f, 0.075f, 0.075f);
                 square.GetComponent<Renderer>().material.color = Color.green;
                 square.AddComponent<GridSquare>();
+                squares[i, j] = square;
             }
         }
     }
@@ -78,5 +87,15 @@ public class Grid : MonoBehaviour {
     public int GetSelection()
     {
         return selection;
+    }
+
+    public int GetXSize()
+    {
+        return x_size;
+    }
+
+    public int GetYSize()
+    {
+        return y_size;
     }
 }

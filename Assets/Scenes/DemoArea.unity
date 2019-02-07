@@ -283,8 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c574b9175cc63b4b95b8fa78ecfb085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x_size: 20
-  y_size: 20
   wall: {fileID: 4912253128181058, guid: e42e9478218929a499d67185b8ede7b4, type: 2}
   pit: {fileID: 4820490543244234, guid: 5d870dbf3dccdfa49855aaadd85b56b5, type: 2}
   crushing_wall: {fileID: 4135774818508772, guid: 09efd3a3c4e6cee46a7d7395525c8e37,
@@ -294,6 +292,7 @@ MonoBehaviour:
   arrow_wall: {fileID: 4402661683941512, guid: 9b5d581e940cae64aa8315ff7d320b6a, type: 2}
   generic_enemy: {fileID: 4934108064056274, guid: 214ecc60b6c01274fa6965a11a9198c9,
     type: 2}
+  party: {fileID: 4959187345580594, guid: d8e4909d40f28e24e9d5e3fb78ebd2b9, type: 2}
 --- !u!4 &690358683
 Transform:
   m_ObjectHideFlags: 0
