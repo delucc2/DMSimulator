@@ -5,10 +5,11 @@ using UnityEngine;
 public class GridSquare : MonoBehaviour {
     private Grid grid;      // Grid manager object
     private Transform item; // Item occupying this square
+    private string item_name;
     private int x_pos;      // x coordinate of square
     private int y_pos;      // y coordinate of square
     private char facing;
-    private bool[,] activate;
+    private List<GridSquare> triggers;
 
     public void Start()
     {
@@ -16,8 +17,8 @@ public class GridSquare : MonoBehaviour {
         x_pos = (int)this.transform.position.x;
         y_pos = (int)this.transform.position.z;
         item = null;
+        item_name = "empty";
         facing = '0';
-        activate = new bool[grid.GetXSize(), grid.GetYSize()];
     }
 
     private void OnMouseExit()
@@ -54,29 +55,35 @@ public class GridSquare : MonoBehaviour {
                     item = Instantiate(grid.wall, this.transform);
                     item.transform.localScale = new Vector3(0.57f, 0.57f, 0.57f);
                     facing = 'w';
+                    item_name = "wall";
                     break;
                 case '2' :
                     item = Instantiate(grid.pit, this.transform);
                     item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    item_name = "pit";
                     break;
                 case '3':
                     item = Instantiate(grid.crushing_wall, this.transform);
                     item.transform.localScale = new Vector3(0.57f, 0.57f, 0.57f);
                     facing = 's';
+                    item_name = "crushing wall";
                     break;
                 case '4':
                     item = Instantiate(grid.spikes, this.transform);
                     item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    item_name = "spikes";
                     break;
                 case '5':
                     item = Instantiate(grid.boulder, this.transform);
                     item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     facing = 's';
+                    item_name = "boulder";
                     break;
                 case '6':
                     item = Instantiate(grid.arrow_wall, this.transform);
                     item.transform.localScale = new Vector3(0.57f, 0.57f, 0.57f);
                     facing = 'n';
+                    item_name = "arrow wall";
                     break;
                 case '9':
                     // TO-DO: Code for deleting objects
@@ -86,15 +93,26 @@ public class GridSquare : MonoBehaviour {
                     item = Instantiate(grid.generic_enemy, this.transform);
                     item.transform.localScale = new Vector3(8f, 8f, 8f);
                     item.transform.position = new Vector3(item.transform.position.x - 0.72f, item.transform.position.y, item.transform.position.z - 0.15f);
+                    item_name = "enemy";
                     break;
                 case 'r':
                     rotateSquare();
+                    if (facing == 'n') {
+                        facing = 'e';
+                    } else if (facing == 'e') {
+                        facing = 's';
+                    } else if (facing == 's') {
+                        facing = 'w';
+                    } else if (facing == 'w') {
+                        facing = 'n';
+                    }
                     break;
                 case '7':
                     item = Instantiate(grid.party, this.transform);
                     item.transform.localScale = new Vector3(8f, 8f, 8f);
                     item.transform.position = new Vector3(item.transform.position.x - 0.3f, item.transform.position.y + 0.65f, item.transform.position.z - 0.7f);
                     item.gameObject.AddComponent<PartyMovement>();
+                    //item_name = "party";
                     break;
             }
         }
@@ -106,5 +124,15 @@ public class GridSquare : MonoBehaviour {
         if (item != null) {
             this.transform.Rotate(new Vector3(0, 90, 0));
         }
+    }
+
+    public string getItem()
+    {
+        return item_name;
+    }
+
+    public char getFacing()
+    {
+        return facing;
     }
 }
