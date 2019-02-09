@@ -55,6 +55,18 @@ public class PartyMovement : MonoBehaviour {
 
         this.transform.position = new Vector3(x_pos, y_pos, z_pos);
         curr_pos = new_pos;
+
+        if (curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes")
+        {
+            this.GetComponent<Renderer>().material.color = Color.red;
+            // take damage
+        } else { this.GetComponent<Renderer>().material.color = Color.white; }
         return true;
+    }
+
+    public void GetPos(ref int x, ref int y)
+    {
+        x = (int)x_pos;
+        y = (int)z_pos;
     }
 }

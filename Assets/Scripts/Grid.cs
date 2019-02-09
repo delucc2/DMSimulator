@@ -18,7 +18,7 @@ public class Grid : MonoBehaviour {
     public Transform generic_enemy;
     public Transform party;
 
-    public GameObject[,] squares = new GameObject[x_size, y_size];
+    public GridSquare[,] squares = new GridSquare[x_size, y_size];
 
     /* Selection Key
      * --------------
@@ -79,7 +79,7 @@ public class Grid : MonoBehaviour {
                 square.transform.localScale = new Vector3(0.075f, 0.075f, 0.075f);
                 square.GetComponent<Renderer>().material.color = Color.green;
                 square.AddComponent<GridSquare>();
-                squares[i, j] = square;
+                squares[i, j] = square.GetComponent<GridSquare>();
             }
         }
     }
