@@ -18,11 +18,10 @@ public class GridSquare : MonoBehaviour {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         x_pos = (int)this.transform.position.x;
         y_pos = (int)this.transform.position.z;
+        triggers = new List<GridSquare>();
         item = null;
         item_name = "empty";
         facing = '0';
-        triggers = new List<GridSquare>();
-        party = null;
         range = 0;
     }
 
@@ -74,7 +73,7 @@ public class GridSquare : MonoBehaviour {
                     facing = 's';
                     item_name = "crushing wall";
                     range = 2;
-                    FindTriggerSquares();
+                    FindTriggerSquares(true);
                     break;
                 case '4':
                     item = Instantiate(grid.spikes, this.transform);
@@ -87,7 +86,7 @@ public class GridSquare : MonoBehaviour {
                     facing = 's';
                     item_name = "boulder";
                     range = 4;
-                    FindTriggerSquares();
+                    FindTriggerSquares(true);
                     break;
                 case '6':
                     item = Instantiate(grid.arrow_wall, this.transform);
@@ -95,7 +94,7 @@ public class GridSquare : MonoBehaviour {
                     facing = 'n';
                     item_name = "arrow wall";
                     range = 3;
-                    FindTriggerSquares();
+                    FindTriggerSquares(true);
                     break;
                 case '9':
                     // TO-DO: Code for deleting objects
@@ -106,6 +105,15 @@ public class GridSquare : MonoBehaviour {
                     item.transform.localScale = new Vector3(8f, 8f, 8f);
                     item.transform.position = new Vector3(item.transform.position.x - 0.72f, item.transform.position.y, item.transform.position.z - 0.15f);
                     item_name = "enemy";
+                    range = 1;
+                    facing = 'n';
+                    FindTriggerSquares(true);
+                    facing = 's';
+                    FindTriggerSquares(false);
+                    facing = 'e';
+                    FindTriggerSquares(false);
+                    facing = 'w';
+                    FindTriggerSquares(false);
                     break;
                 case 'r':
                     if (facing == 'n') {
@@ -142,36 +150,50 @@ public class GridSquare : MonoBehaviour {
             foreach (var square in triggers)
             {
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
-                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged)
-                {
-                    party.damaged = true;
-                    if (!party.NoticeCheck(this)) {
-                        party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
-                        party.GetComponent<Renderer>().material.color = Color.red;
-                    } else if (!party.AvoidCheck(this)) {
-                        party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
-                        party.GetComponent<Renderer>().material.color = Color.red;
+                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
+                    if (item_name != "enemy") {
+                        party.damaged = true;
+                        if (!party.NoticeCheck(this)) {
+                            party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
+                            party.GetComponent<Renderer>().material.color = Color.red;
+                        } else if (!party.AvoidCheck(this)) {
+                            party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
+                            party.GetComponent<Renderer>().material.color = Color.red;
+                        } else {
+                            party.GetComponent<Renderer>().material.color = Color.green;
+                        }
                     } else {
-                        party.GetComponent<Renderer>().material.color = Color.green;
+                        party.damaged = true;
+                        Debug.Log("Fight!!!!");
+                        StartCoroutine(party.Fight(this));
                     }
                 }
             }
         }
-        if (item_name != "empty") { FindTriggerSquares(); }
+        if (item_name == "enemy") {
+            facing = 'n';
+            FindTriggerSquares(true);
+            facing = 's';
+            FindTriggerSquares(false);
+            facing = 'e';
+            FindTriggerSquares(false);
+            facing = 'w';
+            FindTriggerSquares(false);
+        } else if (item_name != "empty") { FindTriggerSquares(true); }
     }
 
     // Rotates item in square
     private void rotateSquare()
     {
         if (item != null) {
-            FindTriggerSquares();
+            FindTriggerSquares(true);
             this.transform.Rotate(new Vector3(0, 90, 0));
         }
     }
 
-    private void FindTriggerSquares()
+    private void FindTriggerSquares(bool clear)
     {
-        triggers.Clear();
+        if (clear) { triggers.Clear(); }
         for (int i = 1; i <= range; i++)
         {
             GridSquare square = null;
@@ -232,5 +254,14 @@ public class GridSquare : MonoBehaviour {
     {
         x = x_pos;
         y = y_pos;
+    }
+
+    public void resetSquare()
+    {
+        item = null;
+        item_name = "empty";
+        facing = '0';
+        triggers.Clear();
+        range = 0;
     }
 }

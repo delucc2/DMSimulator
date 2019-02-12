@@ -10,6 +10,7 @@ public class PartyMovement : MonoBehaviour {
     private Grid grid;
     private bool found;
     public bool damaged;
+    private bool fighting;
 
     private int DEX;
     private int WIS;
@@ -23,6 +24,7 @@ public class PartyMovement : MonoBehaviour {
         y_pos = this.transform.position.y;
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         curr_pos = grid.squares[(int)x_pos, (int)z_pos].GetComponent<GridSquare>();
+        fighting = false;
 
         DEX = 15;
         WIS = 15;
@@ -32,6 +34,8 @@ public class PartyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (fighting) { return; }
+
 		if (Input.GetKeyDown(KeyCode.UpArrow)) {
             z_pos += 1f;
             if (!Move('n', false, (int)x_pos, (int)z_pos)) { z_pos -= 1f; }
@@ -45,8 +49,6 @@ public class PartyMovement : MonoBehaviour {
             x_pos += 1f;
             if (!Move('e', false, (int)x_pos, (int)z_pos)) { x_pos -= 1f; }
         }
-
-
         
         if (Input.GetKeyDown(KeyCode.Space)) {
             char[] path = Pathfind(10, 19);
@@ -74,6 +76,7 @@ public class PartyMovement : MonoBehaviour {
 
     private bool Move(char direction, bool check, int x, int y)
     {
+        while (fighting) { }
         GridSquare new_pos = grid.squares[x, y].GetComponent<GridSquare>();
         if (new_pos.getItem() == "wall" || new_pos.getItem() == "crushing wall" || new_pos.getItem() == "arrow wall")
         {
@@ -114,6 +117,42 @@ public class PartyMovement : MonoBehaviour {
         }
 
         return true;
+    }
+
+    public IEnumerator Fight(GridSquare enemy)
+    {
+        fighting = true;
+        Debug.Log("Fight has begun");
+        while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
+        {
+            // Party attacks
+            if (Random.Range(0f, 1f) <= 0.67f) {
+                enemy.item.GetComponent<EnemyStats>().TakeDamage(DAMAGE);
+                Debug.Log("Party lands a hit!");
+            }
+
+            yield return new WaitForSeconds(2.5f);
+
+            // Enemy attacks
+            if (Random.Range(0f, 1f) < 0.5f) {
+                takeDamage(enemy.item.GetComponent<EnemyStats>().GetDamage());
+                Debug.Log("Enemy lands a hit!");
+            }
+
+            Debug.Log("Party Health: " + HEALTH + "\nEnemy Health: " + enemy.item.GetComponent<EnemyStats>().GetHealth());
+        }
+
+        if (HEALTH <= 0) {
+            Debug.Log("Party is dead!");
+            Destroy(this.gameObject);
+        } else if (enemy.item.GetComponent<EnemyStats>().GetHealth() <= 0) {
+            Debug.Log("Enemy is dead!");
+            Destroy(enemy.item.gameObject);
+            enemy.resetSquare();
+        }
+
+        fighting = false;
+        Debug.Log("Fight has ended");
     }
 
     public void GetPos(ref int x, ref int y)
