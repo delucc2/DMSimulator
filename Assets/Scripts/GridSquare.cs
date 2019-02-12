@@ -106,8 +106,6 @@ public class GridSquare : MonoBehaviour {
                 case 'e':
                     // TO-DO: Enemy detection
                     item = Instantiate(grid.generic_enemy, this.transform);
-                    item.transform.localScale = new Vector3(8f, 8f, 8f);
-                    item.transform.position = new Vector3(item.transform.position.x - 0.72f, item.transform.position.y, item.transform.position.z - 0.15f);
                     item_name = "enemy";
                     range = 1;
                     facing = 'n';
