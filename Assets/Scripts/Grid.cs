@@ -67,6 +67,7 @@ public class Grid : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyCode.R)) {
             selection = 'r';
         }
+
     }
 
     private void DrawGrid()

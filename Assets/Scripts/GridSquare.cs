@@ -210,4 +210,18 @@ public class GridSquare : MonoBehaviour {
     {
         return facing;
     }
+
+    public void addPlayer()
+    {
+        item = Instantiate(grid.party, this.transform);
+        item.transform.localScale = new Vector3(8f, 8f, 8f);
+        item.transform.position = new Vector3(item.transform.position.x - 0.3f, item.transform.position.y + 0.65f, item.transform.position.z - 0.7f);
+        item.gameObject.AddComponent<PartyMovement>();
+    }
+
+    public void GetPos(ref int x, ref int y)
+    {
+        x = x_pos;
+        y = y_pos;
+    }
 }
