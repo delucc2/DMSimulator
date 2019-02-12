@@ -9,15 +9,26 @@ public class PartyMovement : MonoBehaviour {
     private GridSquare curr_pos;
     private Grid grid;
     private bool found;
+    public bool damaged;
 
-	// Use this for initialization
-	void Start () {
+    private int DEX;
+    private int WIS;
+    private int HEALTH;
+    private int DAMAGE;
+
+    // Use this for initialization
+    void Start () {
         x_pos = this.transform.position.x;
         z_pos = this.transform.position.z;
         y_pos = this.transform.position.y;
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         curr_pos = grid.squares[(int)x_pos, (int)z_pos].GetComponent<GridSquare>();
-	}
+
+        DEX = 15;
+        WIS = 15;
+        HEALTH = 112;
+        DAMAGE = 52;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -81,13 +92,23 @@ public class PartyMovement : MonoBehaviour {
 
         if (!check)
         {
+            damaged = false;
             this.transform.position = new Vector3(x_pos, y_pos, z_pos);
             curr_pos = new_pos;
 
             if (curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes")
             {
-                this.GetComponent<Renderer>().material.color = Color.red;
-                // take damage
+                if (!NoticeCheck(curr_pos)) {
+                    takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
+                    this.GetComponent<Renderer>().material.color = Color.red;
+                } else if (!AvoidCheck(curr_pos)) {
+                    // Pass Notice Check!
+                    takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
+                    this.GetComponent<Renderer>().material.color = Color.red;
+                } else {
+                    // Pass Avoid Check + successfully dodge
+                    this.GetComponent<Renderer>().material.color = Color.green;
+                }
             }
             else { this.GetComponent<Renderer>().material.color = Color.white; }
         }
@@ -99,6 +120,39 @@ public class PartyMovement : MonoBehaviour {
     {
         x = (int)x_pos;
         y = (int)z_pos;
+    }
+
+    public bool NoticeCheck(GridSquare square)
+    {
+        if (RollDie() + getModifier(WIS) > square.item.GetComponent<TrapStats>().GetNoticeCheck()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public bool AvoidCheck(GridSquare square)
+    {
+        if (RollDie() + getModifier(DEX) > square.item.GetComponent<TrapStats>().GetAvoidCheck()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int getModifier(int score) {
+        int[] modifiers = new int[] { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        return modifiers[score / 2];
+    }
+
+    public int RollDie()
+    {
+        return (int)Random.Range(0f, 20f);
+    }
+
+    public void takeDamage(int damage)
+    {
+        HEALTH -= damage;
     }
 
     private char[] Pathfind(int dest_x, int dest_y)

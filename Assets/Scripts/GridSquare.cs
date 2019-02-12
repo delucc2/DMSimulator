@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridSquare : MonoBehaviour {
     private Grid grid;      // Grid manager object
-    private Transform item; // Item occupying this square
+    public Transform item; // Item occupying this square
     private string item_name;
     private int x_pos;      // x coordinate of square
     private int y_pos;      // y coordinate of square
@@ -141,10 +141,19 @@ public class GridSquare : MonoBehaviour {
             party.GetPos(ref party_x, ref party_y);
             foreach (var square in triggers)
             {
-                Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
-                if (square.x_pos == party_x && square.y_pos == party_y)
+                //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
+                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged)
                 {
-                    party.GetComponent<Renderer>().material.color = Color.red;
+                    party.damaged = true;
+                    if (!party.NoticeCheck(this)) {
+                        party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
+                        party.GetComponent<Renderer>().material.color = Color.red;
+                    } else if (!party.AvoidCheck(this)) {
+                        party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
+                        party.GetComponent<Renderer>().material.color = Color.red;
+                    } else {
+                        party.GetComponent<Renderer>().material.color = Color.green;
+                    }
                 }
             }
         }
