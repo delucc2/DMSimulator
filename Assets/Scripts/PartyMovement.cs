@@ -17,6 +17,8 @@ public class PartyMovement : MonoBehaviour {
     private int HEALTH;
     private int DAMAGE;
 
+    private int log_lines;
+
     // Use this for initialization
     void Start () {
         x_pos = this.transform.position.x;
@@ -30,6 +32,15 @@ public class PartyMovement : MonoBehaviour {
         WIS = 15;
         HEALTH = 112;
         DAMAGE = 52;
+
+        GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+        GameObject.Find("Damage").GetComponent<UnityEngine.UI.Text>().text = "DAM: " + DAMAGE;
+        GameObject.Find("Dexterity").GetComponent<UnityEngine.UI.Text>().text = "DEX: " + DEX;
+        GameObject.Find("Wisdom").GetComponent<UnityEngine.UI.Text>().text = "WIS: " + WIS;
+        GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "STR: 8";
+        GameObject.Find("Intelligence").GetComponent<UnityEngine.UI.Text>().text = "INT: 15";
+
+        log_lines = 0;
     }
 	
 	// Update is called once per frame
@@ -72,7 +83,7 @@ public class PartyMovement : MonoBehaviour {
             }
 
             Move(dir, false, (int)x_pos, (int)z_pos);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -120,16 +131,30 @@ public class PartyMovement : MonoBehaviour {
         return true;
     }
 
+    public void LogPrint(string line)
+    {
+        string log = GameObject.Find("Log").GetComponent<UnityEngine.UI.Text>().text;
+        if (log_lines < 9)
+        {
+            GameObject.Find("Log").GetComponent<UnityEngine.UI.Text>().text += line;
+            log_lines++;
+        } else
+        {
+            GameObject.Find("Log").GetComponent<UnityEngine.UI.Text>().text = log.Substring(log.IndexOf("\n") + 1) + line;
+        }
+    }
+
     public IEnumerator Fight(GridSquare enemy)
     {
         fighting = true;
-        Debug.Log("Fight has begun");
+        LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
             // Party attacks
             if (Random.Range(0f, 1f) <= 0.67f) {
                 enemy.item.GetComponent<EnemyStats>().TakeDamage(DAMAGE);
-                Debug.Log("Party lands a hit!");
+                LogPrint("> The party deals " + DAMAGE + " damage!\n");
+                LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
             }
 
             yield return new WaitForSeconds(2.5f);
@@ -137,23 +162,21 @@ public class PartyMovement : MonoBehaviour {
             // Enemy attacks
             if (Random.Range(0f, 1f) < 0.5f) {
                 takeDamage(enemy.item.GetComponent<EnemyStats>().GetDamage());
-                Debug.Log("Enemy lands a hit!");
+                LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetDamage() + " damage!\n");
+                GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
             }
-
-            Debug.Log("Party Health: " + HEALTH + "\nEnemy Health: " + enemy.item.GetComponent<EnemyStats>().GetHealth());
         }
 
         if (HEALTH <= 0) {
-            Debug.Log("Party is dead!");
+            LogPrint("> The party has died!\n");
             Destroy(this.gameObject);
         } else if (enemy.item.GetComponent<EnemyStats>().GetHealth() <= 0) {
-            Debug.Log("Enemy is dead!");
+            LogPrint("> The enemy has been slain!\n");
             Destroy(enemy.item.gameObject);
             enemy.resetSquare();
         }
 
         fighting = false;
-        Debug.Log("Fight has ended");
     }
 
     public void GetPos(ref int x, ref int y)
@@ -164,9 +187,12 @@ public class PartyMovement : MonoBehaviour {
 
     public bool NoticeCheck(GridSquare square)
     {
+        LogPrint("> A trap has been sprung!\n");
         if (RollDie() + getModifier(WIS) > square.item.GetComponent<TrapStats>().GetNoticeCheck()) {
+            LogPrint("> The party passes the notice check!\n");
             return true;
         } else {
+            LogPrint("> The party fails the notice check");
             return false;
         }
     }
@@ -174,8 +200,10 @@ public class PartyMovement : MonoBehaviour {
     public bool AvoidCheck(GridSquare square)
     {
         if (RollDie() + getModifier(DEX) > square.item.GetComponent<TrapStats>().GetAvoidCheck()) {
+            LogPrint("> The party passes the avoid check!\n");
             return true;
         } else {
+            LogPrint("> The party fails the avoid check\n");
             return false;
         }
     }
@@ -187,6 +215,8 @@ public class PartyMovement : MonoBehaviour {
 
     public int RollDie()
     {
+        int roll = (int)Random.Range(0f, 20f);
+        LogPrint("> The party rolled a " + roll + "!\n");
         return (int)Random.Range(0f, 20f);
     }
 

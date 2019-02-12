@@ -27,7 +27,11 @@ public class GridSquare : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        this.GetComponent<Renderer>().material.color = Color.green;
+        if (x_pos != 10 || y_pos != 19) {
+            this.GetComponent<Renderer>().material.color = Color.green;
+        } else {
+            this.GetComponent<Renderer>().material.color = Color.blue;
+        }
     }
 
     // Highlights grid square, and allows placement of object
@@ -164,7 +168,6 @@ public class GridSquare : MonoBehaviour {
                         }
                     } else {
                         party.damaged = true;
-                        Debug.Log("Fight!!!!");
                         StartCoroutine(party.Fight(this));
                     }
                 }
