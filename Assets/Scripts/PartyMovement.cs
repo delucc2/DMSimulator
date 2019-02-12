@@ -59,6 +59,8 @@ public class PartyMovement : MonoBehaviour {
     private IEnumerator SlowMove(char[] path) {
         foreach (var dir in path)
         {
+            if (fighting) { break; }
+
             if (dir == 'e') {
                 x_pos++;
             } else if (dir == 'w') {
@@ -76,7 +78,6 @@ public class PartyMovement : MonoBehaviour {
 
     private bool Move(char direction, bool check, int x, int y)
     {
-        while (fighting) { }
         GridSquare new_pos = grid.squares[x, y].GetComponent<GridSquare>();
         if (new_pos.getItem() == "wall" || new_pos.getItem() == "crushing wall" || new_pos.getItem() == "arrow wall")
         {
@@ -266,7 +267,7 @@ public class PartyMovement : MonoBehaviour {
         y = dest_y;
         int min = 10000000;
         char direction = '_';
-        while (x != 0 || y != 0)
+        while (x != (int)x_pos || y != (int)z_pos)
         {
             if (x - 1 >= 0 && min >= paths[x - 1, y] && paths[x-1, y] != 0)
             {

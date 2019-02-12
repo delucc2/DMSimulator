@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HEALTH: 22
-  DAMAGE: 50
+  DAMAGE: 4
