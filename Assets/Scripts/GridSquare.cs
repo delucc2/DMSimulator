@@ -208,23 +208,7 @@ public class GridSquare : MonoBehaviour {
                 square = grid.squares[x_pos - i, y_pos];
             }
 
-            if (square.getItem() == "wall" || square.getItem() == "arrow wall")
-            {
-                if ((facing == 'n' && square.getFacing() == 's') ||
-                    (facing == 'e' && square.getFacing() == 'w') ||
-                    (facing == 's' && square.getFacing() == 'n') ||
-                    (facing == 'w' && square.getFacing() == 'e')) {
-                    break;
-                } else if (facing == square.getFacing()) {
-                    square.GetComponent<Renderer>().material.color = Color.yellow;
-                    triggers.Add(square);
-                    break;
-                } else {
-                    square.GetComponent<Renderer>().material.color = Color.yellow;
-                    triggers.Add(square);
-                }
-               
-            } else if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes") {
+            if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes") {
                 square.GetComponent<Renderer>().material.color = Color.yellow;
                 triggers.Add(square);
             } else {

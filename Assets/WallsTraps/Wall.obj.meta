@@ -5,12 +5,18 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: Wall_Walls_Wall1_Wall2_Wall3
+    100004: NewWall
     400000: //RootNode
     400002: Wall_Walls_Wall1_Wall2_Wall3
+    400004: NewWall
     2100000: Wall_Walls_Wall1_Wall2_Wall3Mat
+    2100002: NewWallMat
     2300000: Wall_Walls_Wall1_Wall2_Wall3
+    2300002: NewWall
     3300000: Wall_Walls_Wall1_Wall2_Wall3
+    3300002: NewWall
     4300000: Wall_Walls_Wall1_Wall2_Wall3
+    4300002: NewWall
   externalObjects: {}
   materials:
     importMaterials: 1
