@@ -67,6 +67,7 @@ public class Grid : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyCode.R)) {
             selection = 'r';
         }
+
     }
 
     private void DrawGrid()
@@ -77,7 +78,11 @@ public class Grid : MonoBehaviour {
                 GameObject square = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 square.transform.position = new Vector3(i, 0, j);
                 square.transform.localScale = new Vector3(0.075f, 0.075f, 0.075f);
-                square.GetComponent<Renderer>().material.color = Color.green;
+                if (i == 10 && j == 19) {
+                    square.GetComponent<Renderer>().material.color = Color.blue;
+                } else {
+                    square.GetComponent<Renderer>().material.color = Color.green;
+                }
                 square.AddComponent<GridSquare>();
                 squares[i, j] = square.GetComponent<GridSquare>();
             }
