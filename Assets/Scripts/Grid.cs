@@ -62,7 +62,7 @@ public class Grid : MonoBehaviour {
             selection = '9';
         } else if (Input.GetKeyDown(KeyCode.Alpha7)) {
             selection = '7';
-        } else if (Input.GetKeyDown(KeyCode.E)) {
+        } else if (Input.GetKeyDown(KeyCode.Alpha8)) {
             selection = 'e';
         } else if (Input.GetKeyDown(KeyCode.R)) {
             selection = 'r';
