@@ -3,7 +3,15 @@ guid: 3c574b9175cc63b4b95b8fa78ecfb085
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - wall: {fileID: 400000, guid: 6a9bd3634eb6ffd4a9a850f1619736a5, type: 3}
+  - pit: {fileID: 400000, guid: f339b2ad447cde140b4043765c7119d6, type: 3}
+  - crushing_wall: {fileID: 400000, guid: 38e5bb9f4545e324d8c469ef9179e1f1, type: 3}
+  - spikes: {fileID: 400000, guid: 0fff876e875ec4a4aaf845c64233c434, type: 3}
+  - boulder: {fileID: 400000, guid: 9d8b53b2e65ae1e4fba5b5d831f96d5b, type: 3}
+  - arrow_wall: {fileID: 400002, guid: e393cc71a5eb1b74c853301b3f105445, type: 3}
+  - generic_enemy: {fileID: 400000, guid: 5ee2b80dd476a0e4aa462983a92ad7f7, type: 3}
+  - party: {fileID: 400000, guid: aa5d9fc29bec7044dbb44b6cf0ddf3a7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
