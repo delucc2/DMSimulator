@@ -90,19 +90,9 @@ public class PartyMovement : MonoBehaviour {
     private bool Move(char direction, bool check, int x, int y)
     {
         GridSquare new_pos = grid.squares[x, y].GetComponent<GridSquare>();
-        if (new_pos.getItem() == "wall" || new_pos.getItem() == "crushing wall" || new_pos.getItem() == "arrow wall")
+        if (new_pos.getItem() != "empty" && new_pos.getItem() != "pit" && new_pos.getItem() != "spikes")
         {
-            if ((new_pos.getFacing() == 'e' && direction == 'w') ||
-                (new_pos.getFacing() == 'w' && direction == 'e') ||
-                (new_pos.getFacing() == 'n' && direction == 's') ||
-                (new_pos.getFacing() == 's' && direction == 'n')) {
                 return false;
-            }
-        }
-
-        if (curr_pos.getItem() == "wall" || curr_pos.getItem() == "crushing wall" || curr_pos.getItem() == "arrow_wall")
-        {
-            if (curr_pos.getFacing() == direction) { return false; }
         }
 
         if (!check)
