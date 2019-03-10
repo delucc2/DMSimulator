@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridSquare : MonoBehaviour {
     private Grid grid;      // Grid manager object
-    public Transform item; // Item occupying this square
+    public GameObject item; // Item occupying this square
     private string item_name;
     private int x_pos;      // x coordinate of square
     private int y_pos;      // y coordinate of square
@@ -60,41 +60,46 @@ public class GridSquare : MonoBehaviour {
             // Places object based on current selection
             switch (grid.GetSelection()) {
                 case '1' :
-                    item = Instantiate(grid.wall, this.transform);
-                    item.transform.localScale = new Vector3(0.57f, 0.57f, 0.57f);
+                    item = Instantiate<GameObject>(grid.wall);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                    item.transform.localScale = new Vector3(4.25f, 4.25f, 4.25f);
                     facing = 'w';
                     item_name = "wall";
                     break;
                 case '2' :
-                    item = Instantiate(grid.pit, this.transform);
-                    item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    item = Instantiate<GameObject>(grid.pit);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.67f, this.transform.position.z);
+                    item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "pit";
                     break;
                 case '3':
-                    item = Instantiate(grid.crushing_wall, this.transform);
-                    item.transform.localScale = new Vector3(0.57f, 0.57f, 0.57f);
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1f);
+                    item = Instantiate<GameObject>(grid.crushing_wall);
+                    item.transform.localScale = new Vector3(3f, 3f, 3f);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z - 0.25f);
                     facing = 's';
                     item_name = "crushing wall";
                     range = 2;
                     FindTriggerSquares(true);
                     break;
                 case '4':
-                    item = Instantiate(grid.spikes, this.transform);
-                    item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    item = Instantiate<GameObject>(grid.spikes);
+                    item.transform.position = this.transform.position;
+                    item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "spikes";
                     break;
                 case '5':
-                    item = Instantiate(grid.boulder, this.transform);
-                    item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    item = Instantiate<GameObject>(grid.boulder);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
+                    item.transform.localScale = new Vector3(3f, 3f, 3f);
                     facing = 's';
                     item_name = "boulder";
                     range = 4;
                     FindTriggerSquares(true);
                     break;
                 case '6':
-                    item = Instantiate(grid.arrow_wall, this.transform);
-                    item.transform.localScale = new Vector3(0.57f, 0.57f, 0.57f);
+                    item = Instantiate<GameObject>(grid.arrow_wall);
+                    item.transform.position = this.transform.position;
+                    item.transform.localScale = new Vector3(3f, 3f, 3f);
                     facing = 'n';
                     item_name = "arrow wall";
                     range = 3;
@@ -105,7 +110,9 @@ public class GridSquare : MonoBehaviour {
                     break;
                 case 'e':
                     // TO-DO: Enemy detection
-                    item = Instantiate(grid.generic_enemy, this.transform);
+                    item = Instantiate<GameObject>(grid.generic_enemy);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+                    item.transform.localScale = new Vector3(6f, 6f, 6f);
                     item_name = "enemy";
                     range = 1;
                     facing = 'n';
@@ -131,9 +138,9 @@ public class GridSquare : MonoBehaviour {
                     break;
                 case '7':
                     //if (GameObject.FindGameObjectWithTag("party") != null) { Destroy(GameObject.FindGameObjectWithTag("party")); }
-                    item = Instantiate(grid.party, this.transform);
+                    item = Instantiate<GameObject>(grid.party);
                     item.transform.localScale = new Vector3(8f, 8f, 8f);
-                    item.transform.position = new Vector3(item.transform.position.x - 0.3f, item.transform.position.y + 0.65f, item.transform.position.z - 0.7f);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.75f, this.transform.position.z);
                     item.gameObject.AddComponent<PartyMovement>();
                     //item_name = "party";
                     break;
@@ -188,7 +195,7 @@ public class GridSquare : MonoBehaviour {
     {
         if (item != null) {
             FindTriggerSquares(true);
-            this.transform.Rotate(new Vector3(0, 90, 0));
+            item.transform.Rotate(new Vector3(0, 90, 0));
         }
     }
 

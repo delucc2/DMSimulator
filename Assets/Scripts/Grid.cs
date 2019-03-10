@@ -9,14 +9,14 @@ public class Grid : MonoBehaviour {
     [SerializeField]
     static public int y_size = 20;
 
-    public Transform wall;
-    public Transform pit;
-    public Transform crushing_wall;
-    public Transform spikes;
-    public Transform boulder;
-    public Transform arrow_wall;
-    public Transform generic_enemy;
-    public Transform party;
+    public GameObject wall;
+    public GameObject pit;
+    public GameObject crushing_wall;
+    public GameObject spikes;
+    public GameObject boulder;
+    public GameObject arrow_wall;
+    public GameObject generic_enemy;
+    public GameObject party;
 
     public GridSquare[,] squares = new GridSquare[x_size, y_size];
 
