@@ -12,6 +12,7 @@ public class GridSquare : MonoBehaviour {
     private List<GridSquare> triggers;
     private int range;
     private PartyMovement party;
+    public Camera cam;
 
     public void Start()
     {
@@ -23,6 +24,7 @@ public class GridSquare : MonoBehaviour {
         item_name = "empty";
         facing = '0';
         range = 0;
+        cam = Camera.main;
     }
 
     private void OnMouseExit()
@@ -145,6 +147,10 @@ public class GridSquare : MonoBehaviour {
                     //item_name = "party";
                     break;
             }
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
+            cam.transform.position = new Vector3(this.transform.position.x + 2f, this.transform.position.y + 5f, this.transform.position.z - 2.5f);
         }
     }
 
