@@ -109,6 +109,11 @@ public class GridSquare : MonoBehaviour {
                     break;
                 case '9':
                     // TO-DO: Code for deleting objects
+                    Destroy(item.gameObject);
+                    item = null;
+                    item_name = "empty";
+                    range = 0;
+                    FindTriggerSquares(true);
                     break;
                 case 'e':
                     // TO-DO: Enemy detection
