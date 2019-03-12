@@ -33,6 +33,8 @@ public class DialogueHandler : MonoBehaviour
             hidden = true;
             if (level == 1) {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("LevelTwo");
+            } else if (level == 2) {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("LevelThree");
             }
         }
 
