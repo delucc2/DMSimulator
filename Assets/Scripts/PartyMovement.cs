@@ -12,6 +12,7 @@ public class PartyMovement : MonoBehaviour {
     public bool damaged;
     public bool fighting;
     private bool levelComplete;
+    private bool running;
 
     private int DEX;
     private int WIS;
@@ -28,6 +29,7 @@ public class PartyMovement : MonoBehaviour {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         curr_pos = grid.squares[(int)x_pos, (int)z_pos].GetComponent<GridSquare>();
         fighting = false;
+        running = false;
 
         DEX = 15;
         WIS = 15;
@@ -70,7 +72,8 @@ public class PartyMovement : MonoBehaviour {
             levelComplete = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && !running) {
+            running = true;
             GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
             char[] path = Pathfind(10, 19);
             StartCoroutine(SlowMove(path));
