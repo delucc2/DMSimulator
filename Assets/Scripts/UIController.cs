@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour {
+    
+    public void Hide(GameObject canvas) {
+        canvas.GetComponent<CanvasGroup>().alpha = 0f;
+        canvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Show(GameObject canvas) {
+        canvas.GetComponent<CanvasGroup>().alpha = 1f;
+        canvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
 }
