@@ -35,6 +35,7 @@ public class Grid : MonoBehaviour {
      */
     private char selection = '0';
     public int gold;
+    public bool pause;
 
     // Initialize grid
     private void Start()
@@ -180,5 +181,20 @@ public class Grid : MonoBehaviour {
             gold -= price;
             return true;
         }
+    }
+
+    public void disableInput()
+    {
+        pause = true;
+    }
+
+    public void enableInput()
+    {
+        pause = false;
+    }
+
+    public bool getPause()
+    {
+        return pause;
     }
 }

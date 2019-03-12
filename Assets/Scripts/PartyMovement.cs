@@ -45,7 +45,9 @@ public class PartyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (fighting) { return; }
+        if (fighting && Input.GetKeyDown(KeyCode.Space)) {
+            fighting = false;
+        } else if (fighting) { return; }
 
 		if (Input.GetKeyDown(KeyCode.UpArrow)) {
             z_pos += 1f;
@@ -166,7 +168,7 @@ public class PartyMovement : MonoBehaviour {
             enemy.resetSquare();
         }
 
-        fighting = false;
+        //fighting = false;
     }
 
     public void GetPos(ref int x, ref int y)

@@ -48,6 +48,8 @@ public class GridSquare : MonoBehaviour {
     // Highlights grid square, and allows placement of object
     private void OnMouseOver()
     {
+        if (grid.getPause()) { return; }
+
         // Change grid color to red
         this.GetComponent<Renderer>().material.color = Color.red;
 
@@ -189,7 +191,6 @@ public class GridSquare : MonoBehaviour {
     public void Update()
     {
         if (party == null) {
-            if (!party_placed) { return; }
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         } else {
             int party_x = 0;
@@ -197,6 +198,7 @@ public class GridSquare : MonoBehaviour {
             party.GetPos(ref party_x, ref party_y);
             foreach (var square in triggers)
             {
+                print(square.x_pos + ", " + square.y_pos);
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
                     if (item_name != "enemy") {
