@@ -80,8 +80,7 @@ public class GridSquare : MonoBehaviour {
          */
         if (Input.GetMouseButtonDown(0))
         {
-            if (item_name != "empty" && grid.GetSelection() != 'r')
-            {
+            if (item_name != "empty" && grid.GetSelection() != 'r' && grid.GetSelection() != '9') {
                 return;
             }
 
@@ -149,12 +148,12 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case '9':
-                    // TO-DO: Code for deleting objects
-                    Destroy(item.gameObject);
-                    item = null;
-                    item_name = "empty";
-                    range = 0;
-                    FindTriggerSquares(false);
+                    if (item_name == "enemy") {
+                        grid.refund(item.gameObject.GetComponent<EnemyStats>().GetCost());
+                    } else {
+                        grid.refund(item.gameObject.GetComponent<TrapStats>().cost);
+                    }
+                    resetSquare();
                     break;
                 case 'e':
                     if (!(grid.spendGold(grid.enemy.GetComponent<EnemyStats>().GetCost()))) {
@@ -272,7 +271,6 @@ public class GridSquare : MonoBehaviour {
 
     private void FindTriggerSquares(bool omnidirectional)
     {
-        print("Finding triggers");
         foreach (var trigger in triggers)
         {
             trigger.GetComponent<Renderer>().material.color = Color.green;
@@ -354,10 +352,19 @@ public class GridSquare : MonoBehaviour {
 
     public void resetSquare()
     {
-        item = null;
         item_name = "empty";
         facing = '0';
+        foreach (var trigger in triggers)
+        {
+            trigger.GetComponent<Renderer>().material.color = Color.green;
+            trigger.isTrigger = false;
+        }
         triggers.Clear();
         range = 0;
+        if (item != null)
+        {
+            Destroy(item.gameObject);
+        }
+        item = null;
     }
 }

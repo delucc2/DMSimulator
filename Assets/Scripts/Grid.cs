@@ -192,6 +192,11 @@ public class Grid : MonoBehaviour {
         }
     }
 
+    public void refund(int price)
+    {
+        gold += price;
+    }
+
     public void disableInput()
     {
         pause = true;
