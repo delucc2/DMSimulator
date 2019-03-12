@@ -15,6 +15,7 @@ public class GridSquare : MonoBehaviour {
     public Camera cam;
     private GameObject enemy;
     public bool isTrigger;
+    private bool party_placed;
 
     public void Start()
     {
@@ -28,6 +29,7 @@ public class GridSquare : MonoBehaviour {
         range = 0;
         cam = Camera.main;
         isTrigger = false;
+        party_placed = false;
     }
 
     private void OnMouseExit()
@@ -173,6 +175,7 @@ public class GridSquare : MonoBehaviour {
                     item.transform.localScale = new Vector3(8f, 8f, 8f);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.75f, this.transform.position.z);
                     item.gameObject.AddComponent<PartyMovement>();
+                    party_placed = true;
                     //item_name = "party";
                     break;
             }
@@ -186,6 +189,7 @@ public class GridSquare : MonoBehaviour {
     public void Update()
     {
         if (party == null) {
+            if (!party_placed) { return; }
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         } else {
             int party_x = 0;
