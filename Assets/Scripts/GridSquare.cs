@@ -207,8 +207,8 @@ public class GridSquare : MonoBehaviour {
             {
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
-                    triggered = true;
                     if (item_name != "enemy") {
+                        triggered = true;
                         party.damaged = true;
                         party.fighting = true;
                         if (!party.NoticeCheck(this)) {
@@ -227,6 +227,10 @@ public class GridSquare : MonoBehaviour {
                 }
             }
             if (triggered) {
+                if (!grid.firstTrap) {
+                    GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FirstTrapDialogue();
+                    grid.firstTrap = true;
+                }
                 foreach(var trigger in triggers)
                 {
                     trigger.GetComponent<Renderer>().material.color = Color.green;

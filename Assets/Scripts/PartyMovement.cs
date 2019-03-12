@@ -49,7 +49,7 @@ public class PartyMovement : MonoBehaviour {
             fighting = false;
         } else if (fighting) { return; }
 
-		if (Input.GetKeyDown(KeyCode.UpArrow)) {
+        /*if (Input.GetKeyDown(KeyCode.UpArrow)) {
             z_pos += 1f;
             if (!Move('n', false, (int)x_pos, (int)z_pos)) { z_pos -= 1f; }
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -61,6 +61,10 @@ public class PartyMovement : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
             x_pos += 1f;
             if (!Move('e', false, (int)x_pos, (int)z_pos)) { x_pos -= 1f; }
+        }*/
+        
+        if (x_pos == 10 && z_pos == 19 && !grid.freeMode) {
+            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
         }
         
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -88,7 +92,7 @@ public class PartyMovement : MonoBehaviour {
             }
 
             Move(dir, false, (int)x_pos, (int)z_pos);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -162,6 +166,7 @@ public class PartyMovement : MonoBehaviour {
             }
         }
 
+        string enemy_name = enemy.item.name;
         if (HEALTH <= 0) {
             LogPrint("> The party has died!\n");
             Destroy(this.gameObject);
@@ -171,6 +176,11 @@ public class PartyMovement : MonoBehaviour {
             enemy.resetSquare();
         }
 
+        if (!grid.firstSkeleton && enemy_name == "Skeleton(Clone)")
+        {
+            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().SkeletonDialogue();
+            grid.firstSkeleton = true;
+        }
         //fighting = false;
     }
 

@@ -37,6 +37,8 @@ public class Grid : MonoBehaviour {
     public int gold;
     public bool pause;
     public bool firstTrap = false;
+    public bool firstSkeleton = false;
+    public bool freeMode = false;
 
     // Initialize grid
     private void Start()
