@@ -16,6 +16,7 @@ public class GridSquare : MonoBehaviour {
     private GameObject enemy;
     public bool isTrigger;
     public bool triggered;
+    public bool running;
 
     public void Start()
     {
@@ -30,6 +31,7 @@ public class GridSquare : MonoBehaviour {
         cam = Camera.main;
         isTrigger = false;
         triggered = false;
+        running = false;
 
         if (x_pos == 0 && y_pos == 0)
         {
@@ -56,7 +58,7 @@ public class GridSquare : MonoBehaviour {
     // Highlights grid square, and allows placement of object
     private void OnMouseOver()
     {
-        if (grid.getPause()) { return; }
+        if (grid.getPause() || running) { return; }
 
         // Change grid color to red
         this.GetComponent<Renderer>().material.color = Color.red;
@@ -78,8 +80,7 @@ public class GridSquare : MonoBehaviour {
          */
         if (Input.GetMouseButtonDown(0))
         {
-            if (item_name != "empty" && grid.GetSelection() != 'r')
-            {
+            if (item_name != "empty" && grid.GetSelection() != 'r' && grid.GetSelection() != '9') {
                 return;
             }
 
@@ -147,12 +148,12 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case '9':
-                    // TO-DO: Code for deleting objects
-                    Destroy(item.gameObject);
-                    item = null;
-                    item_name = "empty";
-                    range = 0;
-                    FindTriggerSquares(false);
+                    if (item_name == "enemy") {
+                        grid.refund(item.gameObject.GetComponent<EnemyStats>().GetCost());
+                    } else {
+                        grid.refund(item.gameObject.GetComponent<TrapStats>().cost);
+                    }
+                    resetSquare();
                     break;
                 case 'e':
                     if (!(grid.spendGold(grid.enemy.GetComponent<EnemyStats>().GetCost()))) {
@@ -197,6 +198,10 @@ public class GridSquare : MonoBehaviour {
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            running = true;
+        }
+
         if (party == null) {
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         } else {
@@ -206,7 +211,7 @@ public class GridSquare : MonoBehaviour {
             foreach (var square in triggers)
             {
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
-                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
+                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
                     if (item_name != "enemy") {
                         triggered = true;
                         party.damaged = true;
@@ -266,7 +271,6 @@ public class GridSquare : MonoBehaviour {
 
     private void FindTriggerSquares(bool omnidirectional)
     {
-        print("Finding triggers");
         foreach (var trigger in triggers)
         {
             trigger.GetComponent<Renderer>().material.color = Color.green;
@@ -348,10 +352,19 @@ public class GridSquare : MonoBehaviour {
 
     public void resetSquare()
     {
-        item = null;
         item_name = "empty";
         facing = '0';
+        foreach (var trigger in triggers)
+        {
+            trigger.GetComponent<Renderer>().material.color = Color.green;
+            trigger.isTrigger = false;
+        }
         triggers.Clear();
         range = 0;
+        if (item != null)
+        {
+            Destroy(item.gameObject);
+        }
+        item = null;
     }
 }
