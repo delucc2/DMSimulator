@@ -212,7 +212,7 @@ public class GridSquare : MonoBehaviour {
             foreach (var square in triggers)
             {
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
-                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
+                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
                     if (item_name != "enemy") {
                         triggered = true;
                         party.damaged = true;
