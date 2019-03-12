@@ -103,4 +103,10 @@ public class Grid : MonoBehaviour {
     {
         return y_size;
     }
+
+    public void changeSelection(string input)
+    {
+        char[] buffer = input.ToCharArray();
+        selection = buffer[0];
+    }
 }
