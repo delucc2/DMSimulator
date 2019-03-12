@@ -11,6 +11,7 @@ public class PartyMovement : MonoBehaviour {
     private bool found;
     public bool damaged;
     public bool fighting;
+    private bool levelComplete;
 
     private int DEX;
     private int WIS;
@@ -41,6 +42,7 @@ public class PartyMovement : MonoBehaviour {
         GameObject.Find("Intelligence").GetComponent<UnityEngine.UI.Text>().text = "INT: 15";
 
         log_lines = 0;
+        levelComplete = false;
     }
 	
 	// Update is called once per frame
@@ -63,8 +65,9 @@ public class PartyMovement : MonoBehaviour {
             if (!Move('e', false, (int)x_pos, (int)z_pos)) { x_pos -= 1f; }
         }*/
         
-        if (x_pos == 10 && z_pos == 19 && !grid.freeMode) {
+        if (x_pos == 10 && z_pos == 19 && !grid.freeMode && !levelComplete) {
             GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
+            levelComplete = true;
         }
         
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -180,6 +183,12 @@ public class PartyMovement : MonoBehaviour {
         {
             GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().SkeletonDialogue();
             grid.firstSkeleton = true;
+        }
+
+        if (!grid.firstWraith && enemy_name == "Wraith(Clone)")
+        {
+            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().WraithDialogue();
+            grid.firstWraith = true;
         }
         //fighting = false;
     }

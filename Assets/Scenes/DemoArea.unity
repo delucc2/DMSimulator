@@ -1762,6 +1762,7 @@ MonoBehaviour:
   pause: 0
   firstTrap: 1
   firstSkeleton: 1
+  firstWraith: 1
   freeMode: 1
 --- !u!4 &690358683
 Transform:
@@ -2669,7 +2670,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1674861170}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.55652165
+  m_Size: 0.5565217
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

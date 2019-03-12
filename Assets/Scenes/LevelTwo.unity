@@ -1773,6 +1773,7 @@ MonoBehaviour:
   pause: 1
   firstTrap: 0
   firstSkeleton: 0
+  firstWraith: 1
   freeMode: 0
 --- !u!4 &690358683
 Transform:
@@ -4568,6 +4569,8 @@ MonoBehaviour:
   - 'Bard: My armor is getting filthy I hate undead dungeons. Can we wrap this up
     and come back later?'
   - 'Paladin: No! We must save the villager, onward for faith and justice!'
+  wraith_dialogue: []
+  ending_dialogue: []
   level: 2
 --- !u!114 &1654592377
 MonoBehaviour:

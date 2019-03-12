@@ -8,6 +8,8 @@ public class DialogueHandler : MonoBehaviour
     public string[] intro_dialogue;
     public string[] firsttrap_dialogue;
     public string[] skeleton_dialogue;
+    public string[] wraith_dialogue;
+    public string[] ending_dialogue;
     private string[] dialogue;
     private int dialogue_counter;
     private bool hidden;
@@ -35,6 +37,13 @@ public class DialogueHandler : MonoBehaviour
                 UnityEngine.SceneManagement.SceneManager.LoadScene("LevelTwo");
             } else if (level == 2) {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("LevelThree");
+            } else if (level == 3)
+            {
+                if (dialogue_counter == dialogue.Length) {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+                }
+                GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = dialogue[dialogue_counter];
+                dialogue_counter++;
             }
         }
 
@@ -70,10 +79,22 @@ public class DialogueHandler : MonoBehaviour
         dialogue_counter++;
     }
 
+    public void WraithDialogue()
+    {
+        ShowDialogueBox();
+        dialogue = wraith_dialogue;
+        GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = dialogue[dialogue_counter];
+        dialogue_counter++;
+    }
+
     public void EndDialogue()
     {
         ShowDialogueBox();
         GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = "Congratulations! You cleared the floor!";
+        if (level == 3)
+        {
+            dialogue = ending_dialogue;
+        }
         level_complete = true;
     }
 

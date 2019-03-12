@@ -1773,6 +1773,7 @@ MonoBehaviour:
   pause: 1
   firstTrap: 0
   firstSkeleton: 0
+  firstWraith: 1
   freeMode: 0
 --- !u!4 &690358683
 Transform:
@@ -4605,6 +4606,8 @@ MonoBehaviour:
   - 'Rogue: Either way, everything dies when you stab it in the head.'
   - 'Paladin: Try to focus on the fight, we must save this peasant, my god commands
     it!'
+  wraith_dialogue: []
+  ending_dialogue: []
   level: 1
 --- !u!114 &1654592377
 MonoBehaviour:
