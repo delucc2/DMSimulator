@@ -9,6 +9,6 @@ public class SceneManager : MonoBehaviour {
     }
 
     public void LoadCampaign() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Campaign");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelOne");
     }
 }

@@ -15,7 +15,7 @@ public class GridSquare : MonoBehaviour {
     public Camera cam;
     private GameObject enemy;
     public bool isTrigger;
-    private bool party_placed;
+    private bool triggered;
 
     public void Start()
     {
@@ -29,7 +29,15 @@ public class GridSquare : MonoBehaviour {
         range = 0;
         cam = Camera.main;
         isTrigger = false;
-        party_placed = false;
+        triggered = false;
+
+        if (x_pos == 0 && y_pos == 0)
+        {
+            item = Instantiate<GameObject>(grid.party);
+            item.transform.localScale = new Vector3(8f, 8f, 8f);
+            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.75f, this.transform.position.z);
+            item.gameObject.AddComponent<PartyMovement>();
+        }
     }
 
     private void OnMouseExit()
@@ -177,7 +185,6 @@ public class GridSquare : MonoBehaviour {
                     item.transform.localScale = new Vector3(8f, 8f, 8f);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.75f, this.transform.position.z);
                     item.gameObject.AddComponent<PartyMovement>();
-                    party_placed = true;
                     //item_name = "party";
                     break;
             }
@@ -198,11 +205,12 @@ public class GridSquare : MonoBehaviour {
             party.GetPos(ref party_x, ref party_y);
             foreach (var square in triggers)
             {
-                print(square.x_pos + ", " + square.y_pos);
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
+                    triggered = true;
                     if (item_name != "enemy") {
                         party.damaged = true;
+                        party.fighting = true;
                         if (!party.NoticeCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
@@ -218,10 +226,18 @@ public class GridSquare : MonoBehaviour {
                     }
                 }
             }
+            if (triggered) {
+                foreach(var trigger in triggers)
+                {
+                    trigger.GetComponent<Renderer>().material.color = Color.green;
+                    trigger.isTrigger = false;
+                }
+                triggers.Clear();
+            }
         }
         if (item_name == "enemy") {
             FindTriggerSquares(true);
-        } else if (item_name != "empty") {
+        } else if (item_name != "empty" && !triggered) {
             FindTriggerSquares(false);
         }
     }
@@ -244,6 +260,7 @@ public class GridSquare : MonoBehaviour {
 
     private void FindTriggerSquares(bool omnidirectional)
     {
+        print("Finding triggers");
         foreach (var trigger in triggers)
         {
             trigger.GetComponent<Renderer>().material.color = Color.green;

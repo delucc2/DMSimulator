@@ -36,6 +36,7 @@ public class Grid : MonoBehaviour {
     private char selection = '0';
     public int gold;
     public bool pause;
+    public bool firstTrap = false;
 
     // Initialize grid
     private void Start()

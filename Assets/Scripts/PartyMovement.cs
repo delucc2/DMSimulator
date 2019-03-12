@@ -10,7 +10,7 @@ public class PartyMovement : MonoBehaviour {
     private Grid grid;
     private bool found;
     public bool damaged;
-    private bool fighting;
+    public bool fighting;
 
     private int DEX;
     private int WIS;
@@ -64,6 +64,7 @@ public class PartyMovement : MonoBehaviour {
         }
         
         if (Input.GetKeyDown(KeyCode.Space)) {
+            GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
             char[] path = Pathfind(10, 19);
             StartCoroutine(SlowMove(path));
         }
@@ -72,7 +73,9 @@ public class PartyMovement : MonoBehaviour {
     private IEnumerator SlowMove(char[] path) {
         foreach (var dir in path)
         {
-            if (fighting) { break; }
+            if (fighting && Input.GetKeyDown(KeyCode.Space)) {
+                fighting = false;
+            } else if (fighting) { break; }
 
             if (dir == 'e') {
                 x_pos++;
@@ -184,7 +187,7 @@ public class PartyMovement : MonoBehaviour {
             LogPrint("> The party passes the notice check!\n");
             return true;
         } else {
-            LogPrint("> The party fails the notice check");
+            LogPrint("> The party fails the notice check\n");
             return false;
         }
     }
