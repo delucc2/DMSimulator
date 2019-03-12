@@ -16,6 +16,7 @@ public class GridSquare : MonoBehaviour {
     private GameObject enemy;
     public bool isTrigger;
     public bool triggered;
+    public bool running;
 
     public void Start()
     {
@@ -30,6 +31,7 @@ public class GridSquare : MonoBehaviour {
         cam = Camera.main;
         isTrigger = false;
         triggered = false;
+        running = false;
 
         if (x_pos == 0 && y_pos == 0)
         {
@@ -56,7 +58,7 @@ public class GridSquare : MonoBehaviour {
     // Highlights grid square, and allows placement of object
     private void OnMouseOver()
     {
-        if (grid.getPause()) { return; }
+        if (grid.getPause() || running) { return; }
 
         // Change grid color to red
         this.GetComponent<Renderer>().material.color = Color.red;
@@ -197,6 +199,10 @@ public class GridSquare : MonoBehaviour {
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            running = true;
+        }
+
         if (party == null) {
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         } else {
