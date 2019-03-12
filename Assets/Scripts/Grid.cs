@@ -34,6 +34,7 @@ public class Grid : MonoBehaviour {
      * 9 - Delete
      */
     private char selection = '0';
+    public int gold;
 
     // Initialize grid
     private void Start()
@@ -69,6 +70,7 @@ public class Grid : MonoBehaviour {
             selection = 'r';
         }
 
+        GameObject.Find("Gold").GetComponent<UnityEngine.UI.Text>().text = gold + "g";
     }
 
     private void DrawGrid()
@@ -163,5 +165,20 @@ public class Grid : MonoBehaviour {
     {
         enemy = input;
         GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nDAM: " + enemy.GetComponent<EnemyStats>().GetDamage().ToString();
+    }
+
+    public int getGold()
+    {
+        return gold;
+    }
+
+    public bool spendGold(int price)
+    {
+        if (price > gold) {
+            return false;
+        } else {
+            gold -= price;
+            return true;
+        }
     }
 }

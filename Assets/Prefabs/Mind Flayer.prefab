@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HEALTH: 71
   DAMAGE: 15
+  COST: 400

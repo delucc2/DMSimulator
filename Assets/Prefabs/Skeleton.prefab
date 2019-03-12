@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23486503584317362}
   - component: {fileID: 114277483113959838}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HEALTH: 13
   DAMAGE: 5
+  COST: 100

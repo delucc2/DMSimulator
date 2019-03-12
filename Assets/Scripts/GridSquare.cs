@@ -81,12 +81,18 @@ public class GridSquare : MonoBehaviour {
                     item_name = "wall";
                     break;
                 case '2' :
+                    if (!(grid.spendGold(100))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.pit);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.67f, this.transform.position.z);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "pit";
                     break;
                 case '3':
+                    if (!(grid.spendGold(200))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.crushing_wall);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z - 0.25f);
@@ -96,12 +102,18 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case '4':
+                    if (!(grid.spendGold(100))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.spikes);
                     item.transform.position = this.transform.position;
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "spikes";
                     break;
                 case '5':
+                    if (!(grid.spendGold(400))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.boulder);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
@@ -111,6 +123,9 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case '6':
+                    if (!(grid.spendGold(200))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.arrow_wall);
                     item.transform.position = this.transform.position;
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
@@ -128,7 +143,9 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case 'e':
-                    // TO-DO: Enemy detection
+                    if (!(grid.spendGold(grid.enemy.GetComponent<EnemyStats>().GetCost()))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.enemy);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
                     item.transform.localScale = new Vector3(6f, 6f, 6f);

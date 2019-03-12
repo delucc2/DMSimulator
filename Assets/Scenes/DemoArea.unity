@@ -1480,6 +1480,7 @@ MonoBehaviour:
   arrow_wall: {fileID: 1912534411452010, guid: 9b5d581e940cae64aa8315ff7d320b6a, type: 2}
   enemy: {fileID: 0}
   party: {fileID: 1620668038651174, guid: d8e4909d40f28e24e9d5e3fb78ebd2b9, type: 2}
+  gold: 2500
 --- !u!4 &690358683
 Transform:
   m_ObjectHideFlags: 0
@@ -5724,6 +5725,11 @@ Prefab:
         type: 2}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982286398430180, guid: eda8969a0d7065c4bbe486b6ab58612e,
+        type: 2}
+      propertyPath: m_Text
+      value: 2500g
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eda8969a0d7065c4bbe486b6ab58612e, type: 2}
