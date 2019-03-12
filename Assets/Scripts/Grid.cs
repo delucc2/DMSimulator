@@ -46,6 +46,7 @@ public class Grid : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Alpha0)) {
             selection = '0';
+            GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
         } else if (Input.GetKeyDown(KeyCode.Alpha1)) {
             selection = '1';
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
@@ -108,10 +109,59 @@ public class Grid : MonoBehaviour {
     {
         char[] buffer = input.ToCharArray();
         selection = buffer[0];
+
+        string item_name = "";
+        string notice_check = "";
+        string avoid_check = "";
+        string damage = "";
+        switch(selection)
+        {
+            case '1':
+                item_name = "Wall";
+                notice_check = "10";
+                avoid_check = "15";
+                damage = "22";
+                break;
+            case '2':
+                item_name = "Pit";
+                notice_check = "10";
+                avoid_check = "10";
+                damage = "5";
+                break;
+            case '3':
+                item_name = "Crushing Wall";
+                notice_check = "10";
+                avoid_check = "15";
+                damage = "22";
+                break;
+            case '4':
+                item_name = "Spikes";
+                notice_check = "12";
+                avoid_check = "12";
+                damage = "11";
+                break;
+            case '5':
+                item_name = "Boulder";
+                notice_check = "15";
+                avoid_check = "15";
+                damage = "35";
+                break;
+            case '6':
+                item_name = "Arrow Wall";
+                notice_check = "12";
+                avoid_check = "12";
+                damage = "11";
+                break;
+        }
+        if (selection != 'e')
+        {
+            GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = item_name + "\n\nNotice Check: " + notice_check + "\nAvoid Check: " + avoid_check + "\nDAM: " + damage;
+        }
     }
 
     public void changeEnemy(GameObject input)
     {
         enemy = input;
+        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nDAM: " + enemy.GetComponent<EnemyStats>().GetDamage().ToString();
     }
 }
