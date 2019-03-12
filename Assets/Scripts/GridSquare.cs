@@ -13,6 +13,8 @@ public class GridSquare : MonoBehaviour {
     private int range;
     private PartyMovement party;
     public Camera cam;
+    private GameObject enemy;
+    public bool isTrigger;
 
     public void Start()
     {
@@ -25,12 +27,17 @@ public class GridSquare : MonoBehaviour {
         facing = '0';
         range = 0;
         cam = Camera.main;
+        isTrigger = false;
     }
 
     private void OnMouseExit()
     {
         if (x_pos != 10 || y_pos != 19) {
+            if (isTrigger) {
+                this.GetComponent<Renderer>().material.color = Color.yellow;
+            } else {
             this.GetComponent<Renderer>().material.color = Color.green;
+            }
         } else {
             this.GetComponent<Renderer>().material.color = Color.blue;
         }
@@ -59,6 +66,11 @@ public class GridSquare : MonoBehaviour {
          */
         if (Input.GetMouseButtonDown(0))
         {
+            if (item_name != "empty" && grid.GetSelection() != 'r')
+            {
+                return;
+            }
+
             // Places object based on current selection
             switch (grid.GetSelection()) {
                 case '1' :
@@ -81,7 +93,7 @@ public class GridSquare : MonoBehaviour {
                     facing = 's';
                     item_name = "crushing wall";
                     range = 2;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case '4':
                     item = Instantiate<GameObject>(grid.spikes);
@@ -96,7 +108,7 @@ public class GridSquare : MonoBehaviour {
                     facing = 's';
                     item_name = "boulder";
                     range = 4;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case '6':
                     item = Instantiate<GameObject>(grid.arrow_wall);
@@ -105,7 +117,7 @@ public class GridSquare : MonoBehaviour {
                     facing = 'n';
                     item_name = "arrow wall";
                     range = 3;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case '9':
                     // TO-DO: Code for deleting objects
@@ -113,25 +125,20 @@ public class GridSquare : MonoBehaviour {
                     item = null;
                     item_name = "empty";
                     range = 0;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case 'e':
                     // TO-DO: Enemy detection
-                    item = Instantiate<GameObject>(grid.generic_enemy);
+                    item = Instantiate<GameObject>(grid.enemy);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
                     item.transform.localScale = new Vector3(6f, 6f, 6f);
                     item_name = "enemy";
                     range = 1;
                     facing = 'n';
                     FindTriggerSquares(true);
-                    facing = 's';
-                    FindTriggerSquares(false);
-                    facing = 'e';
-                    FindTriggerSquares(false);
-                    facing = 'w';
-                    FindTriggerSquares(false);
                     break;
                 case 'r':
+                    print("rotating");
                     if (facing == 'n') {
                         facing = 'e';
                     } else if (facing == 'e') {
@@ -190,48 +197,82 @@ public class GridSquare : MonoBehaviour {
             }
         }
         if (item_name == "enemy") {
-            facing = 'n';
             FindTriggerSquares(true);
-            facing = 's';
+        } else if (item_name != "empty") {
             FindTriggerSquares(false);
-            facing = 'e';
-            FindTriggerSquares(false);
-            facing = 'w';
-            FindTriggerSquares(false);
-        } else if (item_name != "empty") { FindTriggerSquares(true); }
+        }
     }
 
     // Rotates item in square
     private void rotateSquare()
     {
         if (item != null) {
-            FindTriggerSquares(true);
+            if (item_name == "enemy")
+            {
+                FindTriggerSquares(true);
+            }
+            else
+            {
+                FindTriggerSquares(false);
+            }
             item.transform.Rotate(new Vector3(0, 90, 0));
         }
     }
 
-    private void FindTriggerSquares(bool clear)
+    private void FindTriggerSquares(bool omnidirectional)
     {
-        if (clear) { triggers.Clear(); }
+        foreach (var trigger in triggers)
+        {
+            trigger.GetComponent<Renderer>().material.color = Color.green;
+            trigger.isTrigger = false;
+        }
+        triggers.Clear();
         for (int i = 1; i <= range; i++)
         {
             GridSquare square = null;
-            if (facing == 'n') {
+            if (facing == 'n' || omnidirectional) {
                 square = grid.squares[x_pos, y_pos + i];
-            } else if (facing == 'e') {
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                }
+            }
+            if (facing == 'e' || omnidirectional) {
                 square = grid.squares[x_pos + i, y_pos];
-            } else if (facing == 's') {
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                }
+            }
+            if (facing == 's' || omnidirectional) {
                 square = grid.squares[x_pos, y_pos - i];
-            } else if (facing == 'w') {
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                }
+            }
+            if (facing == 'w' || omnidirectional) {
                 square = grid.squares[x_pos - i, y_pos];
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                }
             }
 
-            if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes") {
+            /*if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes") {
                 square.GetComponent<Renderer>().material.color = Color.yellow;
                 triggers.Add(square);
             } else {
                 break;
-            }
+            }*/
         }
     }
 

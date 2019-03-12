@@ -15,7 +15,7 @@ public class Grid : MonoBehaviour {
     public GameObject spikes;
     public GameObject boulder;
     public GameObject arrow_wall;
-    public GameObject generic_enemy;
+    public GameObject enemy;
     public GameObject party;
 
     public GridSquare[,] squares = new GridSquare[x_size, y_size];
@@ -108,5 +108,10 @@ public class Grid : MonoBehaviour {
     {
         char[] buffer = input.ToCharArray();
         selection = buffer[0];
+    }
+
+    public void changeEnemy(GameObject input)
+    {
+        enemy = input;
     }
 }
