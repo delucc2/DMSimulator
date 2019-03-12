@@ -50,6 +50,11 @@ public class Grid : MonoBehaviour {
     // Reads for hotkeys to switch selection
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha0)) {
             selection = '0';
             GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";

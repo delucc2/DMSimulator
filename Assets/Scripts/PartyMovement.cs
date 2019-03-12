@@ -113,15 +113,19 @@ public class PartyMovement : MonoBehaviour {
             this.transform.position = new Vector3(x_pos, y_pos, z_pos);
             curr_pos = new_pos;
 
-            if (curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes")
+            if ((curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes") && !curr_pos.triggered)
             {
+                fighting = true;
+                curr_pos.triggered = true;
                 if (!NoticeCheck(curr_pos)) {
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
                     this.GetComponent<Renderer>().material.color = Color.red;
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 } else if (!AvoidCheck(curr_pos)) {
                     // Pass Notice Check!
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
                     this.GetComponent<Renderer>().material.color = Color.red;
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 } else {
                     // Pass Avoid Check + successfully dodge
                     this.GetComponent<Renderer>().material.color = Color.green;
@@ -351,5 +355,10 @@ public class PartyMovement : MonoBehaviour {
             //Debug.Log("(" + x + ", " + y + ")" + ", " + direction);
         }
         return directions;
+    }
+
+    public int getHealth()
+    {
+        return HEALTH;
     }
 }

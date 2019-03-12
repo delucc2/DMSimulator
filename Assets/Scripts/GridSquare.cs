@@ -15,7 +15,7 @@ public class GridSquare : MonoBehaviour {
     public Camera cam;
     private GameObject enemy;
     public bool isTrigger;
-    private bool triggered;
+    public bool triggered;
 
     public void Start()
     {
@@ -214,9 +214,11 @@ public class GridSquare : MonoBehaviour {
                         if (!party.NoticeCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
+                            GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
                         } else if (!party.AvoidCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
+                            GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
                         } else {
                             party.GetComponent<Renderer>().material.color = Color.green;
                         }
