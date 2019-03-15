@@ -73,6 +73,9 @@ public class PartyMovement : MonoBehaviour {
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !running) {
+            GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
+            GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
+
             running = true;
             GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
             char[] path = Pathfind(10, 19);

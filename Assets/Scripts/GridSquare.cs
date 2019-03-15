@@ -58,7 +58,12 @@ public class GridSquare : MonoBehaviour {
     // Highlights grid square, and allows placement of object
     private void OnMouseOver()
     {
-        if (grid.getPause() || running) { return; }
+        int party_x = -1;
+        int party_y = -1;
+        if (party != null) {
+            party.GetPos(ref party_x, ref party_y);
+        }
+        if (grid.getPause() || running || (x_pos == party_x && y_pos == party_y)) { return; }
 
         // Change grid color to red
         this.GetComponent<Renderer>().material.color = Color.red;
