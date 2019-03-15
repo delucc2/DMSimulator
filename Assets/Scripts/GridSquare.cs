@@ -168,7 +168,6 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(true);
                     break;
                 case 'r':
-                    print("rotating");
                     if (facing == 'n') {
                         facing = 'e';
                     } else if (facing == 'e') {
@@ -202,6 +201,12 @@ public class GridSquare : MonoBehaviour {
             running = true;
         }
 
+        if (item_name == "enemy") {
+            FindTriggerSquares(true);
+        } else if (item_name != "empty" && !triggered) {
+            FindTriggerSquares(false);
+        }
+
         if (party == null) {
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         } else {
@@ -214,6 +219,7 @@ public class GridSquare : MonoBehaviour {
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
                     if (item_name != "enemy") {
                         triggered = true;
+                        party.running = false;
                         party.damaged = true;
                         party.fighting = true;
                         if (!party.NoticeCheck(this)) {
@@ -287,6 +293,8 @@ public class GridSquare : MonoBehaviour {
                     square.GetComponent<Renderer>().material.color = Color.yellow;
                     triggers.Add(square);
                     square.isTrigger = true;
+                } else {
+                    break;
                 }
             }
             if (facing == 'e' || omnidirectional) {
@@ -296,6 +304,8 @@ public class GridSquare : MonoBehaviour {
                     square.GetComponent<Renderer>().material.color = Color.yellow;
                     triggers.Add(square);
                     square.isTrigger = true;
+                } else {
+                    break;
                 }
             }
             if (facing == 's' || omnidirectional) {
@@ -305,6 +315,8 @@ public class GridSquare : MonoBehaviour {
                     square.GetComponent<Renderer>().material.color = Color.yellow;
                     triggers.Add(square);
                     square.isTrigger = true;
+                } else {
+                    break;
                 }
             }
             if (facing == 'w' || omnidirectional) {
@@ -314,6 +326,8 @@ public class GridSquare : MonoBehaviour {
                     square.GetComponent<Renderer>().material.color = Color.yellow;
                     triggers.Add(square);
                     square.isTrigger = true;
+                } else {
+                    break;
                 }
             }
 

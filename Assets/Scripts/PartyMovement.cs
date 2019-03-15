@@ -12,7 +12,7 @@ public class PartyMovement : MonoBehaviour {
     public bool damaged;
     public bool fighting;
     private bool levelComplete;
-    private bool running;
+    public bool running;
 
     private int DEX;
     private int WIS;
@@ -156,6 +156,7 @@ public class PartyMovement : MonoBehaviour {
     public IEnumerator Fight(GridSquare enemy)
     {
         fighting = true;
+        running = false;
         LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
