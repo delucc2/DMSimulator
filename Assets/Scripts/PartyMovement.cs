@@ -10,7 +10,9 @@ public class PartyMovement : MonoBehaviour {
     private Grid grid;
     private bool found;
     public bool damaged;
-    private bool fighting;
+    public bool fighting;
+    private bool levelComplete;
+    public bool running;
 
     private int DEX;
     private int WIS;
@@ -27,6 +29,7 @@ public class PartyMovement : MonoBehaviour {
         grid = GameObject.Find("Grid").GetComponent<Grid>();
         curr_pos = grid.squares[(int)x_pos, (int)z_pos].GetComponent<GridSquare>();
         fighting = false;
+        running = false;
 
         DEX = 15;
         WIS = 15;
@@ -41,13 +44,16 @@ public class PartyMovement : MonoBehaviour {
         GameObject.Find("Intelligence").GetComponent<UnityEngine.UI.Text>().text = "INT: 15";
 
         log_lines = 0;
+        levelComplete = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (fighting) { return; }
+        if (fighting && Input.GetKeyDown(KeyCode.Space)) {
+            fighting = false;
+        } else if (fighting) { return; }
 
-		if (Input.GetKeyDown(KeyCode.UpArrow)) {
+        /*if (Input.GetKeyDown(KeyCode.UpArrow)) {
             z_pos += 1f;
             if (!Move('n', false, (int)x_pos, (int)z_pos)) { z_pos -= 1f; }
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -59,9 +65,19 @@ public class PartyMovement : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
             x_pos += 1f;
             if (!Move('e', false, (int)x_pos, (int)z_pos)) { x_pos -= 1f; }
+        }*/
+        
+        if (x_pos == 10 && z_pos == 19 && !grid.freeMode && !levelComplete) {
+            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
+            levelComplete = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && !running) {
+            GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
+            GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
+
+            running = true;
+            GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
             char[] path = Pathfind(10, 19);
             StartCoroutine(SlowMove(path));
         }
@@ -70,7 +86,9 @@ public class PartyMovement : MonoBehaviour {
     private IEnumerator SlowMove(char[] path) {
         foreach (var dir in path)
         {
-            if (fighting) { break; }
+            if (fighting && Input.GetKeyDown(KeyCode.Space)) {
+                fighting = false;
+            } else if (fighting) { break; }
 
             if (dir == 'e') {
                 x_pos++;
@@ -83,7 +101,7 @@ public class PartyMovement : MonoBehaviour {
             }
 
             Move(dir, false, (int)x_pos, (int)z_pos);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -101,15 +119,19 @@ public class PartyMovement : MonoBehaviour {
             this.transform.position = new Vector3(x_pos, y_pos, z_pos);
             curr_pos = new_pos;
 
-            if (curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes")
+            if ((curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes") && !curr_pos.triggered)
             {
+                fighting = true;
+                curr_pos.triggered = true;
                 if (!NoticeCheck(curr_pos)) {
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
                     this.GetComponent<Renderer>().material.color = Color.red;
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 } else if (!AvoidCheck(curr_pos)) {
                     // Pass Notice Check!
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
                     this.GetComponent<Renderer>().material.color = Color.red;
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 } else {
                     // Pass Avoid Check + successfully dodge
                     this.GetComponent<Renderer>().material.color = Color.green;
@@ -137,6 +159,7 @@ public class PartyMovement : MonoBehaviour {
     public IEnumerator Fight(GridSquare enemy)
     {
         fighting = true;
+        running = false;
         LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
@@ -157,6 +180,7 @@ public class PartyMovement : MonoBehaviour {
             }
         }
 
+        string enemy_name = enemy.item.name;
         if (HEALTH <= 0) {
             LogPrint("> The party has died!\n");
             Destroy(this.gameObject);
@@ -166,7 +190,18 @@ public class PartyMovement : MonoBehaviour {
             enemy.resetSquare();
         }
 
-        fighting = false;
+        if (!grid.firstSkeleton && enemy_name == "Skeleton(Clone)")
+        {
+            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().SkeletonDialogue();
+            grid.firstSkeleton = true;
+        }
+
+        if (!grid.firstWraith && enemy_name == "Wraith(Clone)")
+        {
+            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().WraithDialogue();
+            grid.firstWraith = true;
+        }
+        //fighting = false;
     }
 
     public void GetPos(ref int x, ref int y)
@@ -182,7 +217,7 @@ public class PartyMovement : MonoBehaviour {
             LogPrint("> The party passes the notice check!\n");
             return true;
         } else {
-            LogPrint("> The party fails the notice check");
+            LogPrint("> The party fails the notice check\n");
             return false;
         }
     }
@@ -327,5 +362,10 @@ public class PartyMovement : MonoBehaviour {
             //Debug.Log("(" + x + ", " + y + ")" + ", " + direction);
         }
         return directions;
+    }
+
+    public int getHealth()
+    {
+        return HEALTH;
     }
 }

@@ -7,6 +7,7 @@ public class TrapStats : MonoBehaviour {
     public int notice_check;
     public int avoid_check;
     public int damage;
+    public int cost;
 
     public int GetNoticeCheck(){
         return notice_check;

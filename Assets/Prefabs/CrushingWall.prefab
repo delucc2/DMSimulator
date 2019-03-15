@@ -98,3 +98,4 @@ MonoBehaviour:
   notice_check: 10
   avoid_check: 15
   damage: 22
+  cost: 200

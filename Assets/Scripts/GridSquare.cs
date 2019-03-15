@@ -12,6 +12,11 @@ public class GridSquare : MonoBehaviour {
     private List<GridSquare> triggers;
     private int range;
     private PartyMovement party;
+    public Camera cam;
+    private GameObject enemy;
+    public bool isTrigger;
+    public bool triggered;
+    public bool running;
 
     public void Start()
     {
@@ -23,12 +28,28 @@ public class GridSquare : MonoBehaviour {
         item_name = "empty";
         facing = '0';
         range = 0;
+        cam = Camera.main;
+        isTrigger = false;
+        triggered = false;
+        running = false;
+
+        if (x_pos == 0 && y_pos == 0)
+        {
+            item = Instantiate<GameObject>(grid.party);
+            item.transform.localScale = new Vector3(8f, 8f, 8f);
+            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.75f, this.transform.position.z);
+            item.gameObject.AddComponent<PartyMovement>();
+        }
     }
 
     private void OnMouseExit()
     {
         if (x_pos != 10 || y_pos != 19) {
+            if (isTrigger) {
+                this.GetComponent<Renderer>().material.color = Color.yellow;
+            } else {
             this.GetComponent<Renderer>().material.color = Color.green;
+            }
         } else {
             this.GetComponent<Renderer>().material.color = Color.blue;
         }
@@ -37,6 +58,13 @@ public class GridSquare : MonoBehaviour {
     // Highlights grid square, and allows placement of object
     private void OnMouseOver()
     {
+        int party_x = -1;
+        int party_y = -1;
+        if (party != null) {
+            party.GetPos(ref party_x, ref party_y);
+        }
+        if (grid.getPause() || running || (x_pos == party_x && y_pos == party_y)) { return; }
+
         // Change grid color to red
         this.GetComponent<Renderer>().material.color = Color.red;
 
@@ -57,6 +85,10 @@ public class GridSquare : MonoBehaviour {
          */
         if (Input.GetMouseButtonDown(0))
         {
+            if (item_name != "empty" && grid.GetSelection() != 'r' && grid.GetSelection() != '9') {
+                return;
+            }
+
             // Places object based on current selection
             switch (grid.GetSelection()) {
                 case '1' :
@@ -67,62 +99,78 @@ public class GridSquare : MonoBehaviour {
                     item_name = "wall";
                     break;
                 case '2' :
+                    if (!(grid.spendGold(100))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.pit);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.67f, this.transform.position.z);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "pit";
                     break;
                 case '3':
+                    if (!(grid.spendGold(200))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.crushing_wall);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z - 0.25f);
                     facing = 's';
                     item_name = "crushing wall";
                     range = 2;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case '4':
+                    if (!(grid.spendGold(100))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.spikes);
                     item.transform.position = this.transform.position;
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "spikes";
                     break;
                 case '5':
+                    if (!(grid.spendGold(400))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.boulder);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     facing = 's';
                     item_name = "boulder";
                     range = 4;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case '6':
+                    if (!(grid.spendGold(200))) {
+                        break;
+                    }
                     item = Instantiate<GameObject>(grid.arrow_wall);
                     item.transform.position = this.transform.position;
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     facing = 'n';
                     item_name = "arrow wall";
                     range = 3;
-                    FindTriggerSquares(true);
+                    FindTriggerSquares(false);
                     break;
                 case '9':
-                    // TO-DO: Code for deleting objects
+                    if (item_name == "enemy") {
+                        grid.refund(item.gameObject.GetComponent<EnemyStats>().GetCost());
+                    } else {
+                        grid.refund(item.gameObject.GetComponent<TrapStats>().cost);
+                    }
+                    resetSquare();
                     break;
                 case 'e':
-                    // TO-DO: Enemy detection
-                    item = Instantiate<GameObject>(grid.generic_enemy);
+                    if (!(grid.spendGold(grid.enemy.GetComponent<EnemyStats>().GetCost()))) {
+                        break;
+                    }
+                    item = Instantiate<GameObject>(grid.enemy);
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
                     item.transform.localScale = new Vector3(6f, 6f, 6f);
                     item_name = "enemy";
                     range = 1;
                     facing = 'n';
                     FindTriggerSquares(true);
-                    facing = 's';
-                    FindTriggerSquares(false);
-                    facing = 'e';
-                    FindTriggerSquares(false);
-                    facing = 'w';
-                    FindTriggerSquares(false);
                     break;
                 case 'r':
                     if (facing == 'n') {
@@ -146,10 +194,24 @@ public class GridSquare : MonoBehaviour {
                     break;
             }
         }
+
+        if (Input.GetMouseButtonDown(1)) {
+            cam.transform.position = new Vector3(this.transform.position.x + 2f, this.transform.position.y + 5f, this.transform.position.z - 2.5f);
+        }
     }
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            running = true;
+        }
+
+        if (item_name == "enemy") {
+            FindTriggerSquares(true);
+        } else if (item_name != "empty" && !triggered) {
+            FindTriggerSquares(false);
+        }
+
         if (party == null) {
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         } else {
@@ -159,15 +221,20 @@ public class GridSquare : MonoBehaviour {
             foreach (var square in triggers)
             {
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
-                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged) {
+                if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
                     if (item_name != "enemy") {
+                        triggered = true;
+                        party.running = false;
                         party.damaged = true;
+                        party.fighting = true;
                         if (!party.NoticeCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
+                            GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
                         } else if (!party.AvoidCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
+                            GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
                         } else {
                             party.GetComponent<Renderer>().material.color = Color.green;
                         }
@@ -177,50 +244,104 @@ public class GridSquare : MonoBehaviour {
                     }
                 }
             }
+            if (triggered) {
+                if (!grid.firstTrap) {
+                    GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FirstTrapDialogue();
+                    grid.firstTrap = true;
+                }
+                foreach(var trigger in triggers)
+                {
+                    trigger.GetComponent<Renderer>().material.color = Color.green;
+                    trigger.isTrigger = false;
+                }
+                triggers.Clear();
+            }
         }
         if (item_name == "enemy") {
-            facing = 'n';
             FindTriggerSquares(true);
-            facing = 's';
+        } else if (item_name != "empty" && !triggered) {
             FindTriggerSquares(false);
-            facing = 'e';
-            FindTriggerSquares(false);
-            facing = 'w';
-            FindTriggerSquares(false);
-        } else if (item_name != "empty") { FindTriggerSquares(true); }
+        }
     }
 
     // Rotates item in square
     private void rotateSquare()
     {
         if (item != null) {
-            FindTriggerSquares(true);
+            if (item_name == "enemy")
+            {
+                FindTriggerSquares(true);
+            }
+            else
+            {
+                FindTriggerSquares(false);
+            }
             item.transform.Rotate(new Vector3(0, 90, 0));
         }
     }
 
-    private void FindTriggerSquares(bool clear)
+    private void FindTriggerSquares(bool omnidirectional)
     {
-        if (clear) { triggers.Clear(); }
+        foreach (var trigger in triggers)
+        {
+            trigger.GetComponent<Renderer>().material.color = Color.green;
+            trigger.isTrigger = false;
+        }
+        triggers.Clear();
         for (int i = 1; i <= range; i++)
         {
             GridSquare square = null;
-            if (facing == 'n') {
+            if (facing == 'n' || omnidirectional) {
                 square = grid.squares[x_pos, y_pos + i];
-            } else if (facing == 'e') {
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                } else {
+                    break;
+                }
+            }
+            if (facing == 'e' || omnidirectional) {
                 square = grid.squares[x_pos + i, y_pos];
-            } else if (facing == 's') {
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                } else {
+                    break;
+                }
+            }
+            if (facing == 's' || omnidirectional) {
                 square = grid.squares[x_pos, y_pos - i];
-            } else if (facing == 'w') {
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                } else {
+                    break;
+                }
+            }
+            if (facing == 'w' || omnidirectional) {
                 square = grid.squares[x_pos - i, y_pos];
+                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                {
+                    square.GetComponent<Renderer>().material.color = Color.yellow;
+                    triggers.Add(square);
+                    square.isTrigger = true;
+                } else {
+                    break;
+                }
             }
 
-            if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes") {
+            /*if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes") {
                 square.GetComponent<Renderer>().material.color = Color.yellow;
                 triggers.Add(square);
             } else {
                 break;
-            }
+            }*/
         }
     }
 
@@ -250,10 +371,19 @@ public class GridSquare : MonoBehaviour {
 
     public void resetSquare()
     {
-        item = null;
         item_name = "empty";
         facing = '0';
+        foreach (var trigger in triggers)
+        {
+            trigger.GetComponent<Renderer>().material.color = Color.green;
+            trigger.isTrigger = false;
+        }
         triggers.Clear();
         range = 0;
+        if (item != null)
+        {
+            Destroy(item.gameObject);
+        }
+        item = null;
     }
 }

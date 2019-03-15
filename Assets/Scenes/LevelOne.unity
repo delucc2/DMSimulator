@@ -1769,12 +1769,12 @@ MonoBehaviour:
   arrow_wall: {fileID: 1912534411452010, guid: 9b5d581e940cae64aa8315ff7d320b6a, type: 2}
   enemy: {fileID: 0}
   party: {fileID: 1620668038651174, guid: d8e4909d40f28e24e9d5e3fb78ebd2b9, type: 2}
-  gold: 100000000
-  pause: 0
-  firstTrap: 1
-  firstSkeleton: 1
+  gold: 2500
+  pause: 1
+  firstTrap: 0
+  firstSkeleton: 0
   firstWraith: 1
-  freeMode: 1
+  freeMode: 0
 --- !u!4 &690358683
 Transform:
   m_ObjectHideFlags: 0
@@ -1862,6 +1862,85 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 708821760}
+  m_CullTransparentMesh: 0
+--- !u!1 &720392961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720392962}
+  - component: {fileID: 720392964}
+  - component: {fileID: 720392963}
+  m_Layer: 5
+  m_Name: Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &720392962
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720392961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1654592375}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -117}
+  m_SizeDelta: {x: 750, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &720392963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720392961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: On the edge of the town of Riverton there is a large, black building jutting
+    out of the center of a graveyard. Every night for the past week, the townsfolk
+    have heard strange moans and the rattling of bones coming from it. On the first
+    night, they sent a messenger to the local city, Cityton. After a week of terror,
+    the messenger has returned with a party of brave adventurers in tow.
+--- !u!222 &720392964
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720392961}
   m_CullTransparentMesh: 0
 --- !u!1 &738643482
 GameObject:
@@ -3784,7 +3863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00003625747}
+  m_AnchoredPosition: {x: 0, y: 0.00002834708}
   m_SizeDelta: {x: 0, y: 575}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1367792081
@@ -3890,6 +3969,75 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1447357950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447357951}
+  - component: {fileID: 1447357953}
+  - component: {fileID: 1447357952}
+  m_Layer: 5
+  m_Name: Border
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1447357951
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447357950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1654592375}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1447357952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447357950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 0
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1447357953
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447357950}
+  m_CullTransparentMesh: 0
 --- !u!1 &1517993007
 GameObject:
   m_ObjectHideFlags: 0
@@ -4341,6 +4489,171 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1654592374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1654592375}
+  - component: {fileID: 1654592378}
+  - component: {fileID: 1654592377}
+  - component: {fileID: 1654592376}
+  - component: {fileID: 1654592379}
+  m_Layer: 5
+  m_Name: PlotWindow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1654592375
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654592374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1447357951}
+  - {fileID: 720392962}
+  m_Father: {fileID: 665928994}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -137.5}
+  m_SizeDelta: {x: 0, y: -275}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1654592376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654592374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719204d495979e44db1178fd9282a67d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intro_dialogue:
+  - On the edge of the town of Riverton there is a large, black building jutting out
+    of the center of a graveyard. Every night for the past week, the townsfolk have
+    heard strange moans and the rattling of bones coming from it. On the first night,
+    they sent a messenger to the local city, Cityton. After a week of terror, the
+    messenger has returned with a party of brave adventurers in tow.
+  - Upon their arrival to the town the adventurers are greeted with cheers and smiles,
+    the villagers ecstatic with the thought of salvation! Due to its small size, the
+    town of Riverton has only a small tavern, with no rooms for guests. The adventurers
+    head straight there, hoping for more information and a stiff drink before heading
+    into the crypt.
+  - "As the party enters the inn, the waiting Elder hears a man say, \u201CBard, I
+    don\u2019t know why you insist on drinking before every single mission. It dulls
+    the mind! A true adventurer only needs the good grace of Shallya, lady of mercy,
+    to slay the foul undead!\u201D"
+  - The first member of the party to enter is a bard who is in the middle of yelling
+    back about how drinking is a necessary part of any mission.
+  - "The next person to walk through the door is a radiant man clad in full plate,
+    who upon seeing the Elder proceeds to ignore the bard and walk straight over.
+    \u201CHello, I am Paladin. Me and my companions, Bard, Rogue, and Wizard will
+    have no trouble handling your little necromantic problem. Is there anymore information
+    you can give me?\u201D"
+  - "\u201CI\u2019m afraid not, lad. One of our braver hunters went into the crypt
+    to try and see what was inside, but it\u2019s been days and he hasn\u2019t come
+    back. I fear the worst has occurred, however if you could save him we would be
+    grateful.\u201D"
+  - "Upon hearing this, one of the adventurers chimes in with \u201CHow grateful would
+    you be if we could recover him?\u201D"
+  - "\u201CRogue, that\u2019s enough!\u201D"
+  - "\u201CI\u2019m afraid we are a poor village, but we could spare a few gold for
+    his body, and twice that if you could come back with him alive!\u201D"
+  - "\u201CWe will do what we can, come on adventurers time to combat evil!\u201D"
+  - The brave Adventurers enter the crypt, torches blazing and the rogue immediately
+    quips
+  - "Rogue: Yaknow, I get the whole \u2018scary crypt\u2019 aesthetic, but surely
+    chains on the walls is a bit much."
+  - "Bard: \u201CYeah like why would you even want chains this far up. Why would you
+    put your prison next to the entrance of your dungeon?\u201D"
+  - "Paladin: \u201CQuiet, take this seriously you too! There is a potentially dead
+    villager down there, and we are his only hope!\u201D"
+  - "Wizard: \u201CPlus, think of all the spells this necromancer must know!\u201D"
+  - "All: \u201CGroan:\u201D"
+  - "Paladin: Come on, let\u2019s get to work! "
+  firsttrap_dialogue:
+  - 'Rogue: Is that a boulder trap or is the dungeon master just happy to see me?'
+  - "Bard: Well, I don\u2019t know about the dungeon master but\u2026"
+  - "Paladin: Can you two please, PLEASE take this seriously. A man\u2019s life is
+    in jeopardy! Rogue, do you think you can disarm the trap?"
+  - 'Rogue: I could disarm this trap in my sleep. Hey wait, do you think this is a
+    dream?'
+  - "Wizard: Statistically speaking, yes. Have you seen the traveling minstrel show,
+    the Matrix? It\u2019s an interesting hypothesis about how we are all merely figments
+    of the higher Gods\u2019 imagination."
+  - "Bard: Uh\u2026 Wizard I\u2019m pretty sure that\u2019s a fiction show."
+  - "Wizard: \u2026"
+  - "Bard: \u2026"
+  - "Rogue: Trap\u2019s disarmed, hate to break up the party but let\u2019s get going."
+  skeleton_dialogue:
+  - "Bard: Well, I was hoping to catch a good bone in this town, but these skeletons
+    are taking this a bit too seriously\u2026"
+  - "Paladin: Come on Bard, we\u2019ve been over this: Less talking, more buffing."
+  - 'Wizard: Skeletons are such an interesting strain of necromantic constructs. Raw
+    mana is the only thing holding them together, yet it performs the same as the
+    muscles we humans have. Perhaps we, too, are held together by mana?'
+  - 'Rogue: Either way, everything dies when you stab it in the head.'
+  - 'Paladin: Try to focus on the fight, we must save this peasant, my god commands
+    it!'
+  wraith_dialogue: []
+  ending_dialogue: []
+  level: 1
+--- !u!114 &1654592377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654592374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1654592378
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654592374}
+  m_CullTransparentMesh: 0
+--- !u!225 &1654592379
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654592374}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1664001424
 GameObject:
   m_ObjectHideFlags: 0
