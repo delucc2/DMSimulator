@@ -18,6 +18,7 @@ public class PartyMovement : MonoBehaviour {
     private int WIS;
     private int HEALTH;
     private int DAMAGE;
+    public int EXP;
 
     private int log_lines;
 
@@ -35,12 +36,13 @@ public class PartyMovement : MonoBehaviour {
         WIS = 15;
         HEALTH = 112;
         DAMAGE = 52;
+        EXP = 0;
 
         GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
         GameObject.Find("Damage").GetComponent<UnityEngine.UI.Text>().text = "DAM: " + DAMAGE;
         GameObject.Find("Dexterity").GetComponent<UnityEngine.UI.Text>().text = "DEX: " + DEX;
         GameObject.Find("Wisdom").GetComponent<UnityEngine.UI.Text>().text = "WIS: " + WIS;
-        GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "STR: 8";
+        GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "EXP: " + EXP;
         GameObject.Find("Intelligence").GetComponent<UnityEngine.UI.Text>().text = "INT: 15";
 
         log_lines = 0;
@@ -67,14 +69,14 @@ public class PartyMovement : MonoBehaviour {
             if (!Move('e', false, (int)x_pos, (int)z_pos)) { x_pos -= 1f; }
         }*/
         
-        if (x_pos == 10 && z_pos == 19 && !grid.freeMode && !levelComplete) {
+        if (x_pos == grid.end_x && z_pos == 19 - grid.end_y && !grid.freeMode && !levelComplete) {
             GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
             levelComplete = true;
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !running) {
             GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
-            char[] path = Pathfind(10, 19);
+            char[] path = Pathfind(grid.end_x, 19 - grid.end_y);
             if (path == null) {
                 GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "Make sure there's a clear path to the exit!";
                 return;
@@ -189,6 +191,8 @@ public class PartyMovement : MonoBehaviour {
             Destroy(this.gameObject);
         } else if (enemy.item.GetComponent<EnemyStats>().GetHealth() <= 0) {
             LogPrint("> The enemy has been slain!\n");
+            EXP += enemy.item.GetComponent<EnemyStats>().GetEXP();
+            GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "EXP: " + EXP;
             Destroy(enemy.item.gameObject);
             enemy.resetSquare();
         }

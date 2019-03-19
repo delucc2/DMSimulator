@@ -127,3 +127,4 @@ MonoBehaviour:
   HEALTH: 45
   DAMAGE: 17
   COST: 250
+  EXP: 25

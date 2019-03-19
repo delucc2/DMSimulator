@@ -7,6 +7,7 @@ public class EnemyStats : MonoBehaviour {
     public int HEALTH;
     public int DAMAGE;
     public int COST;
+    public int EXP;
 
     public int GetHealth()
     {
@@ -21,6 +22,11 @@ public class EnemyStats : MonoBehaviour {
     public int GetCost()
     {
         return COST;
+    }
+
+    public int GetEXP()
+    {
+        return EXP;
     }
 
     public void TakeDamage(int damage)
