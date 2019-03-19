@@ -4615,7 +4615,27 @@ MonoBehaviour:
     it!'
   wraith_dialogue: []
   ending_dialogue: []
+  boss_dialogue:
+  - 'Rogue: That is one angry ghost. '
+  - 'Paladin: It matters not, I will destroy this unholy horror with the strength
+    of my faith!'
+  - "Wizard: Couldn\u2019t I study it a little longer? It really seems like a unique
+    specimen."
+  - 'Paladin: No! We must hurry forth and save the innocent!'
+  - 'Bard: Perhaps if I sang it a love song, it would calm down!'
+  - "Rogue: It didn\u2019t seem to like that\u2026"
+  middle_dialogue: []
+  near_end_dialogue: []
   level: 1
+  boss_trigger_x: 10
+  boss_trigger_y: 10
+  boss_triggered: 0
+  middle_trigger_x: -1
+  middle_trigger_y: -1
+  middle_triggered: 1
+  end_trigger_x: -1
+  end_trigger_y: -1
+  end_triggered: 1
 --- !u!114 &1654592377
 MonoBehaviour:
   m_ObjectHideFlags: 0

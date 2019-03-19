@@ -4578,7 +4578,48 @@ MonoBehaviour:
   - 'Paladin: No! We must save the villager, onward for faith and justice!'
   wraith_dialogue: []
   ending_dialogue: []
+  boss_dialogue:
+  - "Bard: I don\u2019t think I\u2019ve ever seen a wraith that big. This necromancer
+    must be truly dangerous to control such a powerful monster."
+  - 'Wizard: Indeed, I will greatly enjoy going through his grimoire. You can find
+    valuable spells in the strangest of places, did you know many of the most advanced
+    healing spells are actually based on necromantic research?'
+  - "Paladin: Please don\u2019t utter such sacrilege in my presence! The power powerful
+    the necromancer, the more my faith will hurt him. Our victory is assured!"
+  - 'Rogue: Wait until we defeat this wraith before you start thinking about the necromancer,
+    it looks pretty mean.'
+  - 'Bard: Well, here it comes!'
+  middle_dialogue:
+  - 'Paladin: Rogue, what can you make of these blood splatters and these strips of
+    cloth?'
+  - "Rogue: Well, I\u2019m not a ranger so this really isn\u2019t my specialty, but
+    it looks like the villager might have fought back here and tried to escape. I
+    can\u2019t really tell how badly he was injured in the attempt."
+  - "Bard: That\u2019s a lot of blood, we should probably hurry. Or you know, we could
+    just give him up for dead."
+  - 'Wizard: The human body can only take a certain amount of blood loss!'
+  - 'Paladin: Thank you for that fact, Wizard. We must hurry and save this poor soul!'
+  near_end_dialogue:
+  - "Wizard: If this aura is any indication, we are nearing a powerful monster. However,
+    I don\u2019t believe it is the necromancer we seek, it doesn\u2019t feel nearly
+    magical enough."
+  - 'Paladin: Then we must defeat this foul monstrosity and then delve deeper so we
+    may cleanse this land of evil!'
+  - "Rogue: We get it, you fight for justice and faith blah blah blah. Let\u2019s
+    just get done with this so I can get paid. "
+  - "Bard: Our pay isn\u2019t even going to cover my laundry fees. Why do I let you
+    talk me into things like this, Paladin? "
+  - 'Paladin: For justice! '
   level: 2
+  boss_trigger_x: 10
+  boss_trigger_y: 12
+  boss_triggered: 0
+  middle_trigger_x: 14
+  middle_trigger_y: 19
+  middle_triggered: 0
+  end_trigger_x: 5
+  end_trigger_y: 7
+  end_triggered: 0
 --- !u!114 &1654592377
 MonoBehaviour:
   m_ObjectHideFlags: 0

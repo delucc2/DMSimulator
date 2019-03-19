@@ -184,7 +184,6 @@ public class GridSquare : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (party.Pathfind(grid.end_x, 19 - grid.end_y) == null) { return; }
-            print("Changing running to true");
             running = true;
         }
 

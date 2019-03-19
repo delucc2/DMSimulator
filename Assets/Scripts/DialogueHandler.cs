@@ -10,12 +10,29 @@ public class DialogueHandler : MonoBehaviour
     public string[] skeleton_dialogue;
     public string[] wraith_dialogue;
     public string[] ending_dialogue;
+    public string[] boss_dialogue;
+    public string[] middle_dialogue;
+    public string[] near_end_dialogue;
     private string[] dialogue;
     private int dialogue_counter;
     private bool hidden;
     private Grid grid;
     private bool level_complete;
     public int level;
+
+    public int boss_trigger_x = -1;
+    public int boss_trigger_y = -1;
+    public bool boss_triggered;
+
+    public int middle_trigger_x = -1;
+    public int middle_trigger_y = -1;
+    public bool middle_triggered;
+
+    public int end_trigger_x = -1;
+    public int end_trigger_y = -1;
+    public bool end_triggered;
+
+    private PartyMovement party;
 
     private void Start()
     {
@@ -30,6 +47,31 @@ public class DialogueHandler : MonoBehaviour
 
     private void Update()
     {
+        int party_x = -1;
+        int party_y = -1;
+        if (party != null) {
+            party.GetPos(ref party_x, ref party_y);
+        } else {
+            party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
+        }
+        print("(" + party_x + ", " + party_y + ")");
+        if (party_x == boss_trigger_x && party_y == boss_trigger_y && !boss_triggered) {
+            boss_triggered = true;
+            BossDialogue();
+            party.running = false;
+            party.fighting = true;
+        } else if (party_x == middle_trigger_x && party_y == middle_trigger_y && !middle_triggered) {
+            middle_triggered = true;
+            MidDialogue();
+            party.running = false;
+            party.fighting = true;
+        } else if (party_x == end_trigger_x && party_y == end_trigger_y && !end_triggered) {
+            end_triggered = true;
+            NearEndDialogue();
+            party.running = false;
+            party.fighting = true;
+        }
+
         if (Input.GetMouseButtonDown(0) && level_complete)
         {
             hidden = true;
@@ -83,6 +125,27 @@ public class DialogueHandler : MonoBehaviour
     {
         ShowDialogueBox();
         dialogue = wraith_dialogue;
+        GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = dialogue[dialogue_counter];
+        dialogue_counter++;
+    }
+
+    public void BossDialogue() {
+        ShowDialogueBox();
+        dialogue = boss_dialogue;
+        GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = dialogue[dialogue_counter];
+        dialogue_counter++;
+    }
+
+    public void MidDialogue() {
+        ShowDialogueBox();
+        dialogue = middle_dialogue;
+        GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = dialogue[dialogue_counter];
+        dialogue_counter++;
+    }
+
+    public void NearEndDialogue() {
+        ShowDialogueBox();
+        dialogue = near_end_dialogue;
         GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = dialogue[dialogue_counter];
         dialogue_counter++;
     }
