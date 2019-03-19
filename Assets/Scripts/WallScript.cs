@@ -78,10 +78,10 @@ public class WallScript : MonoBehaviour {
                         break;
                     }
 
-                    grid.refund(item.gameObject.GetComponent<TrapStats>().cost);
+                    //grid.refund(item.gameObject.GetComponent<TrapStats>().cost);
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].resetSquare();
-                    Destroy(item.gameObject);
-                    item = null;
+                    //Destroy(item.gameObject);
+                    //item = null;
                     break;
             }
         }

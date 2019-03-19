@@ -183,6 +183,7 @@ public class GridSquare : MonoBehaviour {
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
+            if (party.Pathfind(grid.end_x, grid.end_y) == null) { return; }
             running = true;
         }
 

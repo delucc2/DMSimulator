@@ -73,12 +73,15 @@ public class PartyMovement : MonoBehaviour {
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !running) {
-            GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
-            GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
-
-            running = true;
             GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
             char[] path = Pathfind(10, 19);
+            if (path == null) {
+                GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "Make sure there's a clear path to the exit!";
+                return;
+            }
+            running = true;
+            GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
+            GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
             StartCoroutine(SlowMove(path));
         }
 	}
@@ -250,7 +253,7 @@ public class PartyMovement : MonoBehaviour {
         HEALTH -= damage;
     }
 
-    private char[] Pathfind(int dest_x, int dest_y)
+    public char[] Pathfind(int dest_x, int dest_y)
     {
         int[,] paths = new int[grid.GetXSize(), grid.GetYSize()];
         Queue<GridSquare> queue = new Queue<GridSquare>();
@@ -267,11 +270,13 @@ public class PartyMovement : MonoBehaviour {
             GridSquare curr_square = queue.Dequeue();
             curr_square.GetPos(ref x, ref y);
             step = paths[x, y];
+            bool no_moves = true;
             //Debug.Log(x + ", " + y + ", " + paths[x, y]);
 
             y += 1;
             if (y >= 0 && y < 20 && Move('n', true, x, y)) {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
@@ -282,6 +287,7 @@ public class PartyMovement : MonoBehaviour {
             y -= 1;
             if (y >= 0 && y < 20 && Move('s', true, x, y)) {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
@@ -292,6 +298,7 @@ public class PartyMovement : MonoBehaviour {
             x -= 1;
             if (x >= 0 && x < 20 && Move('w', true, x, y)) {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
@@ -303,12 +310,17 @@ public class PartyMovement : MonoBehaviour {
             if (x >= 0 && x < 20 && Move('e', true, x, y))
             {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
                 }
             }
             x -= 1;
+
+            if (no_moves && queue.Count == 0) {
+                return null;
+            }
         }
 
         /*for (int i = 5; i >= 0; i--) {
