@@ -70,8 +70,12 @@ public class PartyMovement : MonoBehaviour {
         }*/
         
         if (x_pos == grid.end_x && z_pos == 19 - grid.end_y && !grid.freeMode && !levelComplete) {
-            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
-            levelComplete = true;
+            if (HEALTH <= grid.HP_goal && EXP >= grid.EXP_goal) {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
+                levelComplete = true;
+            } else {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FailDialogue();
+            }
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !running) {

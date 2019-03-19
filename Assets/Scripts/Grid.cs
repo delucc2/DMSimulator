@@ -25,6 +25,9 @@ public class Grid : MonoBehaviour {
     public int start_x;
     public int start_y;
 
+    public int HP_goal;
+    public int EXP_goal;
+
     public GridSquare[,] squares = new GridSquare[x_size, y_size];
 
     /* Selection Key
@@ -205,7 +208,7 @@ public class Grid : MonoBehaviour {
     public void changeEnemy(GameObject input)
     {
         enemy = input;
-        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nDAM: " + enemy.GetComponent<EnemyStats>().GetDamage().ToString();
+        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nDAM: " + enemy.GetComponent<EnemyStats>().GetDamage().ToString() + "\nEXP: " + enemy.GetComponent<EnemyStats>().GetEXP().ToString();
     }
 
     public int getGold()

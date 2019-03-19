@@ -98,6 +98,11 @@ public class DialogueHandler : MonoBehaviour
         level_complete = true;
     }
 
+    public void FailDialogue() {
+        ShowDialogueBox();
+        GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = "You failed to meet the requirements of this level, try again!";
+    }
+
     private void ShowDialogueBox()
     {
         grid.disableInput();
