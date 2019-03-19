@@ -1769,6 +1769,13 @@ MonoBehaviour:
   arrow_wall: {fileID: 1912534411452010, guid: 9b5d581e940cae64aa8315ff7d320b6a, type: 2}
   enemy: {fileID: 0}
   party: {fileID: 1620668038651174, guid: d8e4909d40f28e24e9d5e3fb78ebd2b9, type: 2}
+  level_file: level1.txt
+  end_x: 13
+  end_y: 10
+  start_x: 0
+  start_y: 0
+  HP_goal: 90
+  EXP_goal: 100
   gold: 2500
   pause: 1
   firstTrap: 0
@@ -2760,7 +2767,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1674861170}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5565217
+  m_Size: 0.5565218
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4608,7 +4615,27 @@ MonoBehaviour:
     it!'
   wraith_dialogue: []
   ending_dialogue: []
+  boss_dialogue:
+  - 'Rogue: That is one angry ghost. '
+  - 'Paladin: It matters not, I will destroy this unholy horror with the strength
+    of my faith!'
+  - "Wizard: Couldn\u2019t I study it a little longer? It really seems like a unique
+    specimen."
+  - 'Paladin: No! We must hurry forth and save the innocent!'
+  - 'Bard: Perhaps if I sang it a love song, it would calm down!'
+  - "Rogue: It didn\u2019t seem to like that\u2026"
+  middle_dialogue: []
+  near_end_dialogue: []
   level: 1
+  boss_trigger_x: 10
+  boss_trigger_y: 10
+  boss_triggered: 0
+  middle_trigger_x: -1
+  middle_trigger_y: -1
+  middle_triggered: 1
+  end_trigger_x: -1
+  end_trigger_y: -1
+  end_triggered: 1
 --- !u!114 &1654592377
 MonoBehaviour:
   m_ObjectHideFlags: 0

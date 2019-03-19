@@ -12,12 +12,13 @@ public class PartyMovement : MonoBehaviour {
     public bool damaged;
     public bool fighting;
     private bool levelComplete;
-    private bool running;
+    public bool running;
 
     private int DEX;
     private int WIS;
     private int HEALTH;
     private int DAMAGE;
+    public int EXP;
 
     private int log_lines;
 
@@ -35,12 +36,13 @@ public class PartyMovement : MonoBehaviour {
         WIS = 15;
         HEALTH = 112;
         DAMAGE = 52;
+        EXP = 0;
 
         GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
         GameObject.Find("Damage").GetComponent<UnityEngine.UI.Text>().text = "DAM: " + DAMAGE;
         GameObject.Find("Dexterity").GetComponent<UnityEngine.UI.Text>().text = "DEX: " + DEX;
         GameObject.Find("Wisdom").GetComponent<UnityEngine.UI.Text>().text = "WIS: " + WIS;
-        GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "STR: 8";
+        GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "EXP: " + EXP;
         GameObject.Find("Intelligence").GetComponent<UnityEngine.UI.Text>().text = "INT: 15";
 
         log_lines = 0;
@@ -67,15 +69,25 @@ public class PartyMovement : MonoBehaviour {
             if (!Move('e', false, (int)x_pos, (int)z_pos)) { x_pos -= 1f; }
         }*/
         
-        if (x_pos == 10 && z_pos == 19 && !grid.freeMode && !levelComplete) {
-            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
-            levelComplete = true;
+        if (x_pos == grid.end_x && z_pos == 19 - grid.end_y && !grid.freeMode && !levelComplete) {
+            if (HEALTH <= grid.HP_goal && EXP >= grid.EXP_goal) {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
+                levelComplete = true;
+            } else {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FailDialogue();
+            }
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !running) {
-            running = true;
             GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
-            char[] path = Pathfind(10, 19);
+            char[] path = Pathfind(grid.end_x, 19 - grid.end_y);
+            if (path == null) {
+                GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "Make sure there's a clear path to the exit!";
+                return;
+            }
+            running = true;
+            GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
+            GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
             StartCoroutine(SlowMove(path));
         }
 	}
@@ -156,6 +168,7 @@ public class PartyMovement : MonoBehaviour {
     public IEnumerator Fight(GridSquare enemy)
     {
         fighting = true;
+        running = false;
         LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
@@ -182,6 +195,8 @@ public class PartyMovement : MonoBehaviour {
             Destroy(this.gameObject);
         } else if (enemy.item.GetComponent<EnemyStats>().GetHealth() <= 0) {
             LogPrint("> The enemy has been slain!\n");
+            EXP += enemy.item.GetComponent<EnemyStats>().GetEXP();
+            GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "EXP: " + EXP;
             Destroy(enemy.item.gameObject);
             enemy.resetSquare();
         }
@@ -246,7 +261,7 @@ public class PartyMovement : MonoBehaviour {
         HEALTH -= damage;
     }
 
-    private char[] Pathfind(int dest_x, int dest_y)
+    public char[] Pathfind(int dest_x, int dest_y)
     {
         int[,] paths = new int[grid.GetXSize(), grid.GetYSize()];
         Queue<GridSquare> queue = new Queue<GridSquare>();
@@ -263,11 +278,13 @@ public class PartyMovement : MonoBehaviour {
             GridSquare curr_square = queue.Dequeue();
             curr_square.GetPos(ref x, ref y);
             step = paths[x, y];
+            bool no_moves = true;
             //Debug.Log(x + ", " + y + ", " + paths[x, y]);
 
             y += 1;
             if (y >= 0 && y < 20 && Move('n', true, x, y)) {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
@@ -278,6 +295,7 @@ public class PartyMovement : MonoBehaviour {
             y -= 1;
             if (y >= 0 && y < 20 && Move('s', true, x, y)) {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
@@ -288,6 +306,7 @@ public class PartyMovement : MonoBehaviour {
             x -= 1;
             if (x >= 0 && x < 20 && Move('w', true, x, y)) {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
@@ -299,12 +318,17 @@ public class PartyMovement : MonoBehaviour {
             if (x >= 0 && x < 20 && Move('e', true, x, y))
             {
                 if (paths[x, y] == 0) {
+                    no_moves = false;
                     paths[x, y] = step + 1;
                     queue.Enqueue(grid.squares[x, y]);
                     if (x == dest_x && y == dest_y) { found = true; continue; }
                 }
             }
             x -= 1;
+
+            if (no_moves && queue.Count == 0) {
+                return null;
+            }
         }
 
         /*for (int i = 5; i >= 0; i--) {
