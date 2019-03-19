@@ -5,10 +5,10 @@ using UnityEngine;
 public class GridSquare : MonoBehaviour {
     private Grid grid;      // Grid manager object
     public GameObject item; // Item occupying this square
-    private string item_name;
+    public string item_name;
     private int x_pos;      // x coordinate of square
     private int y_pos;      // y coordinate of square
-    private char facing;
+    public char facing;
     private List<GridSquare> triggers;
     private int range;
     private PartyMovement party;
@@ -17,6 +17,7 @@ public class GridSquare : MonoBehaviour {
     public bool isTrigger;
     public bool triggered;
     public bool running;
+    public bool deletable;
 
     public void Start()
     {
@@ -32,8 +33,9 @@ public class GridSquare : MonoBehaviour {
         isTrigger = false;
         triggered = false;
         running = false;
+        deletable = true;
 
-        if (x_pos == 0 && y_pos == 0)
+        if (x_pos == grid.start_x && y_pos == grid.start_y)
         {
             item = Instantiate<GameObject>(grid.party);
             item.transform.localScale = new Vector3(8f, 8f, 8f);
@@ -44,7 +46,7 @@ public class GridSquare : MonoBehaviour {
 
     private void OnMouseExit()
     {
-        if (x_pos != 10 || y_pos != 19) {
+        if (x_pos != grid.end_x || (y_pos + 1) != grid.end_y) {
             if (isTrigger) {
                 this.GetComponent<Renderer>().material.color = Color.yellow;
             } else {
@@ -153,6 +155,8 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case '9':
+                    if (!deletable) { break; }
+
                     if (item_name == "enemy") {
                         grid.refund(item.gameObject.GetComponent<EnemyStats>().GetCost());
                     } else {

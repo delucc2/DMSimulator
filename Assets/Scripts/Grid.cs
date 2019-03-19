@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Grid : MonoBehaviour {
 
@@ -17,6 +18,12 @@ public class Grid : MonoBehaviour {
     public GameObject arrow_wall;
     public GameObject enemy;
     public GameObject party;
+
+    public string level_file;
+    public int end_x;
+    public int end_y;
+    public int start_x;
+    public int start_y;
 
     public GridSquare[,] squares = new GridSquare[x_size, y_size];
 
@@ -85,10 +92,34 @@ public class Grid : MonoBehaviour {
 
     private void DrawGrid()
     {
+        StreamReader reader = new StreamReader("Assets/LevelBlueprints/" + level_file);
+
         // Create grid squares for visualization
         for (int i = 0; i < x_size; i++) {
+            string line = reader.ReadLine();
             for (int j = 0; j < y_size; j++) {
                 GameObject square = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                square.transform.position = new Vector3(j, 0, 19 - i);
+                square.transform.localScale = new Vector3(0.075f, 0.075f, 0.075f);
+                if (j == end_x && i == end_y) {
+                    square.GetComponent<Renderer>().material.color = Color.blue;
+                } else {
+                    square.GetComponent<Renderer>().material.color = Color.green;
+                }
+                square.AddComponent<GridSquare>();
+                
+                if (line[j] == 'x') {
+                    square.GetComponent<GridSquare>().item = Instantiate<GameObject>(wall);
+                    square.GetComponent<GridSquare>().item.transform.position = new Vector3(j, 0.5f, 19 - i);
+                    square.GetComponent<GridSquare>().item.transform.localScale = new Vector3(4.25f, 4.25f, 4.25f);
+                    square.GetComponent<GridSquare>().facing = 'w';
+                    square.GetComponent<GridSquare>().item_name = "wall";
+                    square.GetComponent<GridSquare>().deletable = false;
+                }
+
+                squares[i, j] = square.GetComponent<GridSquare>();
+
+                /*GameObject square = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 square.transform.position = new Vector3(i, 0, j);
                 square.transform.localScale = new Vector3(0.075f, 0.075f, 0.075f);
                 if (i == 10 && j == 19) {
@@ -97,7 +128,7 @@ public class Grid : MonoBehaviour {
                     square.GetComponent<Renderer>().material.color = Color.green;
                 }
                 square.AddComponent<GridSquare>();
-                squares[i, j] = square.GetComponent<GridSquare>();
+                squares[i, j] = square.GetComponent<GridSquare>();*/
             }
         }
     }
