@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33942298389043352}
   - component: {fileID: 23513320710172552}
   - component: {fileID: 114624148496147166}
+  - component: {fileID: 114931883185808284}
+  - component: {fileID: 64979678584875534}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -84,6 +86,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1630898914411972}
   m_Mesh: {fileID: 4300000, guid: 6a9bd3634eb6ffd4a9a850f1619736a5, type: 3}
+--- !u!64 &64979678584875534
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630898914411972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 6a9bd3634eb6ffd4a9a850f1619736a5, type: 3}
 --- !u!114 &114624148496147166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,3 +115,14 @@ MonoBehaviour:
   avoid_check: 0
   damage: 0
   cost: 0
+--- !u!114 &114931883185808284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630898914411972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32457686456e8b4dbb5b93ea2e2f983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

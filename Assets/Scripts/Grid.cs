@@ -117,7 +117,7 @@ public class Grid : MonoBehaviour {
                     square.GetComponent<GridSquare>().deletable = false;
                 }
 
-                squares[i, j] = square.GetComponent<GridSquare>();
+                squares[j, 19 - i] = square.GetComponent<GridSquare>();
 
                 /*GameObject square = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 square.transform.position = new Vector3(i, 0, j);
