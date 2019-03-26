@@ -14,6 +14,8 @@ ModelImporter:
     400006: BarbStrapHigh
     400008: BarbStrapLow
     2100000: lambert1
+    2100002: BarbShoulderTex
+    2100004: BarbStrap
     2300000: BarbShoulder
     2300002: BarbSkirt
     2300004: BarbStrapHigh
