@@ -54,7 +54,7 @@ public class DialogueHandler : MonoBehaviour
         } else {
             party = GameObject.Find("Party(Clone)").GetComponent<PartyMovement>();
         }
-        print("(" + party_x + ", " + party_y + ")");
+        //print("(" + party_x + ", " + party_y + ")");
         if (party_x == boss_trigger_x && party_y == boss_trigger_y && !boss_triggered) {
             boss_triggered = true;
             BossDialogue();

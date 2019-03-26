@@ -201,10 +201,10 @@ public class GridSquare : MonoBehaviour {
             party.GetPos(ref party_x, ref party_y);
             foreach (var square in triggers)
             {
-                print(running);
+                //print(running);
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
-                    print("Triggered");
+                    //print("Triggered");
                     if (item_name != "enemy") {
                         triggered = true;
                         party.running = false;
