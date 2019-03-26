@@ -57,7 +57,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3269fef81d7230b40a4d1d906a70d4c1, type: 3}
+  - {fileID: 2100000, guid: 8f105b8b4629f634a852bace56e977e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,3 +98,4 @@ MonoBehaviour:
   HEALTH: 67
   DAMAGE: 21
   COST: 300
+  EXP: 30

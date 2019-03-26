@@ -25,6 +25,9 @@ public class Grid : MonoBehaviour {
     public int start_x;
     public int start_y;
 
+    public int HP_goal;
+    public int EXP_goal;
+
     public GridSquare[,] squares = new GridSquare[x_size, y_size];
 
     /* Selection Key
@@ -117,7 +120,7 @@ public class Grid : MonoBehaviour {
                     square.GetComponent<GridSquare>().deletable = false;
                 }
 
-                squares[i, j] = square.GetComponent<GridSquare>();
+                squares[j, 19 - i] = square.GetComponent<GridSquare>();
 
                 /*GameObject square = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 square.transform.position = new Vector3(i, 0, j);
@@ -205,7 +208,7 @@ public class Grid : MonoBehaviour {
     public void changeEnemy(GameObject input)
     {
         enemy = input;
-        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nDAM: " + enemy.GetComponent<EnemyStats>().GetDamage().ToString();
+        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nDAM: " + enemy.GetComponent<EnemyStats>().GetDamage().ToString() + "\nEXP: " + enemy.GetComponent<EnemyStats>().GetEXP().ToString();
     }
 
     public int getGold()

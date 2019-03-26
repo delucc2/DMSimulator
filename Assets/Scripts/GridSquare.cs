@@ -10,7 +10,7 @@ public class GridSquare : MonoBehaviour {
     private int y_pos;      // y coordinate of square
     public char facing;
     private List<GridSquare> triggers;
-    private int range;
+    public int range;
     private PartyMovement party;
     public Camera cam;
     private GameObject enemy;
@@ -26,7 +26,7 @@ public class GridSquare : MonoBehaviour {
         y_pos = (int)this.transform.position.z;
         triggers = new List<GridSquare>();
         item = null;
-        item_name = "empty";
+        if (item_name == null) { item_name = "empty"; }
         facing = '0';
         range = 0;
         cam = Camera.main;
@@ -109,18 +109,6 @@ public class GridSquare : MonoBehaviour {
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "pit";
                     break;
-                case '3':
-                    if (!(grid.spendGold(200))) {
-                        break;
-                    }
-                    item = Instantiate<GameObject>(grid.crushing_wall);
-                    item.transform.localScale = new Vector3(3f, 3f, 3f);
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z - 0.25f);
-                    facing = 's';
-                    item_name = "crushing wall";
-                    range = 2;
-                    FindTriggerSquares(false);
-                    break;
                 case '4':
                     if (!(grid.spendGold(100))) {
                         break;
@@ -140,18 +128,6 @@ public class GridSquare : MonoBehaviour {
                     facing = 's';
                     item_name = "boulder";
                     range = 4;
-                    FindTriggerSquares(false);
-                    break;
-                case '6':
-                    if (!(grid.spendGold(200))) {
-                        break;
-                    }
-                    item = Instantiate<GameObject>(grid.arrow_wall);
-                    item.transform.position = this.transform.position;
-                    item.transform.localScale = new Vector3(3f, 3f, 3f);
-                    facing = 'n';
-                    item_name = "arrow wall";
-                    range = 3;
                     FindTriggerSquares(false);
                     break;
                 case '9':
@@ -207,6 +183,7 @@ public class GridSquare : MonoBehaviour {
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
+            if (party.Pathfind(grid.end_x, 19 - grid.end_y) == null) { return; }
             running = true;
         }
 
@@ -224,8 +201,10 @@ public class GridSquare : MonoBehaviour {
             party.GetPos(ref party_x, ref party_y);
             foreach (var square in triggers)
             {
+                print(running);
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
+                    print("Triggered");
                     if (item_name != "enemy") {
                         triggered = true;
                         party.running = false;
@@ -269,7 +248,7 @@ public class GridSquare : MonoBehaviour {
     }
 
     // Rotates item in square
-    private void rotateSquare()
+    public void rotateSquare()
     {
         if (item != null) {
             if (item_name == "enemy")
@@ -284,7 +263,7 @@ public class GridSquare : MonoBehaviour {
         }
     }
 
-    private void FindTriggerSquares(bool omnidirectional)
+    public void FindTriggerSquares(bool omnidirectional)
     {
         foreach (var trigger in triggers)
         {
@@ -296,6 +275,9 @@ public class GridSquare : MonoBehaviour {
         {
             GridSquare square = null;
             if (facing == 'n' || omnidirectional) {
+                if (y_pos + i > 19) {
+                    break;
+                }
                 square = grid.squares[x_pos, y_pos + i];
                 if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                 {
@@ -307,6 +289,9 @@ public class GridSquare : MonoBehaviour {
                 }
             }
             if (facing == 'e' || omnidirectional) {
+                if (x_pos + i > 19) {
+                    break;
+                }
                 square = grid.squares[x_pos + i, y_pos];
                 if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                 {
@@ -318,6 +303,9 @@ public class GridSquare : MonoBehaviour {
                 }
             }
             if (facing == 's' || omnidirectional) {
+                if (y_pos - i < 0) {
+                    break;
+                }
                 square = grid.squares[x_pos, y_pos - i];
                 if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                 {
@@ -329,6 +317,9 @@ public class GridSquare : MonoBehaviour {
                 }
             }
             if (facing == 'w' || omnidirectional) {
+                if (x_pos - i < 0) {
+                    break;
+                }
                 square = grid.squares[x_pos - i, y_pos];
                 if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                 {
