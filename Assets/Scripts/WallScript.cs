@@ -18,7 +18,7 @@ public class WallScript : MonoBehaviour {
         {
             if (grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item_name != "wall" && grid.GetSelection() != 'r' && grid.GetSelection() != '9')
             {
-                print(grid.squares[(int)this.transform.position.x, 19 - (int)this.transform.position.z].item_name);
+                //print(grid.squares[(int)this.transform.position.x, 19 - (int)this.transform.position.z].item_name);
                 return;
             }
 

@@ -21,9 +21,11 @@ public class PartyMovement : MonoBehaviour {
     public int EXP;
 
     private int log_lines;
+    public Rigidbody rb;
 
     // Use this for initialization
     void Start () {
+        rb = this.GetComponent<Rigidbody>();
         x_pos = this.transform.position.x;
         z_pos = this.transform.position.z;
         y_pos = this.transform.position.y;
@@ -110,7 +112,7 @@ public class PartyMovement : MonoBehaviour {
             }
 
             Move(dir, false, (int)x_pos, (int)z_pos);
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -125,7 +127,24 @@ public class PartyMovement : MonoBehaviour {
         if (!check)
         {
             damaged = false;
-            this.transform.position = new Vector3(x_pos, y_pos, z_pos);
+
+            // Slow Movement
+            float tempx = this.transform.position.x;
+            float tempz = this.transform.position.z;
+            print("(" + tempx + ", " + tempz + ") | (" + x_pos + ", " + z_pos + ")");
+            if (x_pos - this.transform.position.x > 0.5f){
+                rb.velocity = new Vector3(1.95f, 0, 0);
+            } else if (this.transform.position.x - x_pos > 0.5f) {
+                rb.velocity = new Vector3(-1.95f, 0, 0);
+            }
+
+            if (z_pos - this.transform.position.z > 0.5f) {
+                rb.velocity = new Vector3(0, 0, 1.95f);
+            } else if (this.transform.position.z - z_pos > 0.5f) {
+                rb.velocity = new Vector3(0, 0, -1.95f);
+            }
+
+            //this.transform.position = new Vector3(x_pos, y_pos, z_pos);
             curr_pos = new_pos;
 
             if ((curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes") && !curr_pos.triggered)

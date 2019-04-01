@@ -17,6 +17,9 @@ ModelImporter:
     400010: StrapLow
     2100000: lambert1
     2100002: Boot
+    2100004: BarbShoulderTex
+    2100006: BarbStrap
+    2100008: BarbBra
     2300000: Bra
     2300002: Shoulder
     2300004: Skirt
