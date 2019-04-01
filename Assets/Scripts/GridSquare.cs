@@ -180,6 +180,11 @@ public class GridSquare : MonoBehaviour {
         }
     }
 
+    public void partyStop()
+    {
+        party.rb.velocity = new Vector3(0, 0, 0);
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -201,15 +206,16 @@ public class GridSquare : MonoBehaviour {
             party.GetPos(ref party_x, ref party_y);
             foreach (var square in triggers)
             {
-                print(running);
+                //print(running);
                 //Debug.Log(party_x + "," + party_y + " | " + square.x_pos + "," + square.y_pos);
                 if (square.x_pos == party_x && square.y_pos == party_y && !party.damaged && running) {
-                    print("Triggered");
+                    //print("Triggered");
                     if (item_name != "enemy") {
                         triggered = true;
                         party.running = false;
                         party.damaged = true;
                         party.fighting = true;
+                        Invoke("partyStop", 0.5f);
                         if (!party.NoticeCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
@@ -223,6 +229,7 @@ public class GridSquare : MonoBehaviour {
                         }
                     } else {
                         party.damaged = true;
+                        Invoke("partyStop", 0.5f);
                         StartCoroutine(party.Fight(this));
                     }
                 }
