@@ -180,6 +180,11 @@ public class GridSquare : MonoBehaviour {
         }
     }
 
+    public void partyStop()
+    {
+        party.rb.velocity = new Vector3(0, 0, 0);
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -210,6 +215,7 @@ public class GridSquare : MonoBehaviour {
                         party.running = false;
                         party.damaged = true;
                         party.fighting = true;
+                        Invoke("partyStop", 0.5f);
                         if (!party.NoticeCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.GetComponent<Renderer>().material.color = Color.red;
@@ -223,6 +229,7 @@ public class GridSquare : MonoBehaviour {
                         }
                     } else {
                         party.damaged = true;
+                        Invoke("partyStop", 0.5f);
                         StartCoroutine(party.Fight(this));
                     }
                 }

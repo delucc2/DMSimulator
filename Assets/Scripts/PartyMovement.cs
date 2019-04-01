@@ -21,7 +21,7 @@ public class PartyMovement : MonoBehaviour {
     public int EXP;
 
     private int log_lines;
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     // Use this for initialization
     void Start () {

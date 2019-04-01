@@ -45,6 +45,10 @@ public class DialogueHandler : MonoBehaviour
         level_complete = false;
     }
 
+    private void partyStop()
+    {
+        party.rb.velocity = new Vector3(0, 0, 0);
+    }
     private void Update()
     {
         int party_x = -1;
@@ -59,16 +63,19 @@ public class DialogueHandler : MonoBehaviour
             boss_triggered = true;
             BossDialogue();
             party.running = false;
+            Invoke("partyStop", 0.5f);
             party.fighting = true;
         } else if (party_x == middle_trigger_x && party_y == middle_trigger_y && !middle_triggered) {
             middle_triggered = true;
             MidDialogue();
             party.running = false;
+            Invoke("partyStop", 0.5f);
             party.fighting = true;
         } else if (party_x == end_trigger_x && party_y == end_trigger_y && !end_triggered) {
             end_triggered = true;
             NearEndDialogue();
             party.running = false;
+            Invoke("partyStop", 0.5f);
             party.fighting = true;
         }
 
