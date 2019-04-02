@@ -282,63 +282,100 @@ public class GridSquare : MonoBehaviour {
             trigger.isTrigger = false;
         }
         triggers.Clear();
+        bool skip_n = false;
+        bool skip_e = false;
+        bool skip_w = false;
+        bool skip_s = false;
         for (int i = 1; i <= range; i++)
         {
+            print(i);
             GridSquare square = null;
-            if (facing == 'n' || omnidirectional) {
-                if (y_pos + i > 19) {
-                    break;
-                }
-                square = grid.squares[x_pos, y_pos + i];
-                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+            if (facing == 'n' || (omnidirectional && !skip_n)) {
+                if (y_pos + i > 19)
                 {
-                    square.GetComponent<Renderer>().material.color = Color.yellow;
-                    triggers.Add(square);
-                    square.isTrigger = true;
-                } else {
-                    break;
+                    skip_n = true;
+                    if (!omnidirectional) { break; }
+                }
+                else
+                {
+                    square = grid.squares[x_pos, y_pos + i];
+                    if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                    {
+                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        triggers.Add(square);
+                        square.isTrigger = true;
+                    }
+                    else
+                    {
+                        skip_n = true;
+                        if (!omnidirectional) { break; }
+                    }
                 }
             }
-            if (facing == 'e' || omnidirectional) {
-                if (x_pos + i > 19) {
-                    break;
-                }
-                square = grid.squares[x_pos + i, y_pos];
-                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+            if (facing == 'e' || (omnidirectional && !skip_e)) {
+                if (x_pos + i > 19)
                 {
-                    square.GetComponent<Renderer>().material.color = Color.yellow;
-                    triggers.Add(square);
-                    square.isTrigger = true;
-                } else {
-                    break;
+                    skip_e = true;
+                    if (!omnidirectional) { break; }
+                }
+                else
+                {
+                    square = grid.squares[x_pos + i, y_pos];
+                    if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                    {
+                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        triggers.Add(square);
+                        square.isTrigger = true;
+                    }
+                    else
+                    {
+                        skip_e = true;
+                        if (!omnidirectional) { break; }
+                    }
                 }
             }
-            if (facing == 's' || omnidirectional) {
-                if (y_pos - i < 0) {
-                    break;
-                }
-                square = grid.squares[x_pos, y_pos - i];
-                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+            if (facing == 's' || (omnidirectional && !skip_s)) {
+                if (y_pos - i < 0)
                 {
-                    square.GetComponent<Renderer>().material.color = Color.yellow;
-                    triggers.Add(square);
-                    square.isTrigger = true;
-                } else {
-                    break;
+                    skip_s = true;
+                    if (!omnidirectional) { break; }
+                }
+                else
+                {
+                    square = grid.squares[x_pos, y_pos - i];
+                    if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                    {
+                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        triggers.Add(square);
+                        square.isTrigger = true;
+                    }
+                    else
+                    {
+                        skip_s = true;
+                        if (!omnidirectional) { break; }
+                    }
                 }
             }
-            if (facing == 'w' || omnidirectional) {
-                if (x_pos - i < 0) {
-                    break;
-                }
-                square = grid.squares[x_pos - i, y_pos];
-                if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+            if (facing == 'w' || (omnidirectional && !skip_w)) {
+                if (x_pos - i < 0)
                 {
-                    square.GetComponent<Renderer>().material.color = Color.yellow;
-                    triggers.Add(square);
-                    square.isTrigger = true;
-                } else {
-                    break;
+                    skip_w = true;
+                    if (!omnidirectional) { break; }
+                }
+                else
+                {
+                    square = grid.squares[x_pos - i, y_pos];
+                    if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
+                    {
+                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        triggers.Add(square);
+                        square.isTrigger = true;
+                    }
+                    else
+                    {
+                        skip_w = true;
+                        if (!omnidirectional) { break; }
+                    }
                 }
             }
 

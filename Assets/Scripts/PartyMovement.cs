@@ -51,6 +51,11 @@ public class PartyMovement : MonoBehaviour {
         log_lines = 0;
         levelComplete = false;
     }
+
+    void partyStop()
+    {
+        rb.velocity = new Vector3(0, 0, 0);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -76,10 +81,10 @@ public class PartyMovement : MonoBehaviour {
             if (HEALTH <= grid.HP_goal && EXP >= grid.EXP_goal) {
                 GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
                 levelComplete = true;
-                rb.velocity = new Vector3(0, 0, 0);
+                Invoke("partyStop", 0.5f);
             } else {
                 GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FailDialogue();
-                rb.velocity = new Vector3(0, 0, 0);
+                Invoke("partyStop", 0.5f);
             }
         }
         
