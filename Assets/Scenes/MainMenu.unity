@@ -1029,7 +1029,11 @@ MonoBehaviour:
 
     R + Click on object - Rotate Object
 
-    0 + Click on object - Delete Object'
+    0 + Click on object - Delete Object
+
+    SPACE - Start Party''s Run Through Dungeon
+
+    P - Restart Level'
 --- !u!222 &710453712
 CanvasRenderer:
   m_ObjectHideFlags: 0
