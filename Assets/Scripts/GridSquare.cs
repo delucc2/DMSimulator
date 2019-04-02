@@ -148,7 +148,11 @@ public class GridSquare : MonoBehaviour {
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
                     item.transform.localScale = new Vector3(6f, 6f, 6f);
                     item_name = "enemy";
-                    range = 1;
+                    if (grid.enemy.GetComponent<EnemyStats>().GetRanged()) {
+                        range = 3;
+                    } else {
+                        range = 1;
+                    }
                     facing = 'n';
                     FindTriggerSquares(true);
                     break;
