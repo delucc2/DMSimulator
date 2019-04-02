@@ -4,10 +4,92 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Player_Head
+    100004: Player_Hips
+    100006: Player_LeftArm
+    100008: Player_LeftFoot
+    100010: Player_LeftForeArm
+    100012: Player_LeftHand
+    100014: Player_LeftHandMiddle1
+    100016: Player_LeftHandMiddle2
+    100018: Player_LeftHandMiddle3
+    100020: Player_LeftHandMiddle4
+    100022: Player_LeftHandThumb1
+    100024: Player_LeftHandThumb2
+    100026: Player_LeftHandThumb3
+    100028: Player_LeftHandThumb4
+    100030: Player_LeftLeg
+    100032: Player_LeftShoulder
+    100034: Player_LeftToeBase
+    100036: Player_LeftUpLeg
+    100038: Player_Neck
+    100040: Player_Reference
+    100042: Player_RightArm
+    100044: Player_RightFoot
+    100046: Player_RightForeArm
+    100048: Player_RightHand
+    100050: Player_RightHandMiddle1
+    100052: Player_RightHandMiddle2
+    100054: Player_RightHandMiddle3
+    100056: Player_RightHandMiddle4
+    100058: Player_RightHandThumb1
+    100060: Player_RightHandThumb2
+    100062: Player_RightHandThumb3
+    100064: Player_RightHandThumb4
+    100066: Player_RightLeg
+    100068: Player_RightShoulder
+    100070: Player_RightToeBase
+    100072: Player_RightUpLeg
+    100074: Player_Spine
+    100076: Player_Spine1
+    100078: Player_Spine2
+    100080: Skeleton
     400000: //RootNode
+    400002: Player_Head
+    400004: Player_Hips
+    400006: Player_LeftArm
+    400008: Player_LeftFoot
+    400010: Player_LeftForeArm
+    400012: Player_LeftHand
+    400014: Player_LeftHandMiddle1
+    400016: Player_LeftHandMiddle2
+    400018: Player_LeftHandMiddle3
+    400020: Player_LeftHandMiddle4
+    400022: Player_LeftHandThumb1
+    400024: Player_LeftHandThumb2
+    400026: Player_LeftHandThumb3
+    400028: Player_LeftHandThumb4
+    400030: Player_LeftLeg
+    400032: Player_LeftShoulder
+    400034: Player_LeftToeBase
+    400036: Player_LeftUpLeg
+    400038: Player_Neck
+    400040: Player_Reference
+    400042: Player_RightArm
+    400044: Player_RightFoot
+    400046: Player_RightForeArm
+    400048: Player_RightHand
+    400050: Player_RightHandMiddle1
+    400052: Player_RightHandMiddle2
+    400054: Player_RightHandMiddle3
+    400056: Player_RightHandMiddle4
+    400058: Player_RightHandThumb1
+    400060: Player_RightHandThumb2
+    400062: Player_RightHandThumb3
+    400064: Player_RightHandThumb4
+    400066: Player_RightLeg
+    400068: Player_RightShoulder
+    400070: Player_RightToeBase
+    400072: Player_RightUpLeg
+    400074: Player_Spine
+    400076: Player_Spine1
+    400078: Player_Spine2
+    400080: Skeleton
     2100000: lambert1
     2300000: //RootNode
+    2300002: Skeleton
     3300000: //RootNode
+    3300002: Skeleton
     4300000: Skeleton
   externalObjects: {}
   materials:
