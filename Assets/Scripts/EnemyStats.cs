@@ -5,18 +5,25 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour {
     [SerializeField]
     public int HEALTH;
-    public int DAMAGE;
+    public int MELEE_DAMAGE;
+    public int RANGED_DAMAGE;
     public int COST;
     public int EXP;
+    public bool ranged;
 
     public int GetHealth()
     {
         return HEALTH;
     }
 
-    public int GetDamage()
+    public int GetMeleeDamage()
     {
-        return DAMAGE;
+        return MELEE_DAMAGE;
+    }
+
+    public int GetRangedDamage()
+    {
+        return RANGED_DAMAGE;
     }
 
     public int GetCost()
@@ -32,5 +39,10 @@ public class EnemyStats : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         HEALTH -= damage;
+    }
+
+    public bool GetRanged()
+    {
+        return ranged;
     }
 }

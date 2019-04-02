@@ -51,6 +51,11 @@ public class PartyMovement : MonoBehaviour {
         log_lines = 0;
         levelComplete = false;
     }
+
+    void partyStop()
+    {
+        rb.velocity = new Vector3(0, 0, 0);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -76,8 +81,10 @@ public class PartyMovement : MonoBehaviour {
             if (HEALTH <= grid.HP_goal && EXP >= grid.EXP_goal) {
                 GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().EndDialogue();
                 levelComplete = true;
+                Invoke("partyStop", 0.5f);
             } else {
                 GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FailDialogue();
+                Invoke("partyStop", 0.5f);
             }
         }
         
@@ -203,9 +210,18 @@ public class PartyMovement : MonoBehaviour {
 
             // Enemy attacks
             if (Random.Range(0f, 1f) < 0.5f) {
-                takeDamage(enemy.item.GetComponent<EnemyStats>().GetDamage());
-                LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetDamage() + " damage!\n");
-                GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)
+                {
+                    takeDamage(enemy.item.GetComponent<EnemyStats>().GetRangedDamage());
+                    LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetRangedDamage() + " damage!\n");
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                } else
+                {
+                    takeDamage(enemy.item.GetComponent<EnemyStats>().GetMeleeDamage());
+                    LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetMeleeDamage() + " damage!\n");
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                }
+                
             }
         }
 
