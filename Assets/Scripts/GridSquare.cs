@@ -66,7 +66,7 @@ public class GridSquare : MonoBehaviour {
         if (x_pos != grid.end_x || (y_pos + 1) != grid.end_y) {
             if (isTrigger) {
                 this.GetComponent<Renderer>().material.color = Color.yellow;
-            } else {
+            } else if (!running) {
             this.GetComponent<Renderer>().material.color = Color.green;
             }
         } else {
@@ -210,6 +210,10 @@ public class GridSquare : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (party.Pathfind(grid.end_x, 19 - grid.end_y) == null) { return; }
+            foreach (var square in grid.squares)
+            {
+                square.GetComponent<Renderer>().material = grid.floor_material;
+            }
             running = true;
         }
 
@@ -295,7 +299,7 @@ public class GridSquare : MonoBehaviour {
     {
         foreach (var trigger in triggers)
         {
-            if (trigger.x_pos != grid.end_x && trigger.y_pos != grid.end_y) { trigger.GetComponent<Renderer>().material.color = Color.green; }
+            if (trigger.x_pos != grid.end_x && trigger.y_pos != grid.end_y && !running) { trigger.GetComponent<Renderer>().material.color = Color.green; }
             trigger.isTrigger = false;
         }
         triggers.Clear();

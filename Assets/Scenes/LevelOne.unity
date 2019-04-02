@@ -1770,6 +1770,8 @@ MonoBehaviour:
   enemy: {fileID: 0}
   party: {fileID: 1004139760041238, guid: efe52f97af0e9174eb82f517f1983326, type: 2}
   boss: {fileID: 1816979059670292, guid: 0002ea58fc5064f429e865f1ef5c3157, type: 2}
+  floor: {fileID: 1679992140948420, guid: a7ca8dca117b6f54c9c50fdaee5a10b1, type: 2}
+  floor_material: {fileID: 2100000, guid: 582d0dab734fb9045957f80d067f4c5d, type: 2}
   level_file: level1.txt
   end_x: 13
   end_y: 10
