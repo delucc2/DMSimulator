@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HEALTH: 22
-  DAMAGE: 4
+  MELEE_DAMAGE: 4
+  RANGED_DAMAGE: 0
   COST: 100
   EXP: 10
+  ranged: 0

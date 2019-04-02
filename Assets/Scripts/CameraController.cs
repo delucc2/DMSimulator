@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 		if(Input.GetAxis("Vertical") != 0)
         {
-            transform.Translate(-this.transform.forward * Input.GetAxis("Vertical"));
+            transform.Translate(Vector3.up * Input.GetAxis("Vertical"));
         }
 
         if(Input.GetAxis("Horizontal") != 0)
@@ -23,10 +23,10 @@ public class CameraController : MonoBehaviour {
 
         if(Input.GetKey(KeyCode.E))
         {
-            transform.Translate(this.transform.up * 0.5f);
+            transform.Translate(-Vector3.forward * 0.5f);
         } else if (Input.GetKey(KeyCode.Q))
         {
-            transform.Translate(-this.transform.up * 0.5f);
+            transform.Translate(Vector3.forward * 0.5f);
         }
 	}
 }
