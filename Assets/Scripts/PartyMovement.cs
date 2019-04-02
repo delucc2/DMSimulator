@@ -13,6 +13,7 @@ public class PartyMovement : MonoBehaviour {
     public bool fighting;
     private bool levelComplete;
     public bool running;
+    private Camera camera;
 
     private int DEX;
     private int WIS;
