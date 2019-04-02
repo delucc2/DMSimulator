@@ -139,7 +139,7 @@ public class PartyMovement : MonoBehaviour {
             // Slow Movement
             float tempx = this.transform.position.x;
             float tempz = this.transform.position.z;
-            print("(" + tempx + ", " + tempz + ") | (" + x_pos + ", " + z_pos + ")");
+            //print("(" + tempx + ", " + tempz + ") | (" + x_pos + ", " + z_pos + ")");
             if (x_pos - this.transform.position.x > 0.5f){
                 rb.velocity = new Vector3(1.95f, 0, 0);
             } else if (this.transform.position.x - x_pos > 0.5f) {
