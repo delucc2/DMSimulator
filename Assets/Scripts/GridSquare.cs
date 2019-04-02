@@ -42,6 +42,23 @@ public class GridSquare : MonoBehaviour {
             item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             item.gameObject.AddComponent<PartyMovement>();
         }
+        else if (x_pos == grid.boss_x && y_pos == grid.boss_y)
+        {
+            item = Instantiate<GameObject>(grid.boss);
+            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+            item.transform.localScale = new Vector3(6f, 6f, 6f);
+            item_name = "enemy";
+            if (grid.boss.GetComponent<EnemyStats>().GetRanged())
+            {
+                range = 3;
+            }
+            else
+            {
+                range = 1;
+            }
+            facing = 'n';
+            FindTriggerSquares(true);
+        }
     }
 
     private void OnMouseExit()
@@ -278,7 +295,7 @@ public class GridSquare : MonoBehaviour {
     {
         foreach (var trigger in triggers)
         {
-            trigger.GetComponent<Renderer>().material.color = Color.green;
+            if (trigger.x_pos != grid.end_x && trigger.y_pos != grid.end_y) { trigger.GetComponent<Renderer>().material.color = Color.green; }
             trigger.isTrigger = false;
         }
         triggers.Clear();
@@ -288,7 +305,6 @@ public class GridSquare : MonoBehaviour {
         bool skip_s = false;
         for (int i = 1; i <= range; i++)
         {
-            print(i);
             GridSquare square = null;
             if (facing == 'n' || (omnidirectional && !skip_n)) {
                 if (y_pos + i > 19)
@@ -301,7 +317,7 @@ public class GridSquare : MonoBehaviour {
                     square = grid.squares[x_pos, y_pos + i];
                     if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                     {
-                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        if (square.x_pos != grid.end_x || square.y_pos != grid.end_y) { square.GetComponent<Renderer>().material.color = Color.yellow; }
                         triggers.Add(square);
                         square.isTrigger = true;
                     }
@@ -323,7 +339,7 @@ public class GridSquare : MonoBehaviour {
                     square = grid.squares[x_pos + i, y_pos];
                     if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                     {
-                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        if (square.x_pos != grid.end_x || square.y_pos != grid.end_y) { square.GetComponent<Renderer>().material.color = Color.yellow; }
                         triggers.Add(square);
                         square.isTrigger = true;
                     }
@@ -345,7 +361,7 @@ public class GridSquare : MonoBehaviour {
                     square = grid.squares[x_pos, y_pos - i];
                     if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                     {
-                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        if (square.x_pos != grid.end_x || square.y_pos != grid.end_y) { square.GetComponent<Renderer>().material.color = Color.yellow; }
                         triggers.Add(square);
                         square.isTrigger = true;
                     }
@@ -367,7 +383,7 @@ public class GridSquare : MonoBehaviour {
                     square = grid.squares[x_pos - i, y_pos];
                     if (square.getItem() == "empty" || square.getItem() == "pit" || square.getItem() == "spikes")
                     {
-                        square.GetComponent<Renderer>().material.color = Color.yellow;
+                        if (square.x_pos != grid.end_x || square.y_pos != grid.end_y) { square.GetComponent<Renderer>().material.color = Color.yellow; }
                         triggers.Add(square);
                         square.isTrigger = true;
                     }

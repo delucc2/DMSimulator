@@ -157,7 +157,9 @@ public class PartyMovement : MonoBehaviour {
 
             if ((curr_pos.getItem() == "pit" || curr_pos.getItem() == "spikes") && !curr_pos.triggered)
             {
+                running = false;
                 fighting = true;
+                Invoke("partyStop", 0.5f);
                 curr_pos.triggered = true;
                 if (!NoticeCheck(curr_pos)) {
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());

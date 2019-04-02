@@ -18,12 +18,15 @@ public class Grid : MonoBehaviour {
     public GameObject arrow_wall;
     public GameObject enemy;
     public GameObject party;
+    public GameObject boss;
 
     public string level_file;
     public int end_x;
     public int end_y;
     public int start_x;
     public int start_y;
+    public int boss_x;
+    public int boss_y;
 
     public int HP_goal;
     public int EXP_goal;

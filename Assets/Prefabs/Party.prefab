@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4827185285121444}
   - component: {fileID: 23459980701312816}
   - component: {fileID: 54631055108069428}
-  - component: {fileID: 114973920109284524}
   m_Layer: 0
   m_Name: Party
   m_TagString: Untagged
@@ -5024,19 +5023,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114973920109284524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1004139760041238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae935e3d3e1bb7547ac8146d3cf155bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damaged: 0
-  fighting: 0
-  running: 0
-  EXP: 0
-  rb: {fileID: 54631055108069428}
