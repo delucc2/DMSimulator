@@ -38,8 +38,8 @@ public class GridSquare : MonoBehaviour {
         if (x_pos == grid.start_x && y_pos == grid.start_y)
         {
             item = Instantiate<GameObject>(grid.party);
-            item.transform.localScale = new Vector3(8f, 8f, 8f);
-            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.75f, this.transform.position.z);
+            item.transform.localScale = new Vector3(2f, 2f, 2f);
+            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             item.gameObject.AddComponent<PartyMovement>();
         }
     }

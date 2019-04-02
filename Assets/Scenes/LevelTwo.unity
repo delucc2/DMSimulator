@@ -1768,7 +1768,7 @@ MonoBehaviour:
   boulder: {fileID: 1560592378299156, guid: 158368ef6c070b843872f28cd4832277, type: 2}
   arrow_wall: {fileID: 1912534411452010, guid: 9b5d581e940cae64aa8315ff7d320b6a, type: 2}
   enemy: {fileID: 0}
-  party: {fileID: 1620668038651174, guid: d8e4909d40f28e24e9d5e3fb78ebd2b9, type: 2}
+  party: {fileID: 1004139760041238, guid: efe52f97af0e9174eb82f517f1983326, type: 2}
   level_file: level2.txt
   end_x: 6
   end_y: 10

@@ -4,10 +4,36 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: HelmetPlate
+    100004: Player_Head
+    100006: Player_Hips
+    100008: Player_LeftArm
+    100010: Player_LeftShoulder
+    100012: Player_Neck
+    100014: Player_Reference
+    100016: Player_RightArm
+    100018: Player_RightShoulder
+    100020: Player_Spine
+    100022: Player_Spine1
+    100024: Player_Spine2
     400000: //RootNode
+    400002: HelmetPlate
+    400004: Player_Head
+    400006: Player_Hips
+    400008: Player_LeftArm
+    400010: Player_LeftShoulder
+    400012: Player_Neck
+    400014: Player_Reference
+    400016: Player_RightArm
+    400018: Player_RightShoulder
+    400020: Player_Spine
+    400022: Player_Spine1
+    400024: Player_Spine2
     2100000: lambert1
     2300000: //RootNode
+    2300002: HelmetPlate
     3300000: //RootNode
+    3300002: HelmetPlate
     4300000: HelmetPlate
   externalObjects: {}
   materials:

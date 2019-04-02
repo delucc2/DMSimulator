@@ -4,10 +4,48 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Player_Hips
+    100004: Player_LeftArm
+    100006: Player_LeftForeArm
+    100008: Player_LeftHand
+    100010: Player_LeftHandMiddle1
+    100012: Player_LeftHandMiddle2
+    100014: Player_LeftHandMiddle3
+    100016: Player_LeftHandMiddle4
+    100018: Player_LeftHandThumb1
+    100020: Player_LeftHandThumb2
+    100022: Player_LeftHandThumb3
+    100024: Player_LeftHandThumb4
+    100026: Player_LeftShoulder
+    100028: Player_Reference
+    100030: Player_Spine
+    100032: Player_Spine1
+    100034: Player_Spine2
+    100036: Shield
     400000: //RootNode
+    400002: Player_Hips
+    400004: Player_LeftArm
+    400006: Player_LeftForeArm
+    400008: Player_LeftHand
+    400010: Player_LeftHandMiddle1
+    400012: Player_LeftHandMiddle2
+    400014: Player_LeftHandMiddle3
+    400016: Player_LeftHandMiddle4
+    400018: Player_LeftHandThumb1
+    400020: Player_LeftHandThumb2
+    400022: Player_LeftHandThumb3
+    400024: Player_LeftHandThumb4
+    400026: Player_LeftShoulder
+    400028: Player_Reference
+    400030: Player_Spine
+    400032: Player_Spine1
+    400034: Player_Spine2
+    400036: Shield
     2100000: lambert1
     2300000: //RootNode
+    2300002: Shield
     3300000: //RootNode
+    3300002: Shield
     4300000: Shield
   externalObjects: {}
   materials:

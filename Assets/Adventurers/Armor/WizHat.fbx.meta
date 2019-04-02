@@ -4,10 +4,36 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Player_Head
+    100004: Player_Hips
+    100006: Player_LeftArm
+    100008: Player_LeftShoulder
+    100010: Player_Neck
+    100012: Player_Reference
+    100014: Player_RightArm
+    100016: Player_RightShoulder
+    100018: Player_Spine
+    100020: Player_Spine1
+    100022: Player_Spine2
+    100024: WizHat
     400000: //RootNode
+    400002: Player_Head
+    400004: Player_Hips
+    400006: Player_LeftArm
+    400008: Player_LeftShoulder
+    400010: Player_Neck
+    400012: Player_Reference
+    400014: Player_RightArm
+    400016: Player_RightShoulder
+    400018: Player_Spine
+    400020: Player_Spine1
+    400022: Player_Spine2
+    400024: WizHat
     2100000: lambert1
     2300000: //RootNode
+    2300002: WizHat
     3300000: //RootNode
+    3300002: WizHat
     4300000: WizHat
   externalObjects: {}
   materials:

@@ -14,6 +14,7 @@ ModelImporter:
     100016: UpperArmRLeather
     100018: UpperLefRLeather
     100020: UpperLegLLeather
+    100022: LowerLegLLeather1
     400000: BodyLeather
     400002: BreastLeather
     400004: //RootNode
@@ -25,6 +26,7 @@ ModelImporter:
     400016: UpperArmRLeather
     400018: UpperLefRLeather
     400020: UpperLegLLeather
+    400022: LowerLegLLeather1
     2100000: lambert1
     2300000: BodyLeather
     2300002: BreastLeather
@@ -36,6 +38,7 @@ ModelImporter:
     2300014: UpperArmRLeather
     2300016: UpperLefRLeather
     2300018: UpperLegLLeather
+    2300020: LowerLegLLeather1
     3300000: BodyLeather
     3300002: BreastLeather
     3300004: LoerLegRLeather
@@ -46,6 +49,7 @@ ModelImporter:
     3300014: UpperArmRLeather
     3300016: UpperLefRLeather
     3300018: UpperLegLLeather
+    3300020: LowerLegLLeather1
     4300000: UpperArmRLeather
     4300002: UpperArmLLeather
     4300004: BreastLeather
@@ -56,6 +60,7 @@ ModelImporter:
     4300014: UpperLefRLeather
     4300016: LoerLegRLeather
     4300018: LowerLegLLeather
+    4300020: LowerLegLLeather1
   externalObjects: {}
   materials:
     importMaterials: 1
