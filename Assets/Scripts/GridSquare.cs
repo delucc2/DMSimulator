@@ -200,8 +200,6 @@ public class GridSquare : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(1)) {
-            print("left click");
-
             if(!deletable) {
                 return;
             }
