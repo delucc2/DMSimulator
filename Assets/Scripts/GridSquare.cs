@@ -105,6 +105,7 @@ public class GridSquare : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             if (item_name != "empty" && grid.GetSelection() != 'r' && grid.GetSelection() != '9') {
+                print(grid.GetSelection());
                 return;
             }
 
@@ -148,7 +149,9 @@ public class GridSquare : MonoBehaviour {
                     FindTriggerSquares(false);
                     break;
                 case '9':
-                    if (!deletable) { break; }
+                    if (!deletable) {
+                        break;
+                    }
 
                     if (item_name == "enemy") {
                         grid.refund(item.gameObject.GetComponent<EnemyStats>().GetCost());
@@ -197,7 +200,21 @@ public class GridSquare : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(1)) {
-            cam.transform.position = new Vector3(this.transform.position.x + 2f, this.transform.position.y + 5f, this.transform.position.z - 2.5f);
+            print("left click");
+
+            if(!deletable) {
+                return;
+            }
+
+            if (item_name == "enemy")
+            {
+                grid.refund(item.gameObject.GetComponent<EnemyStats>().GetCost());
+            }
+            else
+            {
+                grid.refund(item.gameObject.GetComponent<TrapStats>().cost);
+            }
+            resetSquare();
         }
     }
 
