@@ -15,6 +15,7 @@ public class PartyMovement : MonoBehaviour {
     public bool running;
     private Camera camera;
     private char facing;
+    private bool blocked;
 
     private int DEX;
     private int WIS;
@@ -57,6 +58,9 @@ public class PartyMovement : MonoBehaviour {
     void partyStop()
     {
         rb.velocity = new Vector3(0, 0, 0);
+        for (int i = 0; i < 4; i++) {
+            this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
+        }
     }
 	
 	// Update is called once per frame
@@ -108,6 +112,7 @@ public class PartyMovement : MonoBehaviour {
 	}
 
     private IEnumerator SlowMove(char[] path) {
+        yield return new WaitForSeconds(0.75f);
         char prev_dir = facing;
         foreach (var dir in path)
         {
@@ -146,7 +151,7 @@ public class PartyMovement : MonoBehaviour {
                 }
                 z_pos--;
             }
-
+            
             Move(dir, false, (int)x_pos, (int)z_pos);
             if (dir == 'e' || dir == 'w' || dir == 'n' || dir == 's') { prev_dir = dir; }
             yield return new WaitForSeconds(0.5f);
