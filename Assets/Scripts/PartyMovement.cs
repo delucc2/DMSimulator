@@ -14,6 +14,7 @@ public class PartyMovement : MonoBehaviour {
     private bool levelComplete;
     public bool running;
     private Camera camera;
+    private char facing;
 
     private int DEX;
     private int WIS;
@@ -34,6 +35,7 @@ public class PartyMovement : MonoBehaviour {
         curr_pos = grid.squares[(int)x_pos, (int)z_pos].GetComponent<GridSquare>();
         fighting = false;
         running = false;
+        facing = 'n';
 
         DEX = 15;
         WIS = 15;
@@ -96,6 +98,9 @@ public class PartyMovement : MonoBehaviour {
                 return;
             }
             running = true;
+            for (int i = 0; i < 4; i++) {
+                this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("move");
+            }
             GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
             GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
             StartCoroutine(SlowMove(path));
@@ -103,23 +108,47 @@ public class PartyMovement : MonoBehaviour {
 	}
 
     private IEnumerator SlowMove(char[] path) {
+        char prev_dir = facing;
         foreach (var dir in path)
         {
+            facing = dir;
             if (fighting && Input.GetKeyDown(KeyCode.Space)) {
                 fighting = false;
             } else if (fighting) { break; }
 
+            print("| prev_dir: " + prev_dir);
             if (dir == 'e') {
+                if (prev_dir == 'n') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                } else if (prev_dir == 's') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                }
                 x_pos++;
             } else if (dir == 'w') {
+                if (prev_dir == 'n') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                } else if (prev_dir == 's') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                }
                 x_pos--;
             } else if (dir == 'n') {
+                if (prev_dir == 'e') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                } else if (prev_dir == 'w') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                }
                 z_pos++;
             } else if (dir == 's') {
+                if (prev_dir == 'e') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                } else if (prev_dir == 'w') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                }
                 z_pos--;
             }
 
             Move(dir, false, (int)x_pos, (int)z_pos);
+            if (dir == 'e' || dir == 'w' || dir == 'n' || dir == 's') { prev_dir = dir; }
             yield return new WaitForSeconds(0.5f);
         }
     }
