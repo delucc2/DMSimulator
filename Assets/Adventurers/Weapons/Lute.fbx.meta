@@ -4,10 +4,50 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Lute
+    100004: Player_Hips
+    100006: Player_LeftArm
+    100008: Player_LeftForeArm
+    100010: Player_LeftHand
+    100012: Player_LeftHandMiddle1
+    100014: Player_LeftHandMiddle2
+    100016: Player_LeftHandMiddle3
+    100018: Player_LeftHandMiddle4
+    100020: Player_LeftHandThumb1
+    100022: Player_LeftHandThumb2
+    100024: Player_LeftHandThumb3
+    100026: Player_LeftHandThumb4
+    100028: Player_LeftShoulder
+    100030: Player_LeftUpLeg
+    100032: Player_Reference
+    100034: Player_Spine
+    100036: Player_Spine1
+    100038: Player_Spine2
     400000: //RootNode
+    400002: Lute
+    400004: Player_Hips
+    400006: Player_LeftArm
+    400008: Player_LeftForeArm
+    400010: Player_LeftHand
+    400012: Player_LeftHandMiddle1
+    400014: Player_LeftHandMiddle2
+    400016: Player_LeftHandMiddle3
+    400018: Player_LeftHandMiddle4
+    400020: Player_LeftHandThumb1
+    400022: Player_LeftHandThumb2
+    400024: Player_LeftHandThumb3
+    400026: Player_LeftHandThumb4
+    400028: Player_LeftShoulder
+    400030: Player_LeftUpLeg
+    400032: Player_Reference
+    400034: Player_Spine
+    400036: Player_Spine1
+    400038: Player_Spine2
     2100000: lambert1
     2300000: //RootNode
+    2300002: Lute
     3300000: //RootNode
+    3300002: Lute
     4300000: Lute
   externalObjects: {}
   materials:

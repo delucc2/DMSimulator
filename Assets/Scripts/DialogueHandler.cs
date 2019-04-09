@@ -61,22 +61,22 @@ public class DialogueHandler : MonoBehaviour
         //print("(" + party_x + ", " + party_y + ")");
         if (party_x == boss_trigger_x && party_y == boss_trigger_y && !boss_triggered) {
             boss_triggered = true;
-            BossDialogue();
+            Invoke("BossDialogue", 0.5f);
             party.running = false;
-            Invoke("partyStop", 0.5f);
             party.fighting = true;
+            Invoke("partyStop", 0.5f);
         } else if (party_x == middle_trigger_x && party_y == middle_trigger_y && !middle_triggered) {
             middle_triggered = true;
-            MidDialogue();
+            Invoke("MidDialogue", 0.5f);
             party.running = false;
-            Invoke("partyStop", 0.5f);
             party.fighting = true;
+            Invoke("partyStop", 0.5f);
         } else if (party_x == end_trigger_x && party_y == end_trigger_y && !end_triggered) {
             end_triggered = true;
-            NearEndDialogue();
+            Invoke("NearEndDialogue", 0.5f);
             party.running = false;
-            Invoke("partyStop", 0.5f);
             party.fighting = true;
+            Invoke("partyStop", 0.5f);
         }
 
         if (Input.GetMouseButtonDown(0) && level_complete)

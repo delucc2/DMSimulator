@@ -4,10 +4,48 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Player_Hips
+    100004: Player_Reference
+    100006: Player_RightArm
+    100008: Player_RightForeArm
+    100010: Player_RightHand
+    100012: Player_RightHandMiddle1
+    100014: Player_RightHandMiddle2
+    100016: Player_RightHandMiddle3
+    100018: Player_RightHandMiddle4
+    100020: Player_RightHandThumb1
+    100022: Player_RightHandThumb2
+    100024: Player_RightHandThumb3
+    100026: Player_RightHandThumb4
+    100028: Player_RightShoulder
+    100030: Player_Spine
+    100032: Player_Spine1
+    100034: Player_Spine2
+    100036: Sword
     400000: //RootNode
+    400002: Player_Hips
+    400004: Player_Reference
+    400006: Player_RightArm
+    400008: Player_RightForeArm
+    400010: Player_RightHand
+    400012: Player_RightHandMiddle1
+    400014: Player_RightHandMiddle2
+    400016: Player_RightHandMiddle3
+    400018: Player_RightHandMiddle4
+    400020: Player_RightHandThumb1
+    400022: Player_RightHandThumb2
+    400024: Player_RightHandThumb3
+    400026: Player_RightHandThumb4
+    400028: Player_RightShoulder
+    400030: Player_Spine
+    400032: Player_Spine1
+    400034: Player_Spine2
+    400036: Sword
     2100000: lambert1
     2300000: //RootNode
+    2300002: Sword
     3300000: //RootNode
+    3300002: Sword
     4300000: Sword
   externalObjects: {}
   materials:

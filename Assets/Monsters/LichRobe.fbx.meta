@@ -4,10 +4,92 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: LichRobe
+    100004: Player_Head
+    100006: Player_Hips
+    100008: Player_LeftArm
+    100010: Player_LeftFoot
+    100012: Player_LeftForeArm
+    100014: Player_LeftHand
+    100016: Player_LeftHandMiddle1
+    100018: Player_LeftHandMiddle2
+    100020: Player_LeftHandMiddle3
+    100022: Player_LeftHandMiddle4
+    100024: Player_LeftHandThumb1
+    100026: Player_LeftHandThumb2
+    100028: Player_LeftHandThumb3
+    100030: Player_LeftHandThumb4
+    100032: Player_LeftLeg
+    100034: Player_LeftShoulder
+    100036: Player_LeftToeBase
+    100038: Player_LeftUpLeg
+    100040: Player_Neck
+    100042: Player_Reference
+    100044: Player_RightArm
+    100046: Player_RightFoot
+    100048: Player_RightForeArm
+    100050: Player_RightHand
+    100052: Player_RightHandMiddle1
+    100054: Player_RightHandMiddle2
+    100056: Player_RightHandMiddle3
+    100058: Player_RightHandMiddle4
+    100060: Player_RightHandThumb1
+    100062: Player_RightHandThumb2
+    100064: Player_RightHandThumb3
+    100066: Player_RightHandThumb4
+    100068: Player_RightLeg
+    100070: Player_RightShoulder
+    100072: Player_RightToeBase
+    100074: Player_RightUpLeg
+    100076: Player_Spine
+    100078: Player_Spine1
+    100080: Player_Spine2
     400000: //RootNode
+    400002: LichRobe
+    400004: Player_Head
+    400006: Player_Hips
+    400008: Player_LeftArm
+    400010: Player_LeftFoot
+    400012: Player_LeftForeArm
+    400014: Player_LeftHand
+    400016: Player_LeftHandMiddle1
+    400018: Player_LeftHandMiddle2
+    400020: Player_LeftHandMiddle3
+    400022: Player_LeftHandMiddle4
+    400024: Player_LeftHandThumb1
+    400026: Player_LeftHandThumb2
+    400028: Player_LeftHandThumb3
+    400030: Player_LeftHandThumb4
+    400032: Player_LeftLeg
+    400034: Player_LeftShoulder
+    400036: Player_LeftToeBase
+    400038: Player_LeftUpLeg
+    400040: Player_Neck
+    400042: Player_Reference
+    400044: Player_RightArm
+    400046: Player_RightFoot
+    400048: Player_RightForeArm
+    400050: Player_RightHand
+    400052: Player_RightHandMiddle1
+    400054: Player_RightHandMiddle2
+    400056: Player_RightHandMiddle3
+    400058: Player_RightHandMiddle4
+    400060: Player_RightHandThumb1
+    400062: Player_RightHandThumb2
+    400064: Player_RightHandThumb3
+    400066: Player_RightHandThumb4
+    400068: Player_RightLeg
+    400070: Player_RightShoulder
+    400072: Player_RightToeBase
+    400074: Player_RightUpLeg
+    400076: Player_Spine
+    400078: Player_Spine1
+    400080: Player_Spine2
     2100000: Male1_initialShadingGroup1
     2300000: //RootNode
+    2300002: LichRobe
     3300000: //RootNode
+    3300002: LichRobe
     4300000: LichRobe
   externalObjects: {}
   materials:

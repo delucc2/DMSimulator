@@ -18,12 +18,17 @@ public class Grid : MonoBehaviour {
     public GameObject arrow_wall;
     public GameObject enemy;
     public GameObject party;
+    public GameObject boss;
+    public GameObject floor;
+    public Material floor_material;
 
     public string level_file;
     public int end_x;
     public int end_y;
     public int start_x;
     public int start_y;
+    public int boss_x;
+    public int boss_y;
 
     public int HP_goal;
     public int EXP_goal;
@@ -101,9 +106,9 @@ public class Grid : MonoBehaviour {
         for (int i = 0; i < x_size; i++) {
             string line = reader.ReadLine();
             for (int j = 0; j < y_size; j++) {
-                GameObject square = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                GameObject square = Instantiate<GameObject>(floor); //GameObject.CreatePrimitive(PrimitiveType.Plane);
                 square.transform.position = new Vector3(j, 0, 19 - i);
-                square.transform.localScale = new Vector3(0.075f, 0.075f, 0.075f);
+                square.transform.localScale = new Vector3(4.25f, 4f, 4.25f);
                 if (j == end_x && i == end_y) {
                     square.GetComponent<Renderer>().material.color = Color.blue;
                 } else {
