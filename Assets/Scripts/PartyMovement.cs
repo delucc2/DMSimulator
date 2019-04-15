@@ -41,7 +41,7 @@ public class PartyMovement : MonoBehaviour {
 
         DEX = 15;
         WIS = 15;
-        HEALTH = 112;
+        HEALTH = 187;
         DAMAGE = 52;
         EXP = 0;
 
