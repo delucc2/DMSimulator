@@ -101,3 +101,4 @@ MonoBehaviour:
   COST: 100
   EXP: 10
   ranged: 0
+  HITRATE: 0.67

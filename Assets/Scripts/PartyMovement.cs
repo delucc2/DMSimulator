@@ -239,7 +239,7 @@ public class PartyMovement : MonoBehaviour {
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
             // Enemy attacks
-            if (Random.Range(0f, 1f) <= 0.67f)
+            if (Random.Range(0f, 1f) <= enemy.item.GetComponent<EnemyStats>().GetHitrate())
             {
                 if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)
                 {

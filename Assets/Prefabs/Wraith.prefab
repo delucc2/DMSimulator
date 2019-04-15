@@ -98,6 +98,7 @@ MonoBehaviour:
   HEALTH: 67
   MELEE_DAMAGE: 21
   RANGED_DAMAGE: 0
-  COST: 300
+  COST: 1000
   EXP: 30
   ranged: 0
+  HITRATE: 0.5

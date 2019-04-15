@@ -10,6 +10,7 @@ public class EnemyStats : MonoBehaviour {
     public int COST;
     public int EXP;
     public bool ranged;
+    public float HITRATE;
 
     public int GetHealth()
     {
@@ -34,6 +35,11 @@ public class EnemyStats : MonoBehaviour {
     public int GetEXP()
     {
         return EXP;
+    }
+
+    public float GetHitrate()
+    {
+        return HITRATE;
     }
 
     public void TakeDamage(int damage)
