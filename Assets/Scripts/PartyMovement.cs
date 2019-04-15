@@ -15,6 +15,8 @@ public class PartyMovement : MonoBehaviour {
     public bool running;
     private Camera camera;
     private char facing;
+    private bool blocked;
+    private string[] attacks = { "swing", "cast", "stab", "play" };
 
     private int DEX;
     private int WIS;
@@ -57,6 +59,9 @@ public class PartyMovement : MonoBehaviour {
     void partyStop()
     {
         rb.velocity = new Vector3(0, 0, 0);
+        /*for (int i = 0; i < 4; i++) {
+            this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
+        }*/
     }
 	
 	// Update is called once per frame
@@ -108,15 +113,14 @@ public class PartyMovement : MonoBehaviour {
 	}
 
     private IEnumerator SlowMove(char[] path) {
+        //yield return new WaitForSeconds(0.5f);
         char prev_dir = facing;
         foreach (var dir in path)
         {
-            facing = dir;
             if (fighting && Input.GetKeyDown(KeyCode.Space)) {
                 fighting = false;
             } else if (fighting) { break; }
-
-            print("| prev_dir: " + prev_dir);
+            
             if (dir == 'e') {
                 if (prev_dir == 'n') {
                     this.transform.Rotate(new Vector3(0, 90, 0));
@@ -147,6 +151,7 @@ public class PartyMovement : MonoBehaviour {
                 z_pos--;
             }
 
+            facing = dir;            
             Move(dir, false, (int)x_pos, (int)z_pos);
             if (dir == 'e' || dir == 'w' || dir == 'n' || dir == 's') { prev_dir = dir; }
             yield return new WaitForSeconds(0.5f);
@@ -227,6 +232,9 @@ public class PartyMovement : MonoBehaviour {
     {
         fighting = true;
         running = false;
+        for (int i = 0; i < 4; i++) {
+            this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
+        }
         LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
@@ -234,6 +242,10 @@ public class PartyMovement : MonoBehaviour {
             if (Random.Range(0f, 1f) <= 0.67f) {
                 enemy.item.GetComponent<EnemyStats>().TakeDamage(DAMAGE);
                 LogPrint("> The party deals " + DAMAGE + " damage!\n");
+                for (int i = 0; i < 4; i++)
+                {
+                    this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger(attacks[i]);
+                }
                 LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
             }
 

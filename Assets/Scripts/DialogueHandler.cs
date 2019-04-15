@@ -48,6 +48,9 @@ public class DialogueHandler : MonoBehaviour
     private void partyStop()
     {
         party.rb.velocity = new Vector3(0, 0, 0);
+        for (int i = 0; i < 4; i++) {
+            party.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
+        }
     }
     private void Update()
     {
