@@ -39,6 +39,10 @@ public class EnemyStats : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         HEALTH -= damage;
+        if (HEALTH < 0)
+        {
+            HEALTH = 0;
+        }
     }
 
     public bool GetRanged()
