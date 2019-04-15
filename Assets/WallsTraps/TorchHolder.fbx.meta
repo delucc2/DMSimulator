@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6cdba6f02b1808945ae9dd2269004c74
+guid: e71cb2613d9446d4c9fb9b3a12c26814
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -10,7 +10,17 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: TorchHolder
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TorchHolderMetal
+    second: {fileID: 2100000, guid: b6f687c29b0269d4d9be3a36f14bbcaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: be292083437b45746a406e555ccd613c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
