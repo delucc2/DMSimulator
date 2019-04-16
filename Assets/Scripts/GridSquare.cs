@@ -219,13 +219,32 @@ public class GridSquare : MonoBehaviour {
     public void partyStop()
     {
         party.rb.velocity = new Vector3(0, 0, 0);
-        item.gameObject.transform.LookAt(party.gameObject.transform);
-        party.prev_facing = 180 * party.gameObject.transform.forward;
-        party.gameObject.transform.LookAt(item.gameObject.transform);
-
-        /*for (int i = 0; i < 4; i++) {
-            party.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
-        }*/
+        if (item_name == "enemy")
+        {
+            item.gameObject.transform.LookAt(party.gameObject.transform);
+            party.prev_facing = 180 * party.gameObject.transform.forward;
+            party.gameObject.transform.LookAt(item.gameObject.transform);
+        } else
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                party.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
+                if (i == 2 || i == 0 || i == 3)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        party.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
+                    }
+                }
+                else if (i == 1)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        party.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
+                    }
+                }
+            }
+        }
     }
 
     public void Update()
@@ -263,16 +282,22 @@ public class GridSquare : MonoBehaviour {
                         party.damaged = true;
                         party.fighting = true;
                         Invoke("partyStop", 0.5f);
+                        SFXHandler sfx = GameObject.Find("SFX Source").GetComponent<SFXHandler>();
                         if (!party.NoticeCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
+                            party.LogPrint("> The party takes " + item.GetComponent<TrapStats>().GetDamage() + " damage!\n");
+                            sfx.playSound(item.GetComponent<TrapStats>().GetFailureSound());
                             party.GetComponent<Renderer>().material.color = Color.red;
                             GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
                         } else if (!party.AvoidCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
+                            party.LogPrint("> The party takes " + item.GetComponent<TrapStats>().GetDamage() + " damage!\n");
+                            sfx.playSound(item.GetComponent<TrapStats>().GetFailureSound());
                             party.GetComponent<Renderer>().material.color = Color.red;
                             GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
                         } else {
-                            party.GetComponent<Renderer>().material.color = Color.green;
+                            sfx.playSound(item.GetComponent<TrapStats>().GetSuccessSound());
+                            //party.GetComponent<Renderer>().material.color = Color.green;
                         }
                     } else {
                         party.damaged = true;

@@ -18,6 +18,7 @@ public class PartyMovement : MonoBehaviour {
     private bool blocked;
     private string[] attacks = { "play", "swing", "cast", "stab" };
     public Vector3 prev_facing;
+    private bool key_lock;
 
     private int DEX;
     private int WIS;
@@ -39,6 +40,7 @@ public class PartyMovement : MonoBehaviour {
         fighting = false;
         running = false;
         facing = 'n';
+        key_lock = false;
 
         DEX = 15;
         WIS = 15;
@@ -60,14 +62,29 @@ public class PartyMovement : MonoBehaviour {
     void partyStop()
     {
         rb.velocity = new Vector3(0, 0, 0);
-        /*for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
-        }*/
+            if (i == 2 || i == 0 || i == 3)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
+                }
+            }
+            else if (i == 1)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
+                }
+            }
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (fighting && Input.GetKeyDown(KeyCode.Space)) {
+        if (fighting && Input.GetKeyDown(KeyCode.Space) && !key_lock) {
             fighting = false;
         } else if (fighting) { return; }
 
@@ -210,17 +227,23 @@ public class PartyMovement : MonoBehaviour {
                 fighting = true;
                 Invoke("partyStop", 0.5f);
                 curr_pos.triggered = true;
+                SFXHandler sfx = GameObject.Find("SFX Source").GetComponent<SFXHandler>();
                 if (!NoticeCheck(curr_pos)) {
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
+                    LogPrint("> The party takess " + curr_pos.item.GetComponent<TrapStats>().GetDamage() + " damage!\n");
+                    sfx.playSound(curr_pos.item.GetComponent<TrapStats>().GetFailureSound());
                     this.GetComponent<Renderer>().material.color = Color.red;
                     GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 } else if (!AvoidCheck(curr_pos)) {
                     // Pass Notice Check!
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
+                    LogPrint("> The party takes " + curr_pos.item.GetComponent<TrapStats>().GetDamage() + " damage!\n");
+                    sfx.playSound(curr_pos.item.GetComponent<TrapStats>().GetFailureSound());
                     this.GetComponent<Renderer>().material.color = Color.red;
                     GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 } else {
                     // Pass Avoid Check + successfully dodge
+                    sfx.playSound(curr_pos.item.GetComponent<TrapStats>().GetSuccessSound());
                     this.GetComponent<Renderer>().material.color = Color.green;
                 }
             }
@@ -233,7 +256,7 @@ public class PartyMovement : MonoBehaviour {
     public void LogPrint(string line)
     {
         string log = GameObject.Find("Log").GetComponent<UnityEngine.UI.Text>().text;
-        if (log_lines < 9)
+        if (log_lines < 8)
         {
             GameObject.Find("Log").GetComponent<UnityEngine.UI.Text>().text += line;
             log_lines++;
@@ -245,9 +268,12 @@ public class PartyMovement : MonoBehaviour {
 
     public IEnumerator Fight(GridSquare enemy)
     {
+        SFXHandler sfx = GameObject.Find("SFX Source").GetComponent<SFXHandler>();
         fighting = true;
         running = false;
+        key_lock = true;
         yield return new WaitForSeconds(0.5f);
+        sfx.playCombat();
         for (int i = 0; i < 4; i++)
         {
             this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
@@ -331,6 +357,7 @@ public class PartyMovement : MonoBehaviour {
         if (HEALTH <= 0) {
             LogPrint("> The party has died!\n");
             Destroy(this.gameObject);
+            sfx.stopCombat();
         } else if (enemy.item.GetComponent<EnemyStats>().GetHealth() <= 0) {
             LogPrint("> The enemy has been slain!\n");
             EXP += enemy.item.GetComponent<EnemyStats>().GetEXP();
@@ -338,6 +365,7 @@ public class PartyMovement : MonoBehaviour {
             Destroy(enemy.item.gameObject);
             enemy.resetSquare();
             this.gameObject.transform.LookAt(prev_facing);
+            sfx.stopCombat();
         }
 
         if (!grid.firstSkeleton && enemy_name == "Skeleton(Clone)")
@@ -351,7 +379,7 @@ public class PartyMovement : MonoBehaviour {
             GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().WraithDialogue();
             grid.firstWraith = true;
         }
-        //fighting = false;
+        key_lock = false;
     }
 
     public void GetPos(ref int x, ref int y)
