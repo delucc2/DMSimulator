@@ -85,6 +85,25 @@ public class WallScript : MonoBehaviour {
                     break;
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            GridSquare square = grid.squares[(int)this.transform.position.x, (int)this.transform.position.z];
+            if (!square.deletable)
+            {
+                return;
+            }
+
+            if (square.item_name == "enemy")
+            {
+                grid.refund(square.item.gameObject.GetComponent<EnemyStats>().GetCost());
+            }
+            else
+            {
+                grid.refund(square.item.gameObject.GetComponent<TrapStats>().cost);
+            }
+            square.resetSquare();
+        }
     }
 
     // Update is called once per frame

@@ -14,6 +14,9 @@ public class PartyMovement : MonoBehaviour {
     private bool levelComplete;
     public bool running;
     private Camera camera;
+    private char facing;
+    private bool blocked;
+    private string[] attacks = { "swing", "cast", "stab", "play" };
 
     private int DEX;
     private int WIS;
@@ -34,10 +37,11 @@ public class PartyMovement : MonoBehaviour {
         curr_pos = grid.squares[(int)x_pos, (int)z_pos].GetComponent<GridSquare>();
         fighting = false;
         running = false;
+        facing = 'n';
 
         DEX = 15;
         WIS = 15;
-        HEALTH = 112;
+        HEALTH = 187;
         DAMAGE = 52;
         EXP = 0;
 
@@ -55,6 +59,9 @@ public class PartyMovement : MonoBehaviour {
     void partyStop()
     {
         rb.velocity = new Vector3(0, 0, 0);
+        /*for (int i = 0; i < 4; i++) {
+            this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
+        }*/
     }
 	
 	// Update is called once per frame
@@ -96,6 +103,9 @@ public class PartyMovement : MonoBehaviour {
                 return;
             }
             running = true;
+            for (int i = 0; i < 4; i++) {
+                this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("move");
+            }
             GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
             GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
             StartCoroutine(SlowMove(path));
@@ -103,23 +113,47 @@ public class PartyMovement : MonoBehaviour {
 	}
 
     private IEnumerator SlowMove(char[] path) {
+        //yield return new WaitForSeconds(0.5f);
+        char prev_dir = facing;
         foreach (var dir in path)
         {
             if (fighting && Input.GetKeyDown(KeyCode.Space)) {
                 fighting = false;
             } else if (fighting) { break; }
-
+            
             if (dir == 'e') {
+                if (prev_dir == 'n') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                } else if (prev_dir == 's') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                }
                 x_pos++;
             } else if (dir == 'w') {
+                if (prev_dir == 'n') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                } else if (prev_dir == 's') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                }
                 x_pos--;
             } else if (dir == 'n') {
+                if (prev_dir == 'e') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                } else if (prev_dir == 'w') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                }
                 z_pos++;
             } else if (dir == 's') {
+                if (prev_dir == 'e') {
+                    this.transform.Rotate(new Vector3(0, 90, 0));
+                } else if (prev_dir == 'w') {
+                    this.transform.Rotate(new Vector3(0, -90, 0));
+                }
                 z_pos--;
             }
 
+            facing = dir;            
             Move(dir, false, (int)x_pos, (int)z_pos);
+            if (dir == 'e' || dir == 'w' || dir == 'n' || dir == 's') { prev_dir = dir; }
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -198,32 +232,41 @@ public class PartyMovement : MonoBehaviour {
     {
         fighting = true;
         running = false;
+        for (int i = 0; i < 4; i++) {
+            this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
+        }
         LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
-            // Party attacks
-            if (Random.Range(0f, 1f) <= 0.67f) {
-                enemy.item.GetComponent<EnemyStats>().TakeDamage(DAMAGE);
-                LogPrint("> The party deals " + DAMAGE + " damage!\n");
-                LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
-            }
-
-            yield return new WaitForSeconds(2.5f);
-
             // Enemy attacks
-            if (Random.Range(0f, 1f) < 0.5f) {
+            if (Random.Range(0f, 1f) <= enemy.item.GetComponent<EnemyStats>().GetHitrate())
+            {
                 if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)
                 {
                     takeDamage(enemy.item.GetComponent<EnemyStats>().GetRangedDamage());
                     LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetRangedDamage() + " damage!\n");
                     GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
-                } else
+                }
+                else
                 {
                     takeDamage(enemy.item.GetComponent<EnemyStats>().GetMeleeDamage());
                     LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetMeleeDamage() + " damage!\n");
                     GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
                 }
-                
+
+            }
+
+            yield return new WaitForSeconds(2.5f);
+
+            // Party attacks
+            if (Random.Range(0f, 1f) <= 0.67f) {
+                enemy.item.GetComponent<EnemyStats>().TakeDamage(DAMAGE);
+                LogPrint("> The party deals " + DAMAGE + " damage!\n");
+                for (int i = 0; i < 4; i++)
+                {
+                    this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger(attacks[i]);
+                }
+                LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
             }
         }
 
@@ -297,6 +340,10 @@ public class PartyMovement : MonoBehaviour {
     public void takeDamage(int damage)
     {
         HEALTH -= damage;
+        if (HEALTH < 0)
+        {
+            HEALTH = 0;
+        }
     }
 
     public char[] Pathfind(int dest_x, int dest_y)

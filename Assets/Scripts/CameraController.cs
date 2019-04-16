@@ -13,19 +13,36 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 		if(Input.GetAxis("Vertical") != 0)
         {
-            transform.Translate(Vector3.up * Input.GetAxis("Vertical"));
+            if (transform.position.z > 16f && Input.GetAxis("Vertical") > 0) {
+                return;
+            } else if (transform.position.z < 1f && Input.GetAxis("Vertical") < 0) {
+                return;
+            }
+            transform.Translate(Vector3.up * Input.GetAxis("Vertical") * 0.25f);
         }
 
         if(Input.GetAxis("Horizontal") != 0)
         {
-            transform.Translate(this.transform.right * Input.GetAxis("Horizontal"));
+            if (transform.position.x < 5f && Input.GetAxis("Horizontal") < 0) {
+                return;
+            } else if (transform.position.x > 15f && Input.GetAxis("Horizontal") > 0) {
+                return;
+            }
+            transform.Translate(this.transform.right * Input.GetAxis("Horizontal") * 0.25f);
         }
 
         if(Input.GetKey(KeyCode.E))
         {
+            if (transform.position.y > 43f) {
+                return;
+            }
             transform.Translate(-Vector3.forward * 0.5f);
-        } else if (Input.GetKey(KeyCode.Q))
+        }
+        else if (Input.GetKey(KeyCode.Q))
         {
+            if (transform.position.y < 16f) {
+                return;
+            }
             transform.Translate(Vector3.forward * 0.5f);
         }
 	}
