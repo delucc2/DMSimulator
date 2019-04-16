@@ -1231,13 +1231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26df133ff123be447990e856c60fac89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HEALTH: 0
-  MELEE_DAMAGE: 0
-  RANGED_DAMAGE: 0
-  COST: 0
-  EXP: 0
+  HEALTH: 13
+  MELEE_DAMAGE: 5
+  RANGED_DAMAGE: 5
+  COST: 100
+  EXP: 10
   ranged: 0
-  HITRATE: 1
+  HITRATE: 0.6
 --- !u!137 &137619845442329682
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
