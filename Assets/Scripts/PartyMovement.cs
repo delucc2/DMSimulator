@@ -292,20 +292,31 @@ public class PartyMovement : MonoBehaviour {
                 }
             }
         }
-        enemy.item.gameObject.GetComponent<Animator>().SetTrigger("fight");
         string attacker_name = (enemy.item.gameObject.name.Split('('))[0].ToLower();
+        enemy.item.gameObject.GetComponent<Animator>().SetTrigger("fight");
+        if (attacker_name == "wraith" || attacker_name == "lich")
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
+            }
+        }
         LogPrint("> The party has encountered a " + attacker_name + "!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
             // Enemy attacks
             if (Random.Range(0f, 1f) <= enemy.item.GetComponent<EnemyStats>().GetHitrate())
             {
-                if (attacker_name == "zombie") {
+                if (attacker_name == "zombie" || attacker_name == "ghost") {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
                 } else if (attacker_name == "skeleton") {
-                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("shoot");
+                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
                 } else {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("cast");
+                    for (int i = 0; i < 2; i++)
+                    {
+                        enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("cast");
+                    }
                 }
 
                 if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)

@@ -45,8 +45,8 @@ public class GridSquare : MonoBehaviour {
         else if (x_pos == grid.boss_x && y_pos == grid.boss_y)
         {
             item = Instantiate<GameObject>(grid.boss);
-            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
-            item.transform.localScale = new Vector3(6f, 6f, 6f);
+            item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
+            item.transform.localScale = new Vector3(3f, 3f, 3f);
             item_name = "enemy";
             if (grid.boss.GetComponent<EnemyStats>().GetRanged())
             {
