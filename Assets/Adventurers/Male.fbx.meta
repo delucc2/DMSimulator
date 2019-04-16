@@ -92,7 +92,12 @@ ModelImporter:
     3300002: Male
     4300000: Male
     13700000: Male
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 29e6fdd4607bf6f41814f3cd902b3802, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

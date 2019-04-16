@@ -294,9 +294,15 @@ public class PartyMovement : MonoBehaviour {
         }
         string attacker_name = (enemy.item.gameObject.name.Split('('))[0].ToLower();
         enemy.item.gameObject.GetComponent<Animator>().SetTrigger("fight");
-        if (attacker_name == "wraith" || attacker_name == "lich")
+        if (attacker_name == "wraith")
         {
             for (int i = 0; i < 2; i++)
+            {
+                enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
+            }
+        } else if (attacker_name == "lich")
+        {
+            for (int i = 0; i < 3; i++)
             {
                 enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
             }
@@ -311,6 +317,12 @@ public class PartyMovement : MonoBehaviour {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
                 } else if (attacker_name == "skeleton") {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
+                } else if (attacker_name == "lich") {
+                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("cast");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("cast");
+                    }
                 } else {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("cast");
                     for (int i = 0; i < 2; i++)
