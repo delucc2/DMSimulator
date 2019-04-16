@@ -149,7 +149,7 @@ public class PartyMovement : MonoBehaviour {
         char prev_dir = facing;
         foreach (var dir in path)
         {
-            if (fighting && Input.GetKeyDown(KeyCode.Space)) {
+            if (fighting && Input.GetKeyDown(KeyCode.Space) && !key_lock) {
                 fighting = false;
             } else if (fighting) { break; }
             

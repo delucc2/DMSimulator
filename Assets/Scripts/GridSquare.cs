@@ -249,7 +249,7 @@ public class GridSquare : MonoBehaviour {
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && !running) {
             if (party.Pathfind(grid.end_x, 19 - grid.end_y) == null) { return; }
             foreach (var square in grid.squares)
             {
