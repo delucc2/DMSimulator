@@ -19,6 +19,46 @@ ModelImporter:
     100026: UpperArmRPlate
     100028: UpperLefRPlate
     100030: UpperLegLPlate
+    100032: PlateM
+    100034: Player_Head
+    100036: Player_Hips
+    100038: Player_LeftArm
+    100040: Player_LeftFoot
+    100042: Player_LeftForeArm
+    100044: Player_LeftHand
+    100046: Player_LeftHandMiddle1
+    100048: Player_LeftHandMiddle2
+    100050: Player_LeftHandMiddle3
+    100052: Player_LeftHandMiddle4
+    100054: Player_LeftHandThumb1
+    100056: Player_LeftHandThumb2
+    100058: Player_LeftHandThumb3
+    100060: Player_LeftHandThumb4
+    100062: Player_LeftLeg
+    100064: Player_LeftShoulder
+    100066: Player_LeftToeBase
+    100068: Player_LeftUpLeg
+    100070: Player_Neck
+    100072: Player_Reference
+    100074: Player_RightArm
+    100076: Player_RightFoot
+    100078: Player_RightForeArm
+    100080: Player_RightHand
+    100082: Player_RightHandMiddle1
+    100084: Player_RightHandMiddle2
+    100086: Player_RightHandMiddle3
+    100088: Player_RightHandMiddle4
+    100090: Player_RightHandThumb1
+    100092: Player_RightHandThumb2
+    100094: Player_RightHandThumb3
+    100096: Player_RightHandThumb4
+    100098: Player_RightLeg
+    100100: Player_RightShoulder
+    100102: Player_RightToeBase
+    100104: Player_RightUpLeg
+    100106: Player_Spine
+    100108: Player_Spine1
+    100110: Player_Spine2
     400000: BodyPlate
     400002: BreastPlate
     400004: CrotchPlate
@@ -35,6 +75,46 @@ ModelImporter:
     400026: UpperArmRPlate
     400028: UpperLefRPlate
     400030: UpperLegLPlate
+    400032: PlateM
+    400034: Player_Head
+    400036: Player_Hips
+    400038: Player_LeftArm
+    400040: Player_LeftFoot
+    400042: Player_LeftForeArm
+    400044: Player_LeftHand
+    400046: Player_LeftHandMiddle1
+    400048: Player_LeftHandMiddle2
+    400050: Player_LeftHandMiddle3
+    400052: Player_LeftHandMiddle4
+    400054: Player_LeftHandThumb1
+    400056: Player_LeftHandThumb2
+    400058: Player_LeftHandThumb3
+    400060: Player_LeftHandThumb4
+    400062: Player_LeftLeg
+    400064: Player_LeftShoulder
+    400066: Player_LeftToeBase
+    400068: Player_LeftUpLeg
+    400070: Player_Neck
+    400072: Player_Reference
+    400074: Player_RightArm
+    400076: Player_RightFoot
+    400078: Player_RightForeArm
+    400080: Player_RightHand
+    400082: Player_RightHandMiddle1
+    400084: Player_RightHandMiddle2
+    400086: Player_RightHandMiddle3
+    400088: Player_RightHandMiddle4
+    400090: Player_RightHandThumb1
+    400092: Player_RightHandThumb2
+    400094: Player_RightHandThumb3
+    400096: Player_RightHandThumb4
+    400098: Player_RightLeg
+    400100: Player_RightShoulder
+    400102: Player_RightToeBase
+    400104: Player_RightUpLeg
+    400106: Player_Spine
+    400108: Player_Spine1
+    400110: Player_Spine2
     2100000: lambert1
     2300000: BodyPlate
     2300002: BreastPlate
@@ -81,6 +161,22 @@ ModelImporter:
     4300024: UpperLefRPlate
     4300026: LoerLegRPlate
     4300028: LowerLegLPlate
+    7400000: Take 001
+    13700000: BodyPlate
+    13700002: BreastPlate
+    13700004: CrotchPlate
+    13700006: ElbowLPlate
+    13700008: ElbowRPlate
+    13700010: LoerLegRPlate
+    13700012: LowerArmLPlate
+    13700014: LowerArmRPlate
+    13700016: LowerLegLPlate
+    13700018: ShoulderLPlate
+    13700020: ShoulderRPlate
+    13700022: UpperArmLPlate
+    13700024: UpperArmRPlate
+    13700026: UpperLefRPlate
+    13700028: UpperLegLPlate
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -132,8 +228,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

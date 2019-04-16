@@ -14,6 +14,46 @@ ModelImporter:
     100016: UpperArmRLeather
     100018: UpperLefRLeather
     100020: UpperLegLLeather
+    100022: LeatherM
+    100024: Player_Head
+    100026: Player_Hips
+    100028: Player_LeftArm
+    100030: Player_LeftFoot
+    100032: Player_LeftForeArm
+    100034: Player_LeftHand
+    100036: Player_LeftHandMiddle1
+    100038: Player_LeftHandMiddle2
+    100040: Player_LeftHandMiddle3
+    100042: Player_LeftHandMiddle4
+    100044: Player_LeftHandThumb1
+    100046: Player_LeftHandThumb2
+    100048: Player_LeftHandThumb3
+    100050: Player_LeftHandThumb4
+    100052: Player_LeftLeg
+    100054: Player_LeftShoulder
+    100056: Player_LeftToeBase
+    100058: Player_LeftUpLeg
+    100060: Player_Neck
+    100062: Player_Reference
+    100064: Player_RightArm
+    100066: Player_RightFoot
+    100068: Player_RightForeArm
+    100070: Player_RightHand
+    100072: Player_RightHandMiddle1
+    100074: Player_RightHandMiddle2
+    100076: Player_RightHandMiddle3
+    100078: Player_RightHandMiddle4
+    100080: Player_RightHandThumb1
+    100082: Player_RightHandThumb2
+    100084: Player_RightHandThumb3
+    100086: Player_RightHandThumb4
+    100088: Player_RightLeg
+    100090: Player_RightShoulder
+    100092: Player_RightToeBase
+    100094: Player_RightUpLeg
+    100096: Player_Spine
+    100098: Player_Spine1
+    100100: Player_Spine2
     400000: BodyLeather
     400002: BreastLeather
     400004: //RootNode
@@ -25,6 +65,46 @@ ModelImporter:
     400016: UpperArmRLeather
     400018: UpperLefRLeather
     400020: UpperLegLLeather
+    400022: LeatherM
+    400024: Player_Head
+    400026: Player_Hips
+    400028: Player_LeftArm
+    400030: Player_LeftFoot
+    400032: Player_LeftForeArm
+    400034: Player_LeftHand
+    400036: Player_LeftHandMiddle1
+    400038: Player_LeftHandMiddle2
+    400040: Player_LeftHandMiddle3
+    400042: Player_LeftHandMiddle4
+    400044: Player_LeftHandThumb1
+    400046: Player_LeftHandThumb2
+    400048: Player_LeftHandThumb3
+    400050: Player_LeftHandThumb4
+    400052: Player_LeftLeg
+    400054: Player_LeftShoulder
+    400056: Player_LeftToeBase
+    400058: Player_LeftUpLeg
+    400060: Player_Neck
+    400062: Player_Reference
+    400064: Player_RightArm
+    400066: Player_RightFoot
+    400068: Player_RightForeArm
+    400070: Player_RightHand
+    400072: Player_RightHandMiddle1
+    400074: Player_RightHandMiddle2
+    400076: Player_RightHandMiddle3
+    400078: Player_RightHandMiddle4
+    400080: Player_RightHandThumb1
+    400082: Player_RightHandThumb2
+    400084: Player_RightHandThumb3
+    400086: Player_RightHandThumb4
+    400088: Player_RightLeg
+    400090: Player_RightShoulder
+    400092: Player_RightToeBase
+    400094: Player_RightUpLeg
+    400096: Player_Spine
+    400098: Player_Spine1
+    400100: Player_Spine2
     2100000: lambert1
     2300000: BodyLeather
     2300002: BreastLeather
@@ -56,6 +136,17 @@ ModelImporter:
     4300014: LoerLegRLeather
     4300016: LowerLegLLeather
     4300018: UpperArmLLeather
+    7400000: Take 001
+    13700000: BodyLeather
+    13700002: BreastLeather
+    13700004: LoerLegRLeather
+    13700006: LowerArmLLeather
+    13700008: LowerArmRLeather
+    13700010: LowerLegLLeather
+    13700012: UpperArmLLeather
+    13700014: UpperArmRLeather
+    13700016: UpperLefRLeather
+    13700018: UpperLegLLeather
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -107,8 +198,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

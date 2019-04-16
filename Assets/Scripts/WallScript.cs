@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallScript : MonoBehaviour {
 
-    private GameObject item;
+    public GameObject item;
     private Grid grid;
 
 	// Use this for initialization
@@ -30,9 +30,10 @@ public class WallScript : MonoBehaviour {
                     }
                     item = Instantiate<GameObject>(grid.crushing_wall);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 0.5f);
+                    item.transform.position = this.transform.position;
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].facing = 's';
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item_name = "crushing wall";
+                    grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item = item;
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].range = 2;
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].FindTriggerSquares(false);
                     break;
@@ -47,6 +48,7 @@ public class WallScript : MonoBehaviour {
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].facing = 'n';
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item_name = "arrow wall";
+                    grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item = item;
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].range = 3;
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].FindTriggerSquares(false);
                     break;
