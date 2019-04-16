@@ -41,7 +41,7 @@ public class PartyMovement : MonoBehaviour {
 
         DEX = 15;
         WIS = 15;
-        HEALTH = 112;
+        HEALTH = 187;
         DAMAGE = 52;
         EXP = 0;
 
@@ -238,6 +238,26 @@ public class PartyMovement : MonoBehaviour {
         LogPrint("> The party has encountered a zombie!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
+            // Enemy attacks
+            if (Random.Range(0f, 1f) <= enemy.item.GetComponent<EnemyStats>().GetHitrate())
+            {
+                if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)
+                {
+                    takeDamage(enemy.item.GetComponent<EnemyStats>().GetRangedDamage());
+                    LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetRangedDamage() + " damage!\n");
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                }
+                else
+                {
+                    takeDamage(enemy.item.GetComponent<EnemyStats>().GetMeleeDamage());
+                    LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetMeleeDamage() + " damage!\n");
+                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                }
+
+            }
+
+            yield return new WaitForSeconds(2.5f);
+
             // Party attacks
             if (Random.Range(0f, 1f) <= 0.67f) {
                 enemy.item.GetComponent<EnemyStats>().TakeDamage(DAMAGE);
@@ -247,24 +267,6 @@ public class PartyMovement : MonoBehaviour {
                     this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger(attacks[i]);
                 }
                 LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
-            }
-
-            yield return new WaitForSeconds(2.5f);
-
-            // Enemy attacks
-            if (Random.Range(0f, 1f) < 0.5f) {
-                if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)
-                {
-                    takeDamage(enemy.item.GetComponent<EnemyStats>().GetRangedDamage());
-                    LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetRangedDamage() + " damage!\n");
-                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
-                } else
-                {
-                    takeDamage(enemy.item.GetComponent<EnemyStats>().GetMeleeDamage());
-                    LogPrint("> The party takes " + enemy.item.GetComponent<EnemyStats>().GetMeleeDamage() + " damage!\n");
-                    GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
-                }
-                
             }
         }
 
@@ -338,6 +340,10 @@ public class PartyMovement : MonoBehaviour {
     public void takeDamage(int damage)
     {
         HEALTH -= damage;
+        if (HEALTH < 0)
+        {
+            HEALTH = 0;
+        }
     }
 
     public char[] Pathfind(int dest_x, int dest_y)

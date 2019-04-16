@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HEALTH: 13
-  MELEE_DAMAGE: 0
+  MELEE_DAMAGE: 5
   RANGED_DAMAGE: 5
   COST: 100
   EXP: 10
   ranged: 1
+  HITRATE: 0.67
