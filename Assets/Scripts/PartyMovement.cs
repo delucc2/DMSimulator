@@ -67,14 +67,14 @@ public class PartyMovement : MonoBehaviour {
             this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
             if (i == 2 || i == 0 || i == 3)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
                 }
             }
             else if (i == 1)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
                 }
@@ -125,14 +125,14 @@ public class PartyMovement : MonoBehaviour {
                 this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("move");
                 if (i == 2 || i == 0 || i == 3)
                 {
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < 4; j++)
                     {
                         this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("move");
                     }
                 }
                 else if (i == 1)
                 {
-                    for (int j = 0; j < 4; j++)
+                    for (int j = 0; j < 5; j++)
                     {
                         this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("move");
                     }
@@ -279,14 +279,14 @@ public class PartyMovement : MonoBehaviour {
             this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
             if (i == 2 || i == 0 || i == 3)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("fight");
                 }
             }
             else if (i == 1)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("fight");
                 }
@@ -334,14 +334,14 @@ public class PartyMovement : MonoBehaviour {
                     this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger(attacks[i]);
                     if (i == 2 || i == 0 || i == 3)
                     {
-                        for (int j = 0; j < 3; j++)
+                        for (int j = 0; j < 4; j++)
                         {
                             this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger(attacks[i]);
                         }
                     }
                     else if (i == 1)
                     {
-                        for (int j = 0; j < 4; j++)
+                        for (int j = 0; j < 5; j++)
                         {
                             this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger(attacks[i]);
                         }

@@ -231,14 +231,14 @@ public class GridSquare : MonoBehaviour {
                 party.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
                 if (i == 2 || i == 0 || i == 3)
                 {
-                    for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < 4; j++)
                     {
                         party.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
                     }
                 }
                 else if (i == 1)
                 {
-                    for (int j = 0; j < 4; j++)
+                    for (int j = 0; j < 5; j++)
                     {
                         party.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("stop");
                     }
