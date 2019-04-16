@@ -128,3 +128,5 @@ MonoBehaviour:
   avoid_check: 12
   damage: 11
   cost: 200
+  failure_sound: {fileID: 8300000, guid: b47e4769bfb757f40ad2b2ab2567c731, type: 3}
+  success_sound: {fileID: 8300000, guid: 6ed41257204948c4583ee0e03611feb9, type: 3}

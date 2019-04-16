@@ -179,6 +179,7 @@ public class DialogueHandler : MonoBehaviour
     {
         ShowDialogueBox();
         GameObject.Find("Dialogue").GetComponent<UnityEngine.UI.Text>().text = "Congratulations! You cleared the floor!";
+        GameObject.Find("SFX Source").GetComponent<SFXHandler>().playLevelComplete();
         if (level == 3)
         {
             dialogue = ending_dialogue;

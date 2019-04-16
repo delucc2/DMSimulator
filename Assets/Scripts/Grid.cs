@@ -213,7 +213,7 @@ public class Grid : MonoBehaviour {
     public void changeEnemy(GameObject input)
     {
         enemy = input;
-        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nMELEE DAM: " + enemy.GetComponent<EnemyStats>().GetMeleeDamage().ToString() + "\nRANGED DAM: " + enemy.GetComponent<EnemyStats>().GetRangedDamage().ToString() + "EXP: " + enemy.GetComponent<EnemyStats>().GetEXP().ToString();
+        GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = enemy.name + "\n\nHP: " + enemy.GetComponent<EnemyStats>().GetHealth().ToString() + "\nMELEE DAM: " + enemy.GetComponent<EnemyStats>().GetMeleeDamage().ToString() + "\nRANGED DAM: " + enemy.GetComponent<EnemyStats>().GetRangedDamage().ToString() + "\nEXP: " + enemy.GetComponent<EnemyStats>().GetEXP().ToString();
     }
 
     public int getGold()
