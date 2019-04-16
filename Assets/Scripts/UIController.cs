@@ -15,4 +15,9 @@ public class UIController : MonoBehaviour {
         canvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
         canvas.GetComponent<CanvasGroup>().interactable = true;
     }
+
+    public void goToMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
 }

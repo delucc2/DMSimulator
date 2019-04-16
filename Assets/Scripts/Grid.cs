@@ -65,33 +65,12 @@ public class Grid : MonoBehaviour {
     // Reads for hotkeys to switch selection
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha0)) {
-            selection = '0';
-            GameObject.Find("ObjectStats").GetComponent<UnityEngine.UI.Text>().text = "";
-        } else if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            selection = '1';
-        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            selection = '2';
-        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            selection = '3';
-        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            selection = '4';
-        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            selection = '5';
-        } else if (Input.GetKeyDown(KeyCode.Alpha6)) {
-            selection = '6';
-        } else if (Input.GetKeyDown(KeyCode.Alpha9)) { 
-            selection = '9';
-        } else if (Input.GetKeyDown(KeyCode.Alpha7)) {
-            selection = '7';
-        } else if (Input.GetKeyDown(KeyCode.Alpha8)) {
-            selection = 'e';
-        } else if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R)) {
             selection = 'r';
         }
 
