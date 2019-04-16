@@ -1235,7 +1235,7 @@ MonoBehaviour:
   MELEE_DAMAGE: 4
   RANGED_DAMAGE: 0
   COST: 100
-  EXP: 10
+  EXP: 50
   ranged: 0
   HITRATE: 0.6
 --- !u!137 &137596141470150326

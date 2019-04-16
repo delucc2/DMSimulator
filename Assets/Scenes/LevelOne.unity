@@ -1821,9 +1821,9 @@ MonoBehaviour:
   start_y: 0
   boss_x: 11
   boss_y: 9
-  HP_goal: 90
-  EXP_goal: 100
-  gold: 2500
+  HP_goal: 100
+  EXP_goal: 1000
+  gold: 3000
   pause: 1
   firstTrap: 0
   firstSkeleton: 0
@@ -3070,7 +3070,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ghost - 250g
+  m_Text: Ghost - 300g
 --- !u!222 &1171596277
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4582,7 +4582,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wraith - 300g
+  m_Text: Wraith - 1000g
 --- !u!222 &1760334144
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4780,7 +4780,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lich - 500g
+  m_Text: Lich - 2000g
 --- !u!222 &1889878629
 CanvasRenderer:
   m_ObjectHideFlags: 0
