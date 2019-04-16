@@ -165,8 +165,8 @@ public class GridSquare : MonoBehaviour {
                         break;
                     }
                     item = Instantiate<GameObject>(grid.enemy);
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
-                    item.transform.localScale = new Vector3(6f, 6f, 6f);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+                    item.transform.localScale = new Vector3(3f, 3f, 3f);
                     item_name = "enemy";
                     if (grid.enemy.GetComponent<EnemyStats>().GetRanged()) {
                         range = 3;
@@ -219,6 +219,10 @@ public class GridSquare : MonoBehaviour {
     public void partyStop()
     {
         party.rb.velocity = new Vector3(0, 0, 0);
+        item.gameObject.transform.LookAt(party.gameObject.transform);
+        party.prev_facing = 180 * party.gameObject.transform.forward;
+        party.gameObject.transform.LookAt(item.gameObject.transform);
+
         /*for (int i = 0; i < 4; i++) {
             party.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("stop");
         }*/

@@ -17,6 +17,7 @@ public class PartyMovement : MonoBehaviour {
     private char facing;
     private bool blocked;
     private string[] attacks = { "swing", "cast", "stab", "play" };
+    public Vector3 prev_facing;
 
     private int DEX;
     private int WIS;
@@ -232,15 +233,26 @@ public class PartyMovement : MonoBehaviour {
     {
         fighting = true;
         running = false;
+        yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < 4; i++) {
             this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
         }
-        LogPrint("> The party has encountered a zombie!\n");
+        enemy.item.gameObject.GetComponent<Animator>().SetTrigger("fight");
+        string attacker_name = (enemy.item.gameObject.name.Split('('))[0].ToLower();
+        LogPrint("> The party has encountered a " + attacker_name + "!\n");
         while (HEALTH > 0 && enemy.item.GetComponent<EnemyStats>().GetHealth() > 0)
         {
             // Enemy attacks
             if (Random.Range(0f, 1f) <= enemy.item.GetComponent<EnemyStats>().GetHitrate())
             {
+                if (attacker_name == "zombie") {
+                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
+                } else if (attacker_name == "skeleton") {
+                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("shoot");
+                } else {
+                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("cast");
+                }
+
                 if (Mathf.Abs(x_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.x) > 1 || Mathf.Abs(z_pos - enemy.item.GetComponent<EnemyStats>().gameObject.transform.position.z) > 1)
                 {
                     takeDamage(enemy.item.GetComponent<EnemyStats>().GetRangedDamage());
@@ -268,6 +280,8 @@ public class PartyMovement : MonoBehaviour {
                 }
                 LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
             }
+
+            yield return new WaitForSeconds(2.5f);
         }
 
         string enemy_name = enemy.item.name;
@@ -280,6 +294,7 @@ public class PartyMovement : MonoBehaviour {
             GameObject.Find("Strength").GetComponent<UnityEngine.UI.Text>().text = "EXP: " + EXP;
             Destroy(enemy.item.gameObject);
             enemy.resetSquare();
+            this.gameObject.transform.LookAt(prev_facing);
         }
 
         if (!grid.firstSkeleton && enemy_name == "Skeleton(Clone)")
