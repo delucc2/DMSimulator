@@ -5,19 +5,21 @@ using UnityEngine;
 public class PartyCamController : MonoBehaviour {
     private GameObject party;
     public Vector3 offset;
+    private bool pressed;
 
     float distance;
     Vector3 playerPrevPos, playerMoveDir;
 
     // Use this for initialization
-    void Start() { 
-
+    void Start() {
+        pressed = false;
     }
 
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && !pressed) {
             this.gameObject.GetComponent<Camera>().enabled = true;
+            pressed = true;
         }
 
         if (party == null) {
