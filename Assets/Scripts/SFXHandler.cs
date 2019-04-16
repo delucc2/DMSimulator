@@ -7,6 +7,28 @@ public class SFXHandler : MonoBehaviour {
     private AudioSource audio;
     public AudioClip combat_noises;
     public AudioClip level_complete;
+    public AudioClip ambient_convo;
+    public AudioClip cheering;
+    public AudioClip coin_clinking;
+    public AudioClip evil_laugh;
+    public AudioClip female_grunt;
+    public AudioClip grumbling;
+    public AudioClip holy_sound;
+    public AudioClip huh;
+    public AudioClip male_grunt;
+    public AudioClip papers_rustling;
+    public AudioClip sigh;
+    public AudioClip magic_circle;
+    public AudioClip wizard_attack_magic_missile;
+    public AudioClip paladin_attack_magic_strike;
+    public AudioClip warlock_sound;
+    public AudioClip monster_attack;
+    public AudioClip monster_death;
+    public AudioClip swordfighting1;
+    public AudioClip swordfighting2;
+    public AudioClip horrorambience;
+    public AudioClip bard_attack;
+    public AudioClip rogue_attack;
 
     public void Start()
     {
