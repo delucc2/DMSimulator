@@ -16,7 +16,7 @@ public class PartyMovement : MonoBehaviour {
     private Camera camera;
     private char facing;
     private bool blocked;
-    private string[] attacks = { "swing", "cast", "stab", "play" };
+    private string[] attacks = { "play", "swing", "cast", "stab" };
     public Vector3 prev_facing;
 
     private int DEX;
@@ -106,6 +106,20 @@ public class PartyMovement : MonoBehaviour {
             running = true;
             for (int i = 0; i < 4; i++) {
                 this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("move");
+                if (i == 2 || i == 0 || i == 3)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("move");
+                    }
+                }
+                else if (i == 1)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("move");
+                    }
+                }
             }
             GameObject.Find("ObjectMenu").GetComponent<UIController>().Hide(GameObject.Find("ObjectMenu"));
             GameObject.Find("MenuButton").GetComponent<UIController>().Hide(GameObject.Find("MenuButton"));
@@ -234,8 +248,23 @@ public class PartyMovement : MonoBehaviour {
         fighting = true;
         running = false;
         yield return new WaitForSeconds(0.5f);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
+            if (i == 2 || i == 0 || i == 3)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("fight");
+                }
+            }
+            else if (i == 1)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger("fight");
+                }
+            }
         }
         enemy.item.gameObject.GetComponent<Animator>().SetTrigger("fight");
         string attacker_name = (enemy.item.gameObject.name.Split('('))[0].ToLower();
@@ -277,6 +306,20 @@ public class PartyMovement : MonoBehaviour {
                 for (int i = 0; i < 4; i++)
                 {
                     this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger(attacks[i]);
+                    if (i == 2 || i == 0 || i == 3)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger(attacks[i]);
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        for (int j = 0; j < 4; j++)
+                        {
+                            this.gameObject.transform.GetChild(i).GetChild(j).GetComponent<Animator>().SetTrigger(attacks[i]);
+                        }
+                    }
                 }
                 LogPrint("> The enemy now has " + enemy.item.GetComponent<EnemyStats>().GetHealth() + " HP.\n");
             }
