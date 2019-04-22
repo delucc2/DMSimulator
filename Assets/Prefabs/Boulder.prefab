@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33259684573354062}
   - component: {fileID: 23268552910244706}
   - component: {fileID: 114776381457358028}
-  - component: {fileID: 95257644724519862}
+  - component: {fileID: 95700181686798484}
   m_Layer: 0
   m_Name: Boulder
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1560592378299156}
   m_Mesh: {fileID: 4300000, guid: 9d8b53b2e65ae1e4fba5b5d831f96d5b, type: 3}
---- !u!95 &95257644724519862
+--- !u!95 &95700181686798484
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1

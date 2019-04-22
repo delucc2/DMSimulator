@@ -258,6 +258,11 @@ public class GridSquare : MonoBehaviour {
             running = true;
         }
 
+        if (!isTrigger && running)
+        {
+            this.GetComponent<Renderer>().material = grid.floor_material;
+        }
+
         if (item_name == "enemy") {
             FindTriggerSquares(true);
         } else if (item_name != "empty" && !triggered) {
@@ -289,12 +294,14 @@ public class GridSquare : MonoBehaviour {
                             sfx.playSound(item.GetComponent<TrapStats>().GetFailureSound());
                             party.GetComponent<Renderer>().material.color = Color.red;
                             GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
+                            item.GetComponent<Animator>().SetTrigger("start");
                         } else if (!party.AvoidCheck(this)) {
                             party.takeDamage(item.GetComponent<TrapStats>().GetDamage());
                             party.LogPrint("> The party takes " + item.GetComponent<TrapStats>().GetDamage() + " damage!\n");
                             sfx.playSound(item.GetComponent<TrapStats>().GetFailureSound());
                             party.GetComponent<Renderer>().material.color = Color.red;
                             GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + party.getHealth();
+                            item.GetComponent<Animator>().SetTrigger("start");
                         } else {
                             sfx.playSound(item.GetComponent<TrapStats>().GetSuccessSound());
                             //party.GetComponent<Renderer>().material.color = Color.green;
