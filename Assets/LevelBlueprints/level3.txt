@@ -1,20 +1,20 @@
    x   x            
+ n x n x  n    n    
  x x x x  x    x    
- x x x x  x    x    
- x x x x  x    x    
- x   x x  xxxxxxxx x
- xxxxx x  x      x  
+ x s x x  x    x    
+ x   x x  xxnnxxxx x
+ xxxxx s  x      x  
     x     x x x  x  
-    xxx   x x x  x  
-      xxxxx x x     
-    x     x x xxxxxx
-xxxxx       x       
-    x  xxxx x x     
-    xxxx  xxxxx     
+    xxx   e w w  x  
+      xxxxx e x     
+    x     x x xxsxsx
+xxsxx       x       
+    x  xssx x x     
+    xxxx  xnsnx     
           x   x     
- xxxxx        x xxxx
-     xxxxxx   x     
+ xnxxx        w xnsx
+     xxsnxx   x     
          xxx xxxxxx 
-     x   x      x   
-xxxxxx   x    x x x 
+     x   e      x   
+xsnxsx   w    x s x 
          x    x   x 

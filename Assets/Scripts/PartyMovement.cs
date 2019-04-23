@@ -257,6 +257,7 @@ public class PartyMovement : MonoBehaviour {
                     sfx.playSound(curr_pos.item.GetComponent<TrapStats>().GetFailureSound());
                     this.GetComponent<Renderer>().material.color = Color.red;
                     GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                    curr_pos.item.GetComponent<Animator>().SetTrigger("start");
                 } else if (!AvoidCheck(curr_pos)) {
                     // Pass Notice Check!
                     takeDamage(curr_pos.item.GetComponent<TrapStats>().GetDamage());
@@ -264,6 +265,7 @@ public class PartyMovement : MonoBehaviour {
                     sfx.playSound(curr_pos.item.GetComponent<TrapStats>().GetFailureSound());
                     this.GetComponent<Renderer>().material.color = Color.red;
                     GameObject.Find("Health").GetComponent<UnityEngine.UI.Text>().text = "HP: " + HEALTH;
+                    curr_pos.item.GetComponent<Animator>().SetTrigger("start");
                 } else {
                     // Pass Avoid Check + successfully dodge
                     sfx.playSound(curr_pos.item.GetComponent<TrapStats>().GetSuccessSound());
@@ -369,7 +371,7 @@ public class PartyMovement : MonoBehaviour {
 
             }
 
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(1.5f);
 
             // Party attacks
             if (Random.Range(0f, 1f) <= 0.67f) {

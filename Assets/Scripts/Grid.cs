@@ -11,6 +11,7 @@ public class Grid : MonoBehaviour {
     static public int y_size = 20;
 
     public GameObject wall;
+    public GameObject torch_wall;
     public GameObject pit;
     public GameObject crushing_wall;
     public GameObject spikes;
@@ -95,10 +96,18 @@ public class Grid : MonoBehaviour {
                 }
                 square.AddComponent<GridSquare>();
                 
-                if (line[j] == 'x') {
-                    square.GetComponent<GridSquare>().item = Instantiate<GameObject>(wall);
+                if (line[j] == 'x' || line[j] == 's' || line[j] == 'n' || line[j] == 'w' || line[j] == 'e') {
+                    if (line[j] == 'x') { square.GetComponent<GridSquare>().item = Instantiate<GameObject>(wall); }
+                    else { square.GetComponent<GridSquare>().item = Instantiate<GameObject>(torch_wall); }
                     square.GetComponent<GridSquare>().item.transform.position = new Vector3(j, 0.5f, 19 - i);
                     square.GetComponent<GridSquare>().item.transform.localScale = new Vector3(4.25f, 4.25f, 4.25f);
+                    if (line[j] == 'n') {
+                        square.GetComponent<GridSquare>().item.transform.Rotate(new Vector3(0, 180));
+                    } else if (line[j] == 'e') {
+                        square.GetComponent<GridSquare>().item.transform.Rotate(new Vector3(0, 270));
+                    } else if (line[j] == 'w') {
+                        square.GetComponent<GridSquare>().item.transform.Rotate(new Vector3(0, 90));
+                    }
                     square.GetComponent<GridSquare>().facing = 'w';
                     square.GetComponent<GridSquare>().item_name = "wall";
                     square.GetComponent<GridSquare>().deletable = false;

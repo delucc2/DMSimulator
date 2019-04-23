@@ -29,10 +29,14 @@ public class WallScript : MonoBehaviour {
                     if (!(grid.spendGold(200))) {
                         break;
                     }
+                    GameObject parent = new GameObject("Crushing Wall Parent");
+                    parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 0.4f);
+                    //parent.transform.localScale = new Vector3(3f, 3f, 3f);
                     item = Instantiate<GameObject>(grid.crushing_wall);
+                    item.transform.parent = parent.transform;
                     item_name = "crushing wall";
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 0.2f);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 0.4f);
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].facing = 's';
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item_name = "crushing wall";
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].item = item;
@@ -45,8 +49,9 @@ public class WallScript : MonoBehaviour {
                         break;
                     }
                     item = Instantiate<GameObject>(grid.arrow_wall);
+                    item.transform.parent = this.gameObject.transform;
                     item_name = "arrow wall";
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.3f, this.transform.position.z + 0.475f);
+                    //item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.3f, this.transform.position.z + 0.475f);
                     item.transform.Rotate(new Vector3(0, 180, 0));
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     grid.squares[(int)this.transform.position.x, (int)this.transform.position.z].facing = 'n';

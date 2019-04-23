@@ -429,7 +429,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2253,6 +2253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall: {fileID: 1630898914411972, guid: e42e9478218929a499d67185b8ede7b4, type: 2}
+  torch_wall: {fileID: 1323593104885180, guid: 3c9d19d801b938648b43d7fe134e8422, type: 2}
   pit: {fileID: 1076040611536498, guid: 5d870dbf3dccdfa49855aaadd85b56b5, type: 2}
   crushing_wall: {fileID: 1643983331500406, guid: 09efd3a3c4e6cee46a7d7395525c8e37,
     type: 2}
