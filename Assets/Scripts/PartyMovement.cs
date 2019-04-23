@@ -147,6 +147,7 @@ public class PartyMovement : MonoBehaviour {
     private IEnumerator SlowMove(char[] path) {
         //yield return new WaitForSeconds(0.5f);
         char prev_dir = facing;
+        float offset = 0;
         foreach (var dir in path)
         {
             if (fighting && Input.GetKeyDown(KeyCode.Space) && !key_lock) {
@@ -158,6 +159,8 @@ public class PartyMovement : MonoBehaviour {
                     this.transform.Rotate(new Vector3(0, 90, 0));
                 } else if (prev_dir == 's') {
                     this.transform.Rotate(new Vector3(0, -90, 0));
+                } else {
+                    offset += 0.00025f;
                 }
                 x_pos++;
             } else if (dir == 'w') {
@@ -165,6 +168,8 @@ public class PartyMovement : MonoBehaviour {
                     this.transform.Rotate(new Vector3(0, -90, 0));
                 } else if (prev_dir == 's') {
                     this.transform.Rotate(new Vector3(0, 90, 0));
+                } else {
+                    offset += 0.00025f;
                 }
                 x_pos--;
             } else if (dir == 'n') {
@@ -172,6 +177,8 @@ public class PartyMovement : MonoBehaviour {
                     this.transform.Rotate(new Vector3(0, -90, 0));
                 } else if (prev_dir == 'w') {
                     this.transform.Rotate(new Vector3(0, 90, 0));
+                } else {
+                    offset += 0.00025f;
                 }
                 z_pos++;
             } else if (dir == 's') {
@@ -179,15 +186,27 @@ public class PartyMovement : MonoBehaviour {
                     this.transform.Rotate(new Vector3(0, 90, 0));
                 } else if (prev_dir == 'w') {
                     this.transform.Rotate(new Vector3(0, -90, 0));
+                } else {
+                    offset += 0.00025f;
                 }
                 z_pos--;
             }
 
-            facing = dir;            
+            facing = dir;
+            if (dir != prev_dir & (dir == 'e' || dir == 'w' || dir == 'n' || dir == 's'))
+            {
+                //Invoke("Snap", 0.3f);
+                offset = 0;
+            }
             Move(dir, false, (int)x_pos, (int)z_pos);
             if (dir == 'e' || dir == 'w' || dir == 'n' || dir == 's') { prev_dir = dir; }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(.5f - offset);
         }
+    }
+
+    private void Snap()
+    {
+        this.transform.position = new Vector3(x_pos, y_pos, z_pos);
     }
 
     private bool Move(char direction, bool check, int x, int y)
@@ -202,9 +221,7 @@ public class PartyMovement : MonoBehaviour {
         {
             damaged = false;
 
-            // Slow Movement
-            float tempx = this.transform.position.x;
-            float tempz = this.transform.position.z;
+            // Slow Movements
             //print("(" + tempx + ", " + tempz + ") | (" + x_pos + ", " + z_pos + ")");
             if (x_pos - this.transform.position.x > 0.5f){
                 rb.velocity = new Vector3(1.95f, 0, 0);
@@ -217,6 +234,8 @@ public class PartyMovement : MonoBehaviour {
             } else if (this.transform.position.z - z_pos > 0.5f) {
                 rb.velocity = new Vector3(0, 0, -1.95f);
             }
+
+            //this.transform.Translate(Vector3.forward * Time.deltaTime);
 
             //this.transform.position = new Vector3(x_pos, y_pos, z_pos);
             curr_pos = new_pos;
@@ -294,9 +313,15 @@ public class PartyMovement : MonoBehaviour {
         }
         string attacker_name = (enemy.item.gameObject.name.Split('('))[0].ToLower();
         enemy.item.gameObject.GetComponent<Animator>().SetTrigger("fight");
-        if (attacker_name == "wraith" || attacker_name == "lich")
+        if (attacker_name == "wraith")
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
+            {
+                enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
+            }
+        } else if (attacker_name == "lich")
+        {
+            for (int i = 0; i < 4; i++)
             {
                 enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("fight");
             }
@@ -311,9 +336,15 @@ public class PartyMovement : MonoBehaviour {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
                 } else if (attacker_name == "skeleton") {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("slap");
-                } else {
+                } else if (attacker_name == "wraith") {
                     enemy.item.gameObject.GetComponent<Animator>().SetTrigger("cast");
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 3; i++)
+                    {
+                        enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("cast");
+                    }
+                } else if (attacker_name == "lich") {
+                    enemy.item.gameObject.GetComponent<Animator>().SetTrigger("cast");
+                    for (int i = 0; i < 4; i++)
                     {
                         enemy.item.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("cast");
                     }
