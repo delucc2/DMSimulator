@@ -123,7 +123,7 @@ public class GridSquare : MonoBehaviour {
                         break;
                     }
                     item = Instantiate<GameObject>(grid.pit);
-                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.9f, this.transform.position.z);
+                    item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.85f, this.transform.position.z);
                     item.transform.localScale = new Vector3(4f, 4f, 4f);
                     item_name = "pit";
                     break;
