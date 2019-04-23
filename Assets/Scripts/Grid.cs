@@ -63,6 +63,8 @@ public class Grid : MonoBehaviour {
     private void Start()
     {
         DrawGrid();
+        GameObject.Find("EXP Goal").GetComponent<UnityEngine.UI.Text>().text = "EXP GOAL: " + EXP_goal;
+        GameObject.Find("HP Goal").GetComponent<UnityEngine.UI.Text>().text = "HP GOAL: " + HP_goal;
     }
 
     // Reads for hotkeys to switch selection
