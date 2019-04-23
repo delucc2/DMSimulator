@@ -2154,6 +2154,8 @@ MonoBehaviour:
   firstTrap: 0
   firstSkeleton: 0
   firstWraith: 1
+  firstZombie: 0
+  firstGhost: 1
   freeMode: 0
 --- !u!4 &690358683
 Transform:
@@ -4977,12 +4979,14 @@ MonoBehaviour:
   - 'Rogue: Either way, everything dies when you stab it in the head.'
   - 'Paladin: Try to focus on the fight, we must save this peasant, my god commands
     it!'
-  wraith_dialogue:
+  zombie_dialogue:
   - "Rogue: I love zombies! It\u2019s so easy to pick their pockets. "
   - "Paladin: Please don\u2019t desecrate the dead, Rogue, its unseemly. "
   - "Bard: Zombies are so gross; there are brains on my armor\u2026 "
   - 'Wizard: Zombies aren''t nearly as fascinating as skeletons, they are basically
     just reanimated humans. Boring. '
+  ghost_dialogue: []
+  wraith_dialogue: []
   ending_dialogue: []
   boss_dialogue:
   - 'Rogue: That is one angry ghost. '

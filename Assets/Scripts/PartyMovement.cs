@@ -402,6 +402,33 @@ public class PartyMovement : MonoBehaviour {
         }
 
         string enemy_name = enemy.item.name;
+        if (enemy.item.GetComponent<EnemyStats>().GetHealth() <= 0 || HEALTH <= 0)
+        {
+            if (!grid.firstSkeleton && enemy_name == "Skeleton(Clone)")
+            {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().SkeletonDialogue();
+                grid.firstSkeleton = true;
+            }
+
+            if (!grid.firstZombie && enemy_name == "Zombie(Clone)")
+            {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().ZombieDialogue();
+                grid.firstZombie = true;
+            }
+
+            if (!grid.firstGhost && enemy_name == "Ghost(Clone)")
+            {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().GhostDialogue();
+                grid.firstGhost = true;
+            }
+
+            if (!grid.firstWraith && enemy_name == "Wraith(Clone)")
+            {
+                GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().WraithDialogue();
+                grid.firstWraith = true;
+            }
+        }
+
         if (HEALTH <= 0) {
             LogPrint("> The party has died!\n");
             Destroy(this.gameObject);
@@ -414,18 +441,6 @@ public class PartyMovement : MonoBehaviour {
             enemy.resetSquare();
             this.gameObject.transform.LookAt(prev_facing);
             sfx.stopCombat();
-        }
-
-        if (!grid.firstSkeleton && enemy_name == "Skeleton(Clone)")
-        {
-            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().SkeletonDialogue();
-            grid.firstSkeleton = true;
-        }
-
-        if (!grid.firstWraith && enemy_name == "Wraith(Clone)")
-        {
-            GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().WraithDialogue();
-            grid.firstWraith = true;
         }
         key_lock = false;
     }

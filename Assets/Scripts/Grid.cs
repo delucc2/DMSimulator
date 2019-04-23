@@ -55,6 +55,8 @@ public class Grid : MonoBehaviour {
     public bool firstTrap = false;
     public bool firstSkeleton = false;
     public bool firstWraith = false;
+    public bool firstZombie = false;
+    public bool firstGhost = false;
     public bool freeMode = false;
 
     // Initialize grid

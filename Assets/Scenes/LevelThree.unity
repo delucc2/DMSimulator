@@ -429,7 +429,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2278,7 +2278,9 @@ MonoBehaviour:
   pause: 1
   firstTrap: 0
   firstSkeleton: 1
-  firstWraith: 0
+  firstWraith: 1
+  firstZombie: 1
+  firstGhost: 1
   freeMode: 0
 --- !u!4 &690358683
 Transform:
@@ -4763,6 +4765,8 @@ MonoBehaviour:
     either way. Faith! '
   - "Rogue: I\u2019ll take cold steel and a dark hallway over faith any day. "
   - 'Paladin: Good thing we have both! '
+  zombie_dialogue: []
+  ghost_dialogue: []
   wraith_dialogue:
   - 'Paladin: What are these foul spirits? They are corrupted with anger and violence.
     I have never seen so many vengeful spirits in one place before. We must purge
@@ -4828,15 +4832,19 @@ MonoBehaviour:
   - "Bard: I\u2019ve sung plenty of songs about heroes, I\u2019m not sure if we quite
     measure up. Well, I certainly do, although I don\u2019t know about you lot. "
   level: 3
-  boss_trigger_x: -1
-  boss_trigger_y: -1
+  boss_trigger_x: 9
+  boss_trigger_y: 7
   boss_triggered: 0
-  middle_trigger_x: -1
-  middle_trigger_y: -1
+  alt_boss_trigger_x: 17
+  alt_boss_trigger_y: 1
+  middle_trigger_x: 17
+  middle_trigger_y: 15
   middle_triggered: 0
-  end_trigger_x: -1
-  end_trigger_y: -1
+  end_trigger_x: 6
+  end_trigger_y: 9
   end_triggered: 0
+  alt_end_trigger_x: 19
+  alt_end_trigger_y: 9
 --- !u!114 &1654592377
 MonoBehaviour:
   m_ObjectHideFlags: 0

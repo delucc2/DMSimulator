@@ -308,7 +308,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2061,6 +2061,8 @@ MonoBehaviour:
   firstTrap: 0
   firstSkeleton: 0
   firstWraith: 1
+  firstZombie: 1
+  firstGhost: 0
   freeMode: 0
 --- !u!4 &690358683
 Transform:
@@ -4588,7 +4590,8 @@ MonoBehaviour:
   - 'Bard: My armor is getting filthy I hate undead dungeons. Can we wrap this up
     and come back later?'
   - 'Paladin: No! We must save the villager, onward for faith and justice!'
-  wraith_dialogue:
+  zombie_dialogue: []
+  ghost_dialogue:
   - 'Rogue: Hey, none of my attacks work on these guys. '
   - 'Paladin: Maybe if you had converted to the one true religion and were more holy,
     you could fight the foul abominations of the catacombs! '
@@ -4597,6 +4600,7 @@ MonoBehaviour:
     very much! "
   - "Bard: Man, I don\u2019t know why these ghosts react so badly to my advances.
     I prefer more human monsters\u2026 "
+  wraith_dialogue: []
   ending_dialogue: []
   boss_dialogue:
   - "Bard: I don\u2019t think I\u2019ve ever seen a wraith that big. This necromancer
