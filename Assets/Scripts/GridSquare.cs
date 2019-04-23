@@ -131,16 +131,24 @@ public class GridSquare : MonoBehaviour {
                     if (!(grid.spendGold(100))) {
                         break;
                     }
+                    GameObject spike_parent = new GameObject("Spike Parent");
+                    spike_parent.transform.position = this.transform.position;
+                    spike_parent.transform.localScale = new Vector3(3f, 3f, 3f);
                     item = Instantiate<GameObject>(grid.spikes);
+                    item.transform.parent = spike_parent.transform;
                     item.transform.position = this.transform.position;
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
+                    item.GetComponent<Animator>().SetTrigger("start");
                     item_name = "spikes";
                     break;
                 case '5':
                     if (!(grid.spendGold(400))) {
                         break;
                     }
+                    GameObject boulder_parent = new GameObject("Boulder Parent");
+                    boulder_parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                     item = Instantiate<GameObject>(grid.boulder);
+                    item.transform.parent = boulder_parent.transform;
                     item.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
                     item.transform.localScale = new Vector3(3f, 3f, 3f);
                     facing = 's';
@@ -254,6 +262,9 @@ public class GridSquare : MonoBehaviour {
             foreach (var square in grid.squares)
             {
                 square.GetComponent<Renderer>().material = grid.floor_material;
+                if (square.item_name == "spikes") {
+                    square.item.GetComponent<Animator>().SetTrigger("reset");
+                }
             }
             running = true;
         }
