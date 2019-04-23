@@ -1,14 +1,1 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SceneManager : MonoBehaviour {
-
-	public void LoadFreeMode() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("DemoArea");
-    }
-
-    public void LoadCampaign() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelOne");
-    }
-}
+﻿using System;using System.Collections;using System.Collections.Generic;using UnityEngine;using UnityEngine.SceneManagement;public class SceneManager : MonoBehaviour {	public void LoadFreeMode() {        UnityEngine.SceneManagement.SceneManager.LoadScene("DemoArea");    }    public void LoadCampaign() {        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelOne");    }    internal static Scene GetActiveScene()    {        throw new NotImplementedException();    }}

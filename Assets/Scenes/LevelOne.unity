@@ -2524,30 +2524,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combat_noises: {fileID: 8300000, guid: 3f5f3b627ed427141b5d62ed6c6b9ecc, type: 3}
   level_complete: {fileID: 8300000, guid: a78740eea4c140843b722c15b8777c75, type: 3}
-  ambient_convo: {fileID: 8300000, guid: 4c12c1556deba994bac014be4c237961, type: 3}
-  cheering: {fileID: 8300000, guid: 4ab8e954cd4c90d458385e37412232c5, type: 3}
-  coin_clinking: {fileID: 8300000, guid: 0782c3a46b9d76445a45ef825832b3f0, type: 3}
-  evil_laugh: {fileID: 8300000, guid: dcd6dd4c48152e84dbc7170ade97c9cc, type: 3}
-  female_grunt: {fileID: 8300000, guid: 8af57f8e9dd47ba4787f19977c615b9f, type: 3}
-  grumbling: {fileID: 8300000, guid: a65c6d9295b5cc74c92d3ad060cd3b59, type: 3}
-  holy_sound: {fileID: 8300000, guid: fe24eab31383db646b8adc2250c587ea, type: 3}
-  huh: {fileID: 8300000, guid: 443b63c5e352075428f00f2cd302f7a8, type: 3}
-  male_grunt: {fileID: 8300000, guid: 193899c3ace88284fa57882a83b3e5a5, type: 3}
-  papers_rustling: {fileID: 8300000, guid: c3e32ca1860f1594584fecb1108362f1, type: 3}
-  sigh: {fileID: 8300000, guid: 22abdd4a416b4b1468867d374e1e312e, type: 3}
-  magic_circle: {fileID: 8300000, guid: 5fd51df759339964dacbe23231dd9f38, type: 3}
-  wizard_attack_magic_missile: {fileID: 8300000, guid: 302ebdecd75a9124da2b30f7b42d3388,
-    type: 3}
-  paladin_attack_magic_strike: {fileID: 8300000, guid: 260d9393bc58f6b4d8fa58b0a92248a8,
-    type: 3}
-  warlock_sound: {fileID: 8300000, guid: 6666ff7ae87c9a647bd650b0374879d3, type: 3}
-  monster_attack: {fileID: 8300000, guid: 4042947019e6a2a4db6d6314e814e1ec, type: 3}
-  monster_death: {fileID: 8300000, guid: e256c4c6a8b42ae4c86f3fab6de77042, type: 3}
-  swordfighting1: {fileID: 8300000, guid: 063daa832cea05a4982567c7b3d1e24e, type: 3}
-  swordfighting2: {fileID: 8300000, guid: b93b003a0ec36ad418e8421fb5503d2a, type: 3}
-  horrorambience: {fileID: 8300000, guid: 380a53d5460762542830e98f7fd9cb40, type: 3}
-  bard_attack: {fileID: 8300000, guid: 2f4ae0d3cba045f4d86db7ccdef207fd, type: 3}
-  rogue_attack: {fileID: 8300000, guid: 14805c024c34cee40a97ea2c336b4bbe, type: 3}
 --- !u!82 &1061405953
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4241,50 +4217,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intro_dialogue:
-  - On the edge of the town of Riverton there is a large, black building jutting out
-    of the center of a graveyard. Every night for the past week, the townsfolk have
-    heard strange moans and the rattling of bones coming from it. On the first night,
-    they sent a messenger to the local city, Cityton. After a week of terror, the
-    messenger has returned with a party of brave adventurers in tow.
-  - Upon their arrival to the town the adventurers are greeted with cheers and smiles,
-    the villagers ecstatic with the thought of salvation! Due to its small size, the
-    town of Riverton has only a small tavern, with no rooms for guests. The adventurers
-    head straight there, hoping for more information and a stiff drink before heading
-    into the crypt.
-  - "As the party enters the inn, the waiting Elder hears a man say, \u201CBard, I
-    don\u2019t know why you insist on drinking before every single mission. It dulls
-    the mind! A true adventurer only needs the good grace of Shallya, lady of mercy,
-    to slay the foul undead!\u201D"
-  - The first member of the party to enter is a bard who is in the middle of yelling
-    back about how drinking is a necessary part of any mission.
-  - "The next person to walk through the door is a radiant man clad in full plate,
-    who upon seeing the Elder proceeds to ignore the bard and walk straight over.
-    \u201CHello, I am Paladin. Me and my companions, Bard, Rogue, and Wizard will
-    have no trouble handling your little necromantic problem. Is there anymore information
-    you can give me?\u201D"
-  - "\u201CI\u2019m afraid not, lad. One of our braver hunters went into the crypt
-    to try and see what was inside, but it\u2019s been days and he hasn\u2019t come
-    back. I fear the worst has occurred, however if you could save him we would be
-    grateful.\u201D"
-  - "Upon hearing this, one of the adventurers chimes in with \u201CHow grateful would
-    you be if we could recover him?\u201D"
-  - "\u201CRogue, that\u2019s enough!\u201D"
-  - "\u201CI\u2019m afraid we are a poor village, but we could spare a few gold for
-    his body, and twice that if you could come back with him alive!\u201D"
-  - "\u201CWe will do what we can, come on adventurers time to combat evil!\u201D"
-  - The brave Adventurers enter the crypt, torches blazing and the rogue immediately
-    quips
-  - "Rogue: Yaknow, I get the whole \u2018scary crypt\u2019 aesthetic, but surely
-    chains on the walls is a bit much."
+  - 'On the edge of the town of Riverton there is a large, black building jutting
+    out of the center of a graveyard. Every night for the past week, the townsfolk
+    have heard strange moans and the rattling of bones coming from it. On the first
+    night, they sent a messenger to the local city, Cityton. '
+  - 'After a week of terror, the messenger has returned with a party of brave adventurers
+    in tow. Upon their arrival to the town the adventurers are greeted with cheers,
+    smiles, and hopeful villagers who are ecstatic with the thought of salvation!  '
+  - Due to its small size, the town of Riverton has only a single small tavern, with
+    no rooms for guests. The adventurers head straight there, hoping for more information
+    and a stiff drink before heading into the crypt.
+  - 'As the party enters the inn, the waiting Elder hears a man say, '
+  - "Paladin: \u201CBard, I don\u2019t know why you insist on drinking before every
+    single mission. It dulls the mind! A true adventurer only needs the good grace
+    of Shallya, lady of mercy, to slay the foul undead!\u201D "
+  - "The first member of the party to enter is a bard who is in the middle of yelling
+    back about how drinking is a necessary part of any mission. The next person to
+    walk through the door is a radiant man clad in full plate, who upon seeing the
+    Elder proceeds to ignore the bard\u2019s muttered grumblings and walk straight
+    over. "
+  - "Paladin: \u201CHello, I am Paladin. My companions and I will have no trouble
+    handling your little necromantic problem. Is there any more information you can
+    give me?\u201D"
+  - "Elder: \u201CI\u2019m afraid not, lad. One of our braver hunters went into the
+    crypt to try and see what was inside, but it\u2019s been days and he hasn\u2019t
+    come back. I fear the worst has occurred, however if you could save him we would
+    be grateful.\u201D "
+  - 'Upon hearing this, one of the adventurers chimes in with:'
+  - "Rogue: \u201CHow grateful would you be if we could recover him?\u201D  "
+  - "Paladin: \u201CRogue, that\u2019s enough!\u201D "
+  - "Elder: \u201CI\u2019m afraid we are a poor village, but we could spare a few
+    gold for his body, and twice that if you could come back with him alive!\u201D
+    Paladin: We will do what we can, come on adventurers time to combat evil!\u201D"
+  - 'Narrator: The (brave?) adventurers enter the crypt, torches blazing and the rogue
+    immediately quips'
+  - "Rogue: \u201CYou know, I get the whole \u2018scary crypt\u2019 aesthetic, but
+    surely chains on the walls is a bit much."
   - "Bard: \u201CYeah like why would you even want chains this far up. Why would you
     put your prison next to the entrance of your dungeon?\u201D"
-  - "Paladin: \u201CQuiet, take this seriously you too! There is a potentially dead
+  - "Paladin: \u201CQuiet, take this seriously you two! There is a potentially dead
     villager down there, and we are his only hope!\u201D"
   - "Wizard: \u201CPlus, think of all the spells this necromancer must know!\u201D"
-  - "All: \u201CGroan:\u201D"
-  - "Paladin: Come on, let\u2019s get to work! "
+  - "All: \u201CSigh:\u201D"
+  - "Paladin: Come on, let\u2019s get to work!"
   firsttrap_dialogue:
-  - 'Rogue: Is that a boulder trap or is the dungeon master just happy to see me?'
+  - 'Rogue: Is that a boulder trap or is the dungeon master just happy to see me? '
   - "Bard: Well, I don\u2019t know about the dungeon master but\u2026"
   - "Paladin: Can you two please, PLEASE take this seriously. A man\u2019s life is
     in jeopardy! Rogue, do you think you can disarm the trap?"
@@ -4307,7 +4284,12 @@ MonoBehaviour:
   - 'Rogue: Either way, everything dies when you stab it in the head.'
   - 'Paladin: Try to focus on the fight, we must save this peasant, my god commands
     it!'
-  wraith_dialogue: []
+  wraith_dialogue:
+  - "Rogue: I love zombies! It\u2019s so easy to pick their pockets. "
+  - "Paladin: Please don\u2019t desecrate the dead, Rogue, its unseemly. "
+  - "Bard: Zombies are so gross; there are brains on my armor\u2026 "
+  - 'Wizard: Zombies aren''t nearly as fascinating as skeletons, they are basically
+    just reanimated humans. Boring. '
   ending_dialogue: []
   boss_dialogue:
   - 'Rogue: That is one angry ghost. '

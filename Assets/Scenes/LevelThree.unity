@@ -2377,30 +2377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combat_noises: {fileID: 8300000, guid: 3f5f3b627ed427141b5d62ed6c6b9ecc, type: 3}
   level_complete: {fileID: 8300000, guid: a78740eea4c140843b722c15b8777c75, type: 3}
-  ambient_convo: {fileID: 8300000, guid: 4c12c1556deba994bac014be4c237961, type: 3}
-  cheering: {fileID: 8300000, guid: 4ab8e954cd4c90d458385e37412232c5, type: 3}
-  coin_clinking: {fileID: 8300000, guid: 0782c3a46b9d76445a45ef825832b3f0, type: 3}
-  evil_laugh: {fileID: 8300000, guid: dcd6dd4c48152e84dbc7170ade97c9cc, type: 3}
-  female_grunt: {fileID: 8300000, guid: 8af57f8e9dd47ba4787f19977c615b9f, type: 3}
-  grumbling: {fileID: 8300000, guid: a65c6d9295b5cc74c92d3ad060cd3b59, type: 3}
-  holy_sound: {fileID: 8300000, guid: fe24eab31383db646b8adc2250c587ea, type: 3}
-  huh: {fileID: 8300000, guid: 443b63c5e352075428f00f2cd302f7a8, type: 3}
-  male_grunt: {fileID: 8300000, guid: 193899c3ace88284fa57882a83b3e5a5, type: 3}
-  papers_rustling: {fileID: 8300000, guid: c3e32ca1860f1594584fecb1108362f1, type: 3}
-  sigh: {fileID: 8300000, guid: 22abdd4a416b4b1468867d374e1e312e, type: 3}
-  magic_circle: {fileID: 8300000, guid: 5fd51df759339964dacbe23231dd9f38, type: 3}
-  wizard_attack_magic_missile: {fileID: 8300000, guid: 302ebdecd75a9124da2b30f7b42d3388,
-    type: 3}
-  paladin_attack_magic_strike: {fileID: 8300000, guid: 260d9393bc58f6b4d8fa58b0a92248a8,
-    type: 3}
-  warlock_sound: {fileID: 8300000, guid: 6666ff7ae87c9a647bd650b0374879d3, type: 3}
-  monster_attack: {fileID: 8300000, guid: 4042947019e6a2a4db6d6314e814e1ec, type: 3}
-  monster_death: {fileID: 8300000, guid: e256c4c6a8b42ae4c86f3fab6de77042, type: 3}
-  swordfighting1: {fileID: 8300000, guid: 063daa832cea05a4982567c7b3d1e24e, type: 3}
-  swordfighting2: {fileID: 8300000, guid: b93b003a0ec36ad418e8421fb5503d2a, type: 3}
-  horrorambience: {fileID: 8300000, guid: 380a53d5460762542830e98f7fd9cb40, type: 3}
-  bard_attack: {fileID: 8300000, guid: 2f4ae0d3cba045f4d86db7ccdef207fd, type: 3}
-  rogue_attack: {fileID: 8300000, guid: 14805c024c34cee40a97ea2c336b4bbe, type: 3}
 --- !u!82 &969346665
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4192,7 +4168,14 @@ MonoBehaviour:
     throats, not searching for and disarming traps."
   - 'Wizard: My specialization is all of magic, because I could not fathom picking
     just one type to study, they are all so fascinating.'
-  skeleton_dialogue: []
+  skeleton_dialogue:
+  - 'Wizard: How interesting, the ghosts are subservient to the wraiths. I wonder
+    if this is paralleled anywhere in any other monster strains.'
+  - 'Bard: It reminds me of hobs and goblins. I really hate hobs, disgusting creatures. '
+  - 'Paladin: Does it really matter how they interact, we will slay them for justice
+    either way. Faith! '
+  - "Rogue: I\u2019ll take cold steel and a dark hallway over faith any day. "
+  - 'Paladin: Good thing we have both! '
   wraith_dialogue:
   - 'Paladin: What are these foul spirits? They are corrupted with anger and violence.
     I have never seen so many vengeful spirits in one place before. We must purge
@@ -4204,7 +4187,7 @@ MonoBehaviour:
     much to ask for."
   - 'Bard: Should I hit them over the head with my guitar? Do you think that will
     work?'
-  - 'Wizard: Probably not.'
+  - 'Wizard: Probably not...'
   - 'Paladin: Just buff us and we will take care of these foul monstrosities!'
   ending_dialogue:
   - After saving the villager, the adventurers head to the entrance of the catacombs.
@@ -4223,9 +4206,40 @@ MonoBehaviour:
     quite a stockpile of information on undead for my research."
   - 'Paladin: We go where the winds of justice take us, wherever that may be!'
   - 'All: Sigh.'
-  boss_dialogue: []
-  middle_dialogue: []
-  near_end_dialogue: []
+  boss_dialogue:
+  - "Paladin: That\u2019s no necromancer, that\u2019s a lich. I should have brought
+    my bigger sword. Luckily my faith is the biggest sword of all! "
+  - "Rogue: That\u2019s a lot of sword talk buddy, feeling like you gotta overcompensate,
+    big guy? "
+  - "Bard: Rogue, even I think now\u2019s not the time for a jokes. That\u2019s a
+    lich, you know, the most terrifying form of undead? "
+  - 'Wizard: Fascinating, simply fascinating. '
+  - "Paladin: That\u2019s enough chatter. Do not worry brave villager, we will rescue
+    you from this vile lich! With the power of faith, justice, and companionship we
+    cannot be defeated! "
+  - "Villager: \u2026 Is he serious? "
+  - 'Bard, Rogue, and Wizard: Yes. '
+  - 'Lich: Foolish adventurers, do you really think you can defeat me in my lair?
+    This is the end for you. '
+  middle_dialogue:
+  - 'Wizard: I can sense the spell more and more the closer we get, it will be finished
+    soon. If we want to study the spell formulae we will have to hurry.'
+  - 'Paladin: I think you mean if we wish to save an innocent life from the depths
+    of evil we must hurry!'
+  - "Bard: I\u2019m just saying, we could really call it quits now. Like, my armor
+    is so gross, and I\u2019m gonna need to spend at least an hour at the bathhouse."
+  - "Rogue: Come on, let\u2019s get this over. There\u2019s a good 10 mugs of ale
+    with my name on it at the tavern."
+  - "Paladin: You know the goddess doesn\u2019t approve of drinking, you should try
+    temperance! "
+  near_end_dialogue:
+  - 'Wizard: We are close to the necromancer, but I can feel the ritual will be complete
+    any second. '
+  - 'Rogue: Finally, this took forever. I thought you said this would be easy, Paladin. '
+  - "Paladin: Everything is easy when you have faith in justice and light! Let\u2019s
+    take care of this necromancer and cement ourselves in legend! "
+  - "Bard: I\u2019ve sung plenty of songs about heroes, I\u2019m not sure if we quite
+    measure up. Well, I certainly do, although I don\u2019t know about you lot. "
   level: 3
   boss_trigger_x: -1
   boss_trigger_y: -1
