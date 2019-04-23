@@ -143,28 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combat_noises: {fileID: 8300000, guid: 3f5f3b627ed427141b5d62ed6c6b9ecc, type: 3}
   level_complete: {fileID: 8300000, guid: a78740eea4c140843b722c15b8777c75, type: 3}
-  ambient_convo: {fileID: 0}
-  cheering: {fileID: 0}
-  coin_clinking: {fileID: 0}
-  evil_laugh: {fileID: 0}
-  female_grunt: {fileID: 0}
-  grumbling: {fileID: 0}
-  holy_sound: {fileID: 0}
-  huh: {fileID: 0}
-  male_grunt: {fileID: 0}
-  papers_rustling: {fileID: 0}
-  sigh: {fileID: 0}
-  magic_circle: {fileID: 0}
-  wizard_attack_magic_missile: {fileID: 0}
-  paladin_attack_magic_strike: {fileID: 0}
-  warlock_sound: {fileID: 0}
-  monster_attack: {fileID: 0}
-  monster_death: {fileID: 0}
-  swordfighting1: {fileID: 0}
-  swordfighting2: {fileID: 0}
-  horrorambience: {fileID: 0}
-  bard_attack: {fileID: 0}
-  rogue_attack: {fileID: 0}
 --- !u!82 &47440395
 AudioSource:
   m_ObjectHideFlags: 0
@@ -271,7 +249,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &48082755
 GameObject:
@@ -565,156 +543,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 77359911}
   m_CullTransparentMesh: 0
---- !u!1 &81725851
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 81725855}
-  - component: {fileID: 81725854}
-  - component: {fileID: 81725853}
-  - component: {fileID: 81725852}
-  - component: {fileID: 81725856}
-  m_Layer: 0
-  m_Name: PartyCam
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &81725852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81725851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e6c0a7d1f1fa24e90ef79a840df8cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 2, y: 0, z: 0}
---- !u!81 &81725853
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81725851}
-  m_Enabled: 1
---- !u!20 &81725854
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81725851}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0.68
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 1
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &81725855
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81725851}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.240562, y: 2.3975554, z: 6.577641}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &81725856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81725851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 81725855}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 1
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!1 &142856529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1222062436779084, guid: eda8969a0d7065c4bbe486b6ab58612e,
@@ -1334,7 +1162,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4642137290635022, guid: 7bd92c2a7d1642444815c2d302066b27, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bd92c2a7d1642444815c2d302066b27, type: 2}
@@ -2274,7 +2102,7 @@ RectTransform:
   m_Children:
   - {fileID: 357663810}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2734,7 +2562,7 @@ MonoBehaviour:
   floor_material: {fileID: 2100000, guid: 582d0dab734fb9045957f80d067f4c5d, type: 2}
   level_file: free.txt
   end_x: 19
-  end_y: 0
+  end_y: 1
   start_x: 0
   start_y: 0
   boss_x: 0
@@ -4608,7 +4436,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4068148139952068, guid: 62e6d8141ee7aaa48bfd7ee13f9e785b, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62e6d8141ee7aaa48bfd7ee13f9e785b, type: 2}

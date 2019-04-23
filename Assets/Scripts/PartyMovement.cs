@@ -111,6 +111,9 @@ public class PartyMovement : MonoBehaviour {
                 GameObject.Find("PlotWindow").GetComponent<DialogueHandler>().FailDialogue();
                 Invoke("partyStop", 0.5f);
             }
+        } else if (x_pos == grid.end_x && z_pos == 19 - grid.end_y)
+        {
+            Invoke("partyStop", 0.5f);
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && !running) {
@@ -121,6 +124,7 @@ public class PartyMovement : MonoBehaviour {
                 return;
             }
             running = true;
+            this.gameObject.transform.GetChild(4).GetComponent<Camera>().enabled = true;
             for (int i = 0; i < 4; i++) {
                 this.gameObject.transform.GetChild(i).GetComponent<Animator>().SetTrigger("move");
                 if (i == 2 || i == 0 || i == 3)
