@@ -5003,12 +5003,16 @@ MonoBehaviour:
   boss_trigger_x: 10
   boss_trigger_y: 10
   boss_triggered: 0
+  alt_boss_trigger_x: -1
+  alt_boss_trigger_y: -1
   middle_trigger_x: -1
   middle_trigger_y: -1
   middle_triggered: 1
   end_trigger_x: -1
   end_trigger_y: -1
   end_triggered: 1
+  alt_end_trigger_x: -1
+  alt_end_trigger_y: -1
 --- !u!114 &1654592377
 MonoBehaviour:
   m_ObjectHideFlags: 0
